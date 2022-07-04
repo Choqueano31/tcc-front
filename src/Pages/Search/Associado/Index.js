@@ -59,24 +59,8 @@ function createData2(item){
   // console.log(item)
   return{
     nome: item.nome,
-    // hierarquia: item.hierarquy.name,
-    // rgPm: item.rg_policial,
-    // rgBm: item.rg_bombeiro,
-    // status: item.status,
-    // person: [{
-    //   cpf: item.cpf,
-    //   email: item.email, 
-    //   celular: item.telefone_celular, 
-    //   fixo: item.telefone_fixo,
-    //   data_nascimento: moment(item.data_nascimento).format('DD/MM/YYYY') 
-    // }],
-    disciplinas:[
-      { 
-        nome: item.disciplinas.nome,
-        code: item.disciplinas.code
-        
-      }
-    ],
+
+    disciplinas:item.disciplinas,
     funcional:[
       {
         nome_guerra: item.nome_funcional,
@@ -92,6 +76,7 @@ function createData2(item){
 }
 function Row(props) {
   const{ row} = props
+ // console.log(row)
   // const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
@@ -117,27 +102,28 @@ function Row(props) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-                Informações Pessoais
+                Disciplinas
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Email</TableCell>
-                    <TableCell>CPF</TableCell>
-                    <TableCell>Celular</TableCell>
-                    <TableCell align="right">Telefone Fixo</TableCell>
+                    <TableCell>nome</TableCell>
+                    <TableCell>codigo</TableCell>
+                   
+                    <TableCell align="center">professor</TableCell>
                     <TableCell align="right">Data de Nascimento</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.disciplinas.map((historyRow) => (
-                    <TableRow key={historyRow.cpf}>
+                   
+                    <TableRow key={historyRow.id}>
                       <TableCell component="th" scope="row">
-                        {historyRow.email}
+                        {historyRow.nome}
                       </TableCell>
-                      <TableCell>{historyRow.cpf}</TableCell>
-                      <TableCell>{historyRow.celular}</TableCell>
-                      <TableCell align="right">{historyRow.fixo}</TableCell>
+                      <TableCell>{historyRow.code}</TableCell>
+                    
+                      <TableCell align="left">{historyRow.teachers[0].nome}</TableCell>
                       <TableCell align="right">
                       {historyRow.data_nascimento}
                         {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}

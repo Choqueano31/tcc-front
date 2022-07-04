@@ -25,8 +25,6 @@ import Update from "@material-ui/icons/Update";
 // import Place from "@material-ui/icons/Place";
 import ArtTrack from "@material-ui/icons/ArtTrack";
 import People from "@material-ui/icons/People";
-import { FaFire, FaUserSecret } from "react-icons/fa";
-import { GiPoliceCar } from "react-icons/gi";
 import {useHistory} from "react-router-dom"
 // import Language from "@material-ui/icons/Language";
 
@@ -57,6 +55,7 @@ import priceImage1 from "assets/img/register.png";
 import priceImage2 from "assets/img/return.png";
 import priceImage3 from "assets/img/delete.png";
 import myApi from "Service/Api";
+import { Class, School } from "@material-ui/icons";
 // import { CircularProgress } from "@material-ui/core";
 
 // const us_flag = require("assets/img/flags/US.png");
@@ -84,23 +83,18 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [listUsers, setListUsers] = useState([]);
-  const [listPM, setListPM] = useState([]);
-  const [listBM, setListBM] = useState([]);
-  const [listPS, setListPS] = useState([]);
+const[listBloco, setListBloco] = useState(0)
+const[listTeachers, setlistTeachers] = useState(0)
+const[listDisciplinas, setlistDisciplinas] = useState(0)
   const history =  useHistory()
   async function searchAssociate() {
-    const response = await myApi.get("/desconts");
-    setListUsers(response.data);
-    // console.log('DESC', response.data)
-    const listPm = response.data.filter((cpf)=> cpf.departamento == "POLICIA MILITAR DO ACRE")
-    setListPM(listPm);
-    // console.log('PM', listPm);
-    const listBm = response.data.filter((cpf)=> cpf.departamento == "CORPO DE BOMBEIROS MILITAR DO ACRE")
-    setListBM(listBm)
-    // console.log('BM', listBm);
-    const listPs = response.data.filter((cpf)=> cpf.departamento == "ACREPREVIDENCIA APOSENTADOS/PENSIONISTAS")
-    setListPS(listPs)
+    const response = await myApi.get("/blocoCount");
+    console.log(response.data.blocoCount)
+   
+      setListBloco(response.data.blocoCount)
+      setlistDisciplinas(response.data.disciplinasCount)
+      setlistTeachers(response.data.professoresCount)
+    
     // console.log('PS', listPs);
   }
   useEffect(() => {
@@ -111,20 +105,21 @@ export default function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={6} md={6} lg={3}>
           <Card style={{ cursor: "pointer" }} onClick={(e) =>{ 
-                 e.preventDefault()
-                 if(listUsers.length > 0){
+              /*   e.preventDefault()
+                 if(listTeachers > 0){
                    
-                   history.push("/admin/associates")
+                   history.push("/admin/listAssociates")
                  }
-                  }} >
+                  }} */
+             }}   >
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
-                <People />
+                <School />
               </CardIcon>
               <p className={classes.cardCategory}>TOTAL</p>
               <h3 className={classes.cardTitle}>
-                {listUsers.length > 0 ? (
-                  listUsers.length
+                {listTeachers > 0 ? (
+                  listTeachers
                 ) : (
                   // <CircularProgress
                   //   style={{ width: 25, marginTop: 10, marginRight: 10 }}
@@ -135,12 +130,10 @@ export default function Dashboard() {
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
-                <Success> 
-                  <Check />
-                </Success>
-                <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                  Relação Geral
-                </a>
+               
+                  <People />
+              
+                  PROFESSORES
               </div> 
             </CardFooter>
           </Card>
@@ -149,11 +142,11 @@ export default function Dashboard() {
           <Card style={{ cursor: "pointer" }}>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
-                <GiPoliceCar />
+                <People />
               </CardIcon>
-              <p className={classes.cardCategory}>PM</p>
-              <h3 className={classes.cardTitle}>{listPM.length > 0 ? (
-                  listPM.length
+              <p className={classes.cardCategory}>TOTAL</p>
+              <h3 className={classes.cardTitle}>{listDisciplinas > 0 ? (
+                  listDisciplinas
                 ) : (
                   <ReactLoading type="spinningBubbles" color="#f8f8"  height={17} width={35} style={{marginLeft: 50, color: "#f8f8"}} />
                   // <CircularProgress
@@ -164,7 +157,7 @@ export default function Dashboard() {
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                Polícia Militar
+                TURMAS
               </div>
             </CardFooter>
           </Card>
@@ -173,11 +166,11 @@ export default function Dashboard() {
           <Card style={{ cursor: "pointer" }}>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
-                <FaFire />
+                <Class />
               </CardIcon>
-              <p className={classes.cardCategory}>BM</p>
-              <h3 className={classes.cardTitle}>{listBM.length > 0 ? (
-                  listBM.length
+              <p className={classes.cardCategory}>TOTAL</p>
+              <h3 className={classes.cardTitle}>{listBloco > 0 ? (
+                  listBloco
                 ) : (
                   <ReactLoading type="spinningBubbles" color="#f8f8"  height={17} width={35} style={{marginLeft: 50, color: "#f8f8"}} />
                   // <CircularProgress
@@ -188,20 +181,20 @@ export default function Dashboard() {
             <CardFooter stats>
               <div className={classes.stats}>
                 <LocalOffer />
-                Bombeiro Militar
+                BLOCOS
               </div>
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={6} lg={3}>
+   { /*    <GridItem xs={12} sm={6} md={6} lg={3}>
           <Card style={{ cursor: "pointer" }}>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
                 <FaUserSecret />
               </CardIcon>
               <p className={classes.cardCategory}>RESERVA</p>
-              <h3 className={classes.cardTitle}>{listPS.length > 0 ? (
-                  listPS.length
+              <h3 className={classes.cardTitle}>{listPS > 0 ? (
+                  listPS
                 ) : (
                   <ReactLoading type="spinningBubbles" color="#f8f8"  height={17} width={35} style={{marginLeft: 50, color: "#f8f8"}} />
                   // <CircularProgress
@@ -216,7 +209,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+        </GridItem>*/}
       </GridContainer>
       {/* <GridContainer>
         <GridItem xs={12}>
@@ -448,13 +441,13 @@ export default function Dashboard() {
           </Card>
         </GridItem>
       </GridContainer> */}
-      <h4>FORMULÁRIOS</h4>
+      <h4>ACESSO RÁPIDO</h4>
       <br />
       <GridContainer>
         <GridItem xs={12} sm={12} md={4}>
           <Card  onClick={(e) =>{ 
                  e.preventDefault()
-                 history.push("/admin/create")
+                 history.push("/admin/listAssociates")
                   }} product className={classes.cardHover}>
             <CardHeader image className={classes.cardHeaderHover}>
               <a href="#pablo" onClick={(e) => e.preventDefault()}>
@@ -497,11 +490,11 @@ export default function Dashboard() {
               </div>
               <h4 className={classes.cardProductTitle}>
                 <span  >
-                   ADESÃO
+                   LISTAR DISCIPLINAS
                 </span>
               </h4>
               <span className={classes.cardProductDesciprion}>
-               Acesso rápido para adesão de novo associado.
+               Acesso rápido para as disciplinas de cada bloco.
               </span>
             </CardBody>
             {/* <CardFooter product>
@@ -556,11 +549,11 @@ export default function Dashboard() {
               </div>
               <h4 className={classes.cardProductTitle}>
                 <span href="#pablo" onClick={(e) => e.preventDefault()}>
-                  REINCLUSÃO
+                  CRIAR HORARIO DE AULAS
                 </span>
               </h4>
               <span className={classes.cardProductDesciprion}>
-                Acesso rápido para reincluir quem foi associado.
+                Acesso rápido para criar horario de aulas de cada bloco.
               </span>
             </CardBody>
             {/* <CardFooter product>
@@ -576,7 +569,7 @@ export default function Dashboard() {
         <GridItem xs={12} sm={12} md={4}>
           <Card product className={classes.cardHover} onClick={(e) =>{ 
                  e.preventDefault()
-                 if(listUsers.length > 0){
+                 if(listDisciplinas.length > 0){
                    
                    history.push("/admin/associates")
                  }
@@ -621,11 +614,11 @@ export default function Dashboard() {
               </div>
               <h4 className={classes.cardProductTitle}>
                 <span href="#pablo" onClick={(e) => e.preventDefault()}>
-                   DESLIGAMENTO
+                   LISTAR PROFESSORES
                 </span>
               </h4>
               <span className={classes.cardProductDesciprion}>
-                Acesso rápido para desligamento de associado.
+                Acesso rápido para listar todos os professores.
               </span>
             </CardBody>
             {/* <CardFooter product>

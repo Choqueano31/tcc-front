@@ -36,22 +36,22 @@ export default function Footer(props) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a href="#home" className={block}>
-                {rtlActive ? "الصفحة الرئيسية" : "SITE"}
+                {rtlActive ? "الصفحة الرئيسية" : ""}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#company" className={block}>
-                {rtlActive ? "شركة" : "PMAC"}
+                {rtlActive ? "شركة" : ""}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#portfolio" className={block}>
-                {rtlActive ? "بعدسة" : "ACRE.GOV"}
+                {rtlActive ? "بعدسة" : ""}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="#blog" className={block}>
-                {rtlActive ? "مدونة" : "SEPLAD"}
+                {rtlActive ? "مدونة" : ""}
               </a>
             </ListItem>
           </List>
@@ -63,11 +63,11 @@ export default function Footer(props) {
             className={anchor}
             target="_blank"
           >
-            {rtlActive ? "توقيت الإبداعية" : "AME -"}
+            {rtlActive ? "توقيت الإبداعية" : "UFPA -"}
           </a>
           {rtlActive
             ? ", مصنوعة مع الحب لشبكة الإنترنت أفضل"
-            : " Associação dos militares do Estado do Acre"}
+            : " UNIVERSIDADE FEDERAL DO PARÁ"}
         </p>
       </div>
     </footer>

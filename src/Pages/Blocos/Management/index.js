@@ -24,6 +24,7 @@ import myApi from "Service/Api";
 // import AssociateUpdate from "../../UpdateAll/Associate/index";
 // import { CircularProgress } from "@material-ui/core";
 import ReactLoading from 'react-loading';
+import UpdateBloco from "./UpdateBloco";
 
 const styles = {
   cardIconTitle: {
@@ -36,7 +37,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function AssociatesSearch() {
+export default function BlocoManagment() {
   const [list, setList] = useState([]);
   // const [listAss, setListAss] = useState([]);
   // const [listAss1, setListAss1] = useState([]);
@@ -46,6 +47,8 @@ export default function AssociatesSearch() {
     setOpen(true)
   }
   function ModalClose(){
+   
+    listBlocos()
     setOpen(false)
   }
 
@@ -56,10 +59,11 @@ export default function AssociatesSearch() {
   
   // const classes = useStyles();
 
-  async function listAssociates() {
-    const response = await myApi.get("/associadosteam");
+  async function listBlocos() {
+    const response = await myApi.get("/bloco");
     // const resp01 = await myApi.get("/desconts")
     // const data  = resp01.data
+   
     const response2 = response.data;
     // const aa = response.data.map(association => association.cpf)
 
@@ -89,15 +93,15 @@ export default function AssociatesSearch() {
         return {
           id: index ,
           nome: item.nome,
-          nome_funcional: item.nome_funcional,
-          cpf: item.cpf,
-          rg_policial: item.rg_policial,
-          rg_bombeiro: item.rg_bombeiro,
-          unidade: item.unity.nome,
-          endereco_logradouro: item.endereco_logradouro,
-          telefone_celular: item.telefone_celular,
-          telefone_fixo: item.telefone_fixo,
-          email: item.email,
+          code: item.code,
+          // cpf: item.cpf,
+          // rg_policial: item.rg_policial,
+          // rg_bombeiro: item.rg_bombeiro,
+          // unidade: item.unity.nome,
+          // endereco_logradouro: item.endereco_logradouro,
+          // telefone_celular: item.telefone_celular,
+          // telefone_fixo: item.telefone_fixo,
+          // email: item.email,
          
           actions: (
             // we've added some custom button actions
@@ -128,6 +132,7 @@ export default function AssociatesSearch() {
               </Button>{" "} */}
               {/* use this button to add a edit kind of action */}
               <Button
+
                 justIcon
                 round
                 simple
@@ -164,13 +169,15 @@ export default function AssociatesSearch() {
   }
   async function removeAssociate(id){
   
-    await myApi.put(`/associadoupdate/${id}`,{status:'INATIVO'})
-    listAssociates()
-   return toast.success('associado desligado com sucesso')
+    await myApi.delete(`/bloco/${id}`)
+   // listAssociates()
+   listBlocos()
+   return toast.success('Bloco excluido com sucesso')
  }
+
   useEffect(() => {
     // getAssociate();
-    listAssociates();
+    listBlocos();
   }, []);
   const [data, setData] = React.useState(
     list.map((prop, key) => {
@@ -178,9 +185,8 @@ export default function AssociatesSearch() {
       return {
         id: key,
         nome: prop.nome,
-        nome_funcional: prop.nome_funcional,
-        office: prop[2],
-        age: prop[3],
+        code: prop.code,
+      
         actions: (
           // we've added some custom button actions
           <div className="actions-right">
@@ -264,8 +270,8 @@ export default function AssociatesSearch() {
   return (
     <GridContainer>
      {open ? (
-       <p>y</p>
-       // <AssociateUpdate close={ModalClose} info={infoUpadte}  />
+     
+        <UpdateBloco ModalClose={ModalClose} info={infoUpadte}   />
      ):(
 
      
@@ -276,7 +282,7 @@ export default function AssociatesSearch() {
               <PermContactCalendar />
             </CardIcon>
             <div style={{justifyContent: 'space-between', display: 'flex'}}>
-            <h4 className={classes.cardIconTitle}>ASSOCIADOS</h4>
+            <h4 className={classes.cardIconTitle}>BLOCOS</h4>
             <h4 className={classes.cardIconTitle}>TOTAL: 
             {list.length > 0 ? (
                   <span style={{color: 'orange'}}>{list.length}</span>
@@ -305,62 +311,62 @@ export default function AssociatesSearch() {
                   accessor: "id",
                 },
                 {
-                  Header: "NOME COMPLETO",
+                  Header: "BLOCO",
                   accessor: "nome",
                 },
                
-                {
-                  Header: "CPF",
-                  accessor: "cpf",
-                  sortable: false,
-                  filterable: false,
-                },
-                {
-                  Header: "RG PM",
-                  accessor: "rg_policial",
-                  sortable: false,
-                  filterable: false,
-                },
-                {
-                  Header: "RG BM",
-                  accessor: "rg_bombeiro",
-                  sortable: false,
-                  filterable: false,
-                },
-                {
-                  Header: "LOTAÇÃO",
-                  accessor: "unidade",
-                  sortable: false,
-                  filterable: false,
-                },
+                // {
+                //   Header: "CÓDIGO",
+                //   accessor: "code",
+                //   sortable: false,
+                //   filterable: false,
+                // },
+                // {
+                //   Header: "RG PM",
+                //   accessor: "rg_policial",
+                //   sortable: false,
+                //   filterable: false,
+                // },
+                // {
+                //   Header: "RG BM",
+                //   accessor: "rg_bombeiro",
+                //   sortable: false,
+                //   filterable: false,
+                // },
+                // {
+                //   Header: "LOTAÇÃO",
+                //   accessor: "unidade",
+                //   sortable: false,
+                //   filterable: false,
+                // },
                
-                {
-                  Header: "CELULAR",
-                  accessor: "telefone_celular",
-                  sortable: false,
-                  filterable: false,
-                },
-                {
-                  Header: "TELEFONE",
-                  accessor: "telefone_fixo",
-                  sortable: false,
-                  filterable: false,
-                },
-                {
-                  // eslint-disable-next-line react/display-name
-                  Header: () => (
-                    <div
-                      style={{
-                        textAlign: "left",
-                      }}
-                    >
-                      EMAIL
-                    </div>
-                  ),
-                  accessor: "email",
-                  sortable: false,
-                  filterable: false,
-                },
+                // {
+                //   Header: "CELULAR",
+                //   accessor: "telefone_celular",
+                //   sortable: false,
+                //   filterable: false,
+                // },
+                // {
+                //   Header: "TELEFONE",
+                //   accessor: "telefone_fixo",
+                //   sortable: false,
+                //   filterable: false,
+                // },
+                // {
+                //   // eslint-disable-next-line react/display-name
+                //   Header: () => (
+                //     <div
+                //       style={{
+                //         textAlign: "left",
+                //       }}
+                //     >
+                //       EMAIL
+                //     </div>
+                //   ),
+                //   accessor: "email",
+                //   sortable: false,
+                //   filterable: false,
+                // },
                 {
                   // eslint-disable-next-line react/display-name
                   Header: () => (

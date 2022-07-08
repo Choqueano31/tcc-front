@@ -60,7 +60,7 @@ function createData2(item){
   return{
     nome: item.nome,
 
-    disciplinas:item.disciplinas,
+    teachers:item.teachers,
     funcional:[
       {
         nome_guerra: item.nome_funcional,
@@ -89,7 +89,7 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell  align="center" component="th" scope="row">
           {row?.nome}
         </TableCell>
         {/* <TableCell align="center">{row.hierarquia}</TableCell> */}
@@ -111,23 +111,23 @@ function Row(props) {
                     <TableCell>codigo</TableCell>
                    
                     <TableCell align="center">professor</TableCell>
-                    <TableCell align="right">Data de Nascimento</TableCell>
+                    {/* <TableCell align="right">Data de Nascimento</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.disciplinas.map((historyRow) => (
+                  {row.teachers.map((historyRow) => (
                    
                     <TableRow key={historyRow.id}>
                       <TableCell component="th" scope="row">
-                        {historyRow.nome}
+                        {historyRow.disciplina.nome}
                       </TableCell>
-                      <TableCell>{historyRow.code}</TableCell>
+                      <TableCell>{historyRow.disciplina.code}</TableCell>
                     
-                      <TableCell align="left">{historyRow.teachers[0].nome}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">{historyRow.nome}</TableCell>
+                      {/* <TableCell align="right">
                       {historyRow.data_nascimento}
+                      </TableCell> */}
                         {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}
-                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -224,7 +224,7 @@ Row.propTypes = {
     rgPm: PropTypes.string,
     rgBm: PropTypes.string,
     status: PropTypes.string,
-    disciplinas: PropTypes.arrayOf(
+    teachers: PropTypes.arrayOf(
       PropTypes.shape({
         nome: PropTypes.string,
         code: PropTypes.string,
@@ -310,8 +310,11 @@ export default function Associado() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
+          <TableCell />
+            <TableCell  align="center">BLOCOS</TableCell>
             <TableCell />
-            <TableCell>BLOCOS</TableCell>
+            <TableCell />
+            <TableCell />
             {/* <TableCell align="center">POSTO/GRAD</TableCell>
             <TableCell align="center">RG&nbsp;(PM)</TableCell>
             <TableCell align="center">RG&nbsp;(BM)</TableCell>

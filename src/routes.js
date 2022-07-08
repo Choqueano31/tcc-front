@@ -43,7 +43,10 @@ import ValidationForms from "views/Forms/ValidationForms";
 import ExtendedForms from "views/Forms/ExtendedForms";
 import RegularForms from "views/Forms/RegularForms";
 import ClassRegister from "Pages/Classe/Register";
+
 import Associado from "Pages/Search/Associado/Index";
+import BlocoManagment from "Pages/Blocos/Management";
+import BlocoRegister from "Pages/Blocos/Register";
 // import Timeline from "@material-ui/icons/Timeline";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
@@ -67,22 +70,22 @@ var dashRoutes = [
     // layout: "/admin",
     views: [
       {
-        path: "/ClassRegister",
+        path: "/blococreate",
         name: "Inserir",
         rtlName: "ساحر",
         mini: "I",
         rtlMini: "ث",
-        component: ClassRegister,
+        component: BlocoRegister,
         layout: "/admin",
       },
       {
-        path: "/read",
+        path: "/blocomanagement",
         name: "Gerenciar",
         rtlName: "ساحر",
         mini: "G",
         rtlMini: "ث",
-        component: BedroomRegister,
-        // layout: "/admin",
+        component: BlocoManagment,
+         layout: "/admin",
       },
     ]},
     {

@@ -33,6 +33,7 @@ export default function Pages(props) {
   });
   const getRoutes = routes => {
     return routes.map((prop, key) => {
+     
       if (prop.collapse) {
         return getRoutes(prop.views);
       }

@@ -91,7 +91,7 @@ export default function AuthNavbar(props) {
             [classes.navLinkActive]: activeRoute("/auth/login-page")
           })}
         >
-          <Fingerprint className={classes.listItemIcon} />
+          {/* <Fingerprint className={classes.listItemIcon} /> */}
           <ListItemText
             primary={"ENTRAR"}
             disableTypography={true}

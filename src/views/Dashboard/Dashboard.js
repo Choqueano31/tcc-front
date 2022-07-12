@@ -157,7 +157,7 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
             <CardFooter stats>
               <div className={classes.stats}>
                 <DateRange />
-                TURMAS
+              DISCIPLINAS
               </div>
             </CardFooter>
           </Card>

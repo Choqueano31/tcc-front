@@ -95,7 +95,7 @@ export default function HeaderLinks(props) {
         >
         <span class="material-icons">fingerprint</span>
       </Button> */}
-      <Button
+      {/* <Button
         color="transparent"
         round
         aria-label="Login"
@@ -117,9 +117,9 @@ export default function HeaderLinks(props) {
         {rtlActive ? "لوحة القيادة" : "Login"}
         </span>
         </Hidden>
-      </Button>
+      </Button> */}
       <div className={managerClasses}>
-        <Button
+        {/* <Button
           color="transparent"
           justIcon
           aria-label="Notifications"
@@ -149,8 +149,8 @@ export default function HeaderLinks(props) {
               {rtlActive ? "إعلام" : "Notification"}
             </span>
           </Hidden>
-        </Button>
-        <Popper
+        </Button> */}
+        {/* <Popper
           open={Boolean(openNotification)}
           anchorEl={openNotification}
           transition
@@ -212,11 +212,11 @@ export default function HeaderLinks(props) {
               </Paper>
             </Grow>
           )}
-        </Popper>
+        </Popper> */}
       </div>
 
       <div className={managerClasses}>
-        <Button
+        {/* <Button
           color="transparent"
           aria-label="Person"
           justIcon
@@ -242,7 +242,7 @@ export default function HeaderLinks(props) {
               {rtlActive ? "الملف الشخصي" : "Profile"}
             </span>
           </Hidden>
-        </Button>
+        </Button> */}
         <Popper
           open={Boolean(openProfile)}
           anchorEl={openProfile}

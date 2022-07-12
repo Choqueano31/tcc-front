@@ -47,6 +47,7 @@ import ClassRegister from "Pages/Classe/Register";
 import Associado from "Pages/Search/Associado/Index";
 import BlocoManagment from "Pages/Blocos/Management";
 import BlocoRegister from "Pages/Blocos/Register";
+import ClassManagment from "Pages/Classe/Management";
 // import Timeline from "@material-ui/icons/Timeline";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
@@ -99,7 +100,7 @@ var dashRoutes = [
       // layout: "/admin",
       views: [
         {
-          path: "/ClassRegister",
+          path: "/classregister",
           name: "Inserir",
           rtlName: "ساحر",
           mini: "I",
@@ -108,13 +109,13 @@ var dashRoutes = [
           layout: "/admin",
         },
         {
-          path: "/read",
+          path: "/classmanagment",
           name: "Gerenciar",
           rtlName: "ساحر",
           mini: "G",
           rtlMini: "ث",
-          component: BedroomRegister,
-          // layout: "/admin",
+          component: ClassManagment,
+          layout: "/admin",
         },
       ]},
       {
@@ -256,15 +257,15 @@ var dashRoutes = [
   //       component: TimelinePage,
   //       layout: "/admin",
   //     },
-  //     {
-  //       path: "/login-page",
-  //       name: "Vamos lá",
-  //       rtlName: "هعذاتسجيل الدخول",
-  //       mini: "L",
-  //       rtlMini: "هعذا",
-  //       component: LoginPage,
-  //       layout: "/auth",
-  //     },
+      {
+        path: "/login-page",
+        name: "Vamos lá",
+        rtlName: "هعذاتسجيل الدخول",
+        mini: "L",
+        rtlMini: "هعذا",
+        component: LoginPage,
+        layout: "/auth",
+      },
   //     {
   //       path: "/register-page",
   //       name: "Register Page",
@@ -394,60 +395,60 @@ var dashRoutes = [
   //     },
   //   ],
   // },
-  // {
-  //   collapse: true,
-  //   name: "HOTEL DE TRANSITO",
-  //   rtlName: "إستمارات",
-  //   icon: "content_paste",
-  //   state: "formsCollapse",
-  //   views: [
-  //     // {
-  //     //   path: "/regular-forms",
-  //     //   name: "Regular Forms",
-  //     //   rtlName: "أشكال عادية",
-  //     //   mini: "RF",
-  //     //   rtlMini: "صو",
-  //     //   component: RegularForms,
-  //     //   layout: "/admin",
-  //     // },
-  //     // {
-  //     //   path: "/extended-forms",
-  //     //   name: "Extended Forms",
-  //     //   rtlName: "نماذج موسعة",
-  //     //   mini: "EF",
-  //     //   rtlMini: "هوو",
-  //     //   component: ExtendedForms,
-  //     //   layout: "/admin",
-  //     // },
-  //     // {
-  //     //   path: "/validation-forms",
-  //     //   name: "Validation Forms",
-  //     //   rtlName: "نماذج التحقق من الصحة",
-  //     //   mini: "VF",
-  //     //   rtlMini: "تو",
-  //     //   component: ValidationForms,
-  //     //   layout: "/admin",
-  //     // },
-  //     {
-  //       path: "/hotelregister",
-  //       name: "REGISTRO NO HOTEL",
-  //       rtlName: "ساحر",
-  //       mini: "RH",
-  //       rtlMini: "ث",
-  //       component: HotelRegister,
-  //       layout: "/admin",
-  //     },
-  //     {
-  //       path: "/bedroomregister",
-  //       name: "REGISTRO DE QUARTO",
-  //       rtlName: "ساحر",
-  //       mini: "RQ",
-  //       rtlMini: "ث",
-  //       component: BedroomRegister,
-  //       layout: "/admin",
-  //     },
-  //   ],
-  // },
+  {
+    collapse: true,
+    name: "HOTEL DE TRANSITO",
+    rtlName: "إستمارات",
+    icon: "content_paste",
+    state: "formsCollapse",
+    views: [
+      {
+        path: "/regular-forms",
+        name: "Regular Forms",
+        rtlName: "أشكال عادية",
+        mini: "RF",
+        rtlMini: "صو",
+        component: RegularForms,
+        layout: "/admin",
+      },
+      {
+        path: "/extended-forms",
+        name: "Extended Forms",
+        rtlName: "نماذج موسعة",
+        mini: "EF",
+        rtlMini: "هوو",
+        component: ExtendedForms,
+        layout: "/admin",
+      },
+      {
+        path: "/validation-forms",
+        name: "Validation Forms",
+        rtlName: "نماذج التحقق من الصحة",
+        mini: "VF",
+        rtlMini: "تو",
+        component: ValidationForms,
+        layout: "/admin",
+      },
+      {
+        path: "/hotelregister",
+        name: "REGISTRO NO HOTEL",
+        rtlName: "ساحر",
+        mini: "RH",
+        rtlMini: "ث",
+        component: HotelRegister,
+        layout: "/admin",
+      },
+      {
+        path: "/bedroomregister",
+        name: "REGISTRO DE QUARTO",
+        rtlName: "ساحر",
+        mini: "RQ",
+        rtlMini: "ث",
+        component: BedroomRegister,
+        layout: "/admin",
+      },
+    ],
+  },
   // {
   //   collapse: true,
   //   name: "ACESSORIA JURÍDICA",

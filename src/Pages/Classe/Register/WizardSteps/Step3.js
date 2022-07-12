@@ -14,8 +14,8 @@ import "date-fns";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // import CustomInput from "components/CustomInput/CustomInput.js";
-import { Assignment } from "@material-ui/icons";
-import { TextField } from "@material-ui/core";
+import { Assignment, Check } from "@material-ui/icons";
+import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 
 const style = {
   infoText: {
@@ -39,6 +39,7 @@ class Step3 extends React.Component {
       obsState: "",
       occurrency: "",
       occurrencyState: "",
+      checked:[24, 22]
     };
   }
 
@@ -79,6 +80,18 @@ class Step3 extends React.Component {
     }
     this.setState({ [stateName]: event.target.value });
   }
+  handleToggle = value => {
+    const currentIndex = this.state.checked.indexOf(value);
+    const newChecked = [...this.state.checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    //setChecked(newChecked);
+    this.setState({checked:newChecked})
+  };
   handleSimple = (event) => {
     this.setState({ [event.target.name]: event.target.value });
     this.setState({ [event.target.name + "State"]: "success" });
@@ -91,7 +104,7 @@ class Step3 extends React.Component {
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={12}>
-          <h4 className={classes.infoText}>Preencha os campos abaixo</h4>
+          <h4 className={classes.infoText}>Preencha os horarios/dias com restrição (caso houver)</h4>
         </GridItem>
         <GridItem xs={12} sm={11}>
           <TextField

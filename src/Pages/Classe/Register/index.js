@@ -16,24 +16,23 @@ import myApi from "Service/Api.js";
 
 export default function ClassRegister() {
   async function typeCreate(e) {
-    // console.log(e)
     const dados = {
-      name: e.bedroom.name,
-      description: e.bedroom.description,
-      status: 1
+      nome: e.class.name,
+      teams_id: e.class.bloco,
     };
+    console.log(dados)
  
     try {
-      const response = await myApi.post("/classcreate", dados);
+      const response = await myApi.post("/classroom", dados);
       if (response) {
-        toast.success("classe criada com sucesso!");
+        toast.success("Sala criada com sucesso!");
         setTimeout(() => {
           reload2();
         }, 3000);
       }
     } catch (error) {
       // console.log(error);
-      toast.error("Não foi possível criar classe");
+      toast.error("Não foi possível criar Sala");
     }
   }
   function reload2() {
@@ -48,12 +47,12 @@ export default function ClassRegister() {
           steps={[
             {
               stepName: "Registrar a sala",
-              stepComponent: Step1,
+              stepComponent: Step3,
               stepId: "class",
             },
             {
-              stepName: "Observações",
-              stepComponent: Step3,
+              stepName: "Restrições",
+              stepComponent: Step1,
               stepId: "obs",
             },
           ]}

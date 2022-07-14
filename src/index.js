@@ -22,13 +22,17 @@ import { ToastContainer } from "react-toastify";
 import AuthLayout from "layouts/Auth.js";
 import RtlLayout from "layouts/RTL.js";
 import AdminLayout from "layouts/Admin.js";
-
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import "assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
+import Global from "styles/global";
 
 const hist = createBrowserHistory();
 
 ReactDOM.render(
+ 
   <Router history={hist}>
+     <DndProvider backend={HTML5Backend}>
     <ToastContainer />
     <Switch>
     <Route path="/rtl" component={RtlLayout} />
@@ -41,6 +45,8 @@ ReactDOM.render(
       <Route path="/admin" component={AdminLayout} />
       <Redirect from="/" to="/admin/dashboard" /> */}
     </Switch>
+    <Global/>
+    </DndProvider>
   </Router>,
   document.getElementById("root")
 );

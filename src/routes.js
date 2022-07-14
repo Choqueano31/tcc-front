@@ -48,6 +48,8 @@ import Associado from "Pages/Search/Associado/Index";
 import BlocoManagment from "Pages/Blocos/Management";
 import BlocoRegister from "Pages/Blocos/Register";
 import ClassManagment from "Pages/Classe/Management";
+import TimeTable from "Pages/TimeTable";
+import Board from "Pages/TimeTable/Board";
 // import Timeline from "@material-ui/icons/Timeline";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
@@ -257,15 +259,7 @@ var dashRoutes = [
   //       component: TimelinePage,
   //       layout: "/admin",
   //     },
-      {
-        path: "/login-page",
-        name: "Vamos lá",
-        rtlName: "هعذاتسجيل الدخول",
-        mini: "L",
-        rtlMini: "هعذا",
-        component: LoginPage,
-        layout: "/auth",
-      },
+   
   //     {
   //       path: "/register-page",
   //       name: "Register Page",
@@ -501,6 +495,15 @@ var dashRoutes = [
       //   component: AssociatesSearch,
       //   layout: "/admin",
       // },
+      {
+        path: "/timetable",
+        name: "Horários",
+        rtlName: "خرائط جوجل",
+        mini: "G",
+        rtlMini: "زم",
+        component: Board,
+        layout: "/admin",
+      },
             {
         path: "/listassociates",
         name: "BLOCOS",
@@ -531,6 +534,15 @@ var dashRoutes = [
       //   layout: "/admin",
       // },
     ],
+  },
+  {
+    path: "/login-page",
+    name: "SAIR",
+    rtlName: "هعذاتسجيل الدخول",
+    mini: "L",
+    rtlMini: "هعذا",
+    component: LoginPage,
+    layout: "/auth",
   },
   // {
   //   path: "/widgets",

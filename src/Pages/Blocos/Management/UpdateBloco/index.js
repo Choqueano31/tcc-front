@@ -34,7 +34,8 @@ async function handleUpdate(){
    const dados={
     nome:obj.nome
    }
-    const id = obj.id
+   console.log(obj)
+    const id = obj._id
      await myApi.put(`/bloco/${id}`,dados )
     toast.success("Atualização realizada com sucesso")
     setTimeout(() => {

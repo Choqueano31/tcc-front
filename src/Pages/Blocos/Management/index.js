@@ -153,7 +153,7 @@ export default function BlocoManagment() {
                 round
                 simple
                 onClick={() => {
-                  removeAssociate(item.id)
+                  removeAssociate(item._id)
 
                 }}
                 color="danger"

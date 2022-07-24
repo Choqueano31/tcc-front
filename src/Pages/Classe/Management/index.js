@@ -43,6 +43,7 @@ export default function ClassManagment() {
   // const [listAss1, setListAss1] = useState([]);
   const [open, setOpen] = useState(false)
   const [infoUpadte, setInfoUpdate] = useState(null)
+  console.log(infoUpadte)
   function ModalOpen(){
     setOpen(true)
   }
@@ -60,7 +61,7 @@ export default function ClassManagment() {
   // const classes = useStyles();
 
   async function listClass() {
-    const response = await myApi.get("/classroom");
+    const response = await myApi.get("/salas");
     // const resp01 = await myApi.get("/desconts")
     // const data  = resp01.data
    
@@ -93,7 +94,7 @@ export default function ClassManagment() {
         return {
           id: index ,
           nome: item.nome,
-          bloco:item.team.nome,
+          bloco:item.bloco.nome,
           // rg_policial: item.rg_policial,
           // rg_bombeiro: item.rg_bombeiro,
           // unidade: item.unity.nome,
@@ -152,7 +153,7 @@ export default function ClassManagment() {
                 round
                 simple
                 onClick={() => {
-                  removeAssociate(item.id)
+                  removeAssociate(item._id)
 
                 }}
                 color="danger"
@@ -168,7 +169,7 @@ export default function ClassManagment() {
   }
   async function removeAssociate(id){
   
-    await myApi.delete(`/classroom/${id}`)
+    await myApi.delete(`/salas/${id}`)
    // listAssociates()
    listClass()
    return toast.success('Sala excluida com sucesso')

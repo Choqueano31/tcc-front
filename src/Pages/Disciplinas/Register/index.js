@@ -14,16 +14,16 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import myApi from "Service/Api.js";
 
-export default function ClassRegister() {
+export default function DisciplinasRegister() {
   async function typeCreate(e) {
     const dados = {
       nome: e.class.name,
-      bloco_id: e.class.bloco,
+      teams_id: e.class.bloco,
     };
     console.log(dados)
  
     try {
-      const response = await myApi.post("/salas", dados);
+      const response = await myApi.post("/classroom", dados);
       if (response) {
         toast.success("Sala criada com sucesso!");
         setTimeout(() => {
@@ -47,12 +47,12 @@ export default function ClassRegister() {
           steps={[
             {
               stepName: "Registrar a sala",
-              stepComponent: Step1,
+              stepComponent: Step3,
               stepId: "class",
             },
             {
               stepName: "Restrições",
-              stepComponent: Step3,
+              stepComponent: Step1,
               stepId: "obs",
             },
           ]}

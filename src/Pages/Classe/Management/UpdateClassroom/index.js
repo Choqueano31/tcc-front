@@ -24,11 +24,9 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 function UpdateClass(info) {
- // console.log(close)
-
   const [obj, setObj] = useState(info.info)
   const [blocoList, setBlocoList] = useState([])
-  const [teamsChosen, setTeamsChosen] = useState(info.info.team)
+  const [teamsChosen, setTeamsChosen] = useState(info.info.bloco)
 async function handleUpdate(){
   if(obj.nome == ""){
     toast.error("campo nao pode ir vazio")
@@ -36,11 +34,12 @@ async function handleUpdate(){
   try{
    const dados={
     nome:obj.nome,
-    teams_id: teamsChosen.id
+    bloco_id: teamsChosen._id
    }
+   console.log(obj)
   
-    const id = obj.id
-     await myApi.put(`/classroom/${id}`,dados )
+    const id = obj._id
+     await myApi.put(`/salas/${id}`,dados )
     toast.success("Atualização realizada com sucesso")
     setTimeout(() => {
       info.ModalClose()
@@ -122,11 +121,11 @@ function handleSimple (event) {
           classes={{
             select: classes.select
           }}
-          value={teamsChosen.id}
+          value={teamsChosen._id}
           onChange={handleSimple}
           inputProps={{
-            name: "id",
-            id: "id"
+            name: "_id",
+            id: "_id"
           }}
         >
           <MenuItem
@@ -141,12 +140,12 @@ function handleSimple (event) {
             return(
 
           <MenuItem
-          key={item.id}
+          key={item._id}
             classes={{
               root: classes.selectMenuItem,
               selected: classes.selectMenuItemSelected
             }}
-            value={item.id}
+            value={item._id}
           >
             {item.nome}
           </MenuItem>

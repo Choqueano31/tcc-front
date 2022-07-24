@@ -193,12 +193,12 @@ class Step1 extends React.Component {
                             return(
 
                           <MenuItem
-                          key={item._id}
+                          key={item.id}
                             classes={{
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected
                             }}
-                            value={item._id}
+                            value={item.id}
                           >
                             {item.nome}
                           </MenuItem>

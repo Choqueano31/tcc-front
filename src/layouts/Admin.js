@@ -32,7 +32,7 @@ export default function Dashboard(props) {
   const [bgColor, setBgColor] = React.useState("black");
   // const [hasImage, setHasImage] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState("dropdown");
-  const [logo, setLogo] = React.useState(require("assets/img/logoameac.png"));
+  const [logo, setLogo] = React.useState(require("assets/img/faces/R.png"));
   // styles
   const classes = useStyles();
   const mainPanelClasses =
@@ -96,11 +96,12 @@ export default function Dashboard(props) {
     return window.location.pathname !== "/admin/full-screen-maps";
   };
   const getActiveRoute = routes => {
+
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
-       
+
         if (collapseActiveRoute !== activeRoute) {
           return collapseActiveRoute;
         }

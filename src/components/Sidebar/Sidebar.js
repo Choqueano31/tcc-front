@@ -21,7 +21,7 @@ import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
 
 import sidebarStyle from "assets/jss/material-dashboard-pro-react/components/sidebarStyle.js";
 
-import avatar from "assets/img/faces/myphoto.jpeg";
+import avatar from "assets/img/faces/admin.png";
 
 var ps;
 
@@ -352,7 +352,7 @@ class Sidebar extends React.Component {
     var user = (
       <div className={userWrapperClass}>
         <div className={photo}>
-          <img style={{width: 40, height: 30}} src={avatar} className={[classes.avatarImg]} alt="..." />
+          <img style={{width: 40, height: 40}} src={avatar}  className={[classes.avatarImg]} alt="..." />
         </div>
         <List className={classes.list}>
           <ListItem className={classes.item + " " + classes.userItem}>
@@ -362,7 +362,7 @@ class Sidebar extends React.Component {
               onClick={() => this.openCollapse("openAvatar")}
             >
               <ListItemText
-                primary={rtlActive ? "تانيا أندرو" : "UFPA"}
+                primary={rtlActive ? "تانيا أندرو" : "ADMINSTRADOR"}
                 secondary={
                   <b
                     className={

@@ -90,11 +90,11 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
   async function searchAssociate() {
     const response = await myApi.get("/blocoCount");
     console.log(response.data.blocoCount)
-   
+
       setListBloco(response.data.blocoCount)
       setlistDisciplinas(response.data.disciplinasCount)
       setlistTeachers(response.data.professoresCount)
-    
+
     // console.log('PS', listPs);
   }
   useEffect(() => {
@@ -104,10 +104,10 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
     <div>
       <GridContainer>
         <GridItem xs={12} sm={6} md={6} lg={3}>
-          <Card style={{ cursor: "pointer" }} onClick={(e) =>{ 
+          <Card style={{ cursor: "pointer" }} onClick={(e) =>{
               /*   e.preventDefault()
                  if(listTeachers > 0){
-                   
+
                    history.push("/admin/listAssociates")
                  }
                   }} */
@@ -130,11 +130,11 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
-               
+
                   <People />
-              
+
                   PROFESSORES
-              </div> 
+              </div>
             </CardFooter>
           </Card>
         </GridItem>
@@ -445,7 +445,7 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
       <br />
       <GridContainer>
         <GridItem xs={12} sm={12} md={4}>
-          <Card  onClick={(e) =>{ 
+          <Card  onClick={(e) =>{
                  e.preventDefault()
                  history.push("/admin/listAssociates")
                   }} product className={classes.cardHover}>
@@ -457,7 +457,7 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
             <CardBody  >
               <div className={classes.cardHoverUnder}>
                 <Tooltip
-               
+
                   id="tooltip-top"
                   title="Abrir"
                   placement="bottom"
@@ -490,11 +490,11 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
               </div>
               <h4 className={classes.cardProductTitle}>
                 <span  >
-                   LISTAR DISCIPLINAS
+                   LISTAR GRADE ATUAL
                 </span>
               </h4>
               <span className={classes.cardProductDesciprion}>
-               Acesso rápido para as disciplinas de cada bloco.
+               Acesso rápido para a grade de disciplinas por bloco.
               </span>
             </CardBody>
             {/* <CardFooter product>
@@ -508,7 +508,12 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
-          <Card product className={classes.cardHover}>
+          <Card
+           onClick={(e) =>{
+            e.preventDefault()
+            history.push("/admin/timetable")
+             }}
+          product className={classes.cardHover}>
             <CardHeader image className={classes.cardHeaderHover}>
               <a href="#pablo" onClick={(e) => e.preventDefault()}>
                 <img src={priceImage2} alt="..." />
@@ -567,13 +572,12 @@ const[listDisciplinas, setlistDisciplinas] = useState(0)
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
-          <Card product className={classes.cardHover} onClick={(e) =>{ 
-                 e.preventDefault()
-                 if(listDisciplinas.length > 0){
-                   
-                   history.push("/admin/associates")
-                 }
-                  }}>
+          <Card
+          onClick={(e) =>{
+            e.preventDefault()
+            history.push("/admin/ProfessorManagement")
+             }}
+          product className={classes.cardHover} >
             <CardHeader image className={classes.cardHeaderHover}>
               <a href="#pablo" onClick={(e) => e.preventDefault()}>
                 <img src={priceImage3} alt="..." />

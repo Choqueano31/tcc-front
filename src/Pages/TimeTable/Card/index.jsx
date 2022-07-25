@@ -118,7 +118,7 @@ function Card({ data, index, listIndex }) {
     </div>
   );
   return (
-   
+
     <Container ref={ref} isDragging={isDragging}>
       <Dialog header="Adicionar Professor" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => setDisplayBasic(false)}>
         <span className="p-float-label" style={{ marginTop: 10 }}>
@@ -130,14 +130,19 @@ function Card({ data, index, listIndex }) {
         <Label color={data.labels} style={{ marginRight: 5 }} />
         {data.content}
       </header>
-      <p>
+      <p style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
 
         {' '}
         {data.teacher}
         {' '}
-
-        {isActive ? <p style={{ color: 'red' }}>Solte pra escolher horario</p> : null}
       </p>
+      <p style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+
+{' '}
+          {data?.sala}
+          {' '}
+          {isActive ? <p style={{ color: 'red' }}>Solte</p> : null}
+          </p>
       {/* {data.teacher !== '' ? (
         <aside>
           <MdSettingsApplications

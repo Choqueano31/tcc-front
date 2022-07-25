@@ -21,7 +21,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 
-import image from "assets/img/logoameac.png";
+import image from "assets/img/faces/ufpa.png";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 
@@ -49,7 +49,7 @@ export default function LoginPage() {
               >
                 <h4 className={classes.cardTitle}>UFPA</h4>
                 <div className={classes.socialLine}>
-                <img src={image} alt="..." style={{width: 70, height: 70}} /> 
+                <img src={image} alt="..." style={{width: 100, height: 100}} />
                 </div>
               </CardHeader>
               <CardBody>

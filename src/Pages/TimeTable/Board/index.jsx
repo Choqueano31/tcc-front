@@ -26,6 +26,7 @@ function Board() {
       content: dragged.content,
       teacher: dragged.teacher,
       labels: dragged.labels,
+      sala:dragged.sala,
       user: dragged.user,
     };
     // console.log(lists[fromList].cards[from]);
@@ -76,8 +77,29 @@ function Board() {
   }
   async function ListDisciplines(){
     try{
-      const response = await myApi.get("/disciplinas")
-      console.log(response.data)
+      const response = await myApi.get("/professor")
+      const updateBase = response.data.map((item)=> ({
+        id: item._id ,
+        teacher: item.nome,
+        content: item.disciplina?.nome ,
+        sala: item.disciplina?.sala?.nome,
+        labels: gerarCorHexadecimal(),
+
+      }))
+     const replaceTeachers = data.map((item)=>{
+      if(item.title === "Disciplinas"){
+      const refatore={
+        title: 'Disciplinas',
+        creatable: true,
+        cards: updateBase
+      }
+      return refatore
+      }
+      else{
+        return item
+      }
+     })
+    setLists(replaceTeachers)
     }catch(err){
       toast.erro(err)
     }

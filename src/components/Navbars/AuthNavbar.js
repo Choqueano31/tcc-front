@@ -131,7 +131,7 @@ export default function AuthNavbar(props) {
           <div className={classes.flex}>
             <Button href="#" className={classes.title} color="transparent">
               UFPA
-            </Button> 
+            </Button>
           </div>
         </Hidden>
         <Hidden smDown>{list}</Hidden>

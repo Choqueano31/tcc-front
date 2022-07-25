@@ -48,17 +48,17 @@ function List({ data, index: listIndex }) {
       <>
         <header style={{border:"1px solid",color:"white", backgroundColor:"#34495e", marginRight:20 }}>
         <h2>{data.title}</h2>
-       
+
 
         {/* <button type="button" onClick={() => setDisplayBasic(true)}>
           <MdAdd size={24} color="#FFF" />
         </button> */}
-     
+
       </header>
 
       <ul style={{ marginTop: 20,
        marginRight:20,
-       height:520, 
+       height:520,
       overflowX:"hidden",
       overflowY: 'scroll'  }}  >
         {data.cards.map((card, index) => (
@@ -74,14 +74,14 @@ function List({ data, index: listIndex }) {
  <>
        <header style={{border:"1px solid",color:"white", backgroundColor:"#34495e"}}>
         <h2>{data.title}</h2>
-       
+
 
         {/* <button type="button" onClick={() => setDisplayBasic(true)}>
           <MdAdd size={24} color="#FFF" />
         </button> */}
-     
+
       </header>
-      
+
             <ul style={{ marginTop: 20}}>
               {data.cards.map((card, index) => (
                <div key={index} style={{height:80,padding: 15,marginTop:12,
@@ -89,17 +89,17 @@ function List({ data, index: listIndex }) {
                   justifyContent:'center'}}>{card.horario} </div>
               ))}
             </ul>
-            </> 
+            </>
       )
-        
+
       }
            {!data.creatable && (
  <>
               <header style={{border:"1px solid",color:"white", backgroundColor:"#34495e" }}>
               <h2>{data.title}</h2>
-           
+
             </header>
-      
+
             <ul style={{ marginTop: 20 }}>
               {data.cards.map((card, index) => (
                 <Card
@@ -110,13 +110,13 @@ function List({ data, index: listIndex }) {
                 />
               ))}
             </ul>
-            </> 
+            </>
       )
-        
+
       }
-        
-      
-      
+
+
+
     </Container>
   );
 }

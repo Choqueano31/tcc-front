@@ -60,7 +60,7 @@ function createData2(item){
   return{
     nome: item.nome,
 
-    teachers:item.teachers,
+    teachers:item.disciplinas,
     funcional:[
       {
         nome_guerra: item.nome_funcional,
@@ -109,27 +109,53 @@ function Row(props) {
                   <TableRow>
                     <TableCell>nome</TableCell>
                     <TableCell>codigo</TableCell>
-                   
+
                     <TableCell align="center">professor</TableCell>
                     {/* <TableCell align="right">Data de Nascimento</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
+
                   {row.teachers.map((historyRow) => (
-                   
-                    <TableRow key={historyRow.id}>
+                    <>
+                    {historyRow.professores.length > 1&& (
+                      <>
+                      {historyRow.professores.map((item)=>(
+                           <TableRow key={item._id}>
+                           <TableCell component="th" scope="row">
+                             {historyRow.nome}
+                           </TableCell>
+                           <TableCell>{historyRow.code}</TableCell>
+
+                           <TableCell align="left">{item.nome}</TableCell>
+                           {/* <TableCell align="right">
+                           {historyRow.data_nascimento}
+                           </TableCell> */}
+                             {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}
+                         </TableRow>
+                        ))}
+                        </>
+                    )}
+
+                {historyRow.professores.length <= 1&& (
+
+                    <TableRow key={historyRow._id}>
                       <TableCell component="th" scope="row">
-                        {historyRow.disciplina.nome}
+                        {historyRow.nome}
                       </TableCell>
-                      <TableCell>{historyRow.disciplina.code}</TableCell>
-                    
-                      <TableCell align="left">{historyRow.nome}</TableCell>
+                      <TableCell>{historyRow.code}</TableCell>
+
+                      <TableCell align="left">{historyRow.professores[0]?.nome}</TableCell>
                       {/* <TableCell align="right">
                       {historyRow.data_nascimento}
                       </TableCell> */}
                         {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}
                     </TableRow>
-                  ))}
+
+                    )}
+                    </>
+                ))}
+
                 </TableBody>
               </Table>
             </Box>
@@ -251,7 +277,7 @@ Row.propTypes = {
       })
     )
   }).isRequired,
- 
+
 };
 
 
@@ -284,7 +310,7 @@ export default function Associado() {
   async function resptwo() {
     const response1 = await myApi.get("/desconts");
     setAssociate(response1.data);
-    
+
   }
   useEffect(() => {
     listAssociates();

@@ -1,16 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import produce from 'immer';
 import List from '../List';
 import { loadLists } from '../services/api';
 import teachers from '../services/teachers';
 import { Container } from './styles';
 import BoardContext from './context';
+import myApi from 'Service/Api';
+import { toast } from 'react-toastify';
 
 const data = loadLists();
 
 function Board() {
   // eslint-disable-next-line no-unused-vars
+
   const [lists, setLists] = useState(data);
 
   async function move(fromList, toList, from, to) {
@@ -71,11 +74,22 @@ function Board() {
     //  ,
     // ]);
   }
+  async function ListDisciplines(){
+    try{
+      const response = await myApi.get("/disciplinas")
+      console.log(response.data)
+    }catch(err){
+      toast.erro(err)
+    }
+  }
+  useEffect(()=>{
+    ListDisciplines()
+  },[])
   return (
-    
+
     <BoardContext.Provider value={{ lists, move, teacherAdd }}>
       <Container >
-      
+
         {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
         {/* <List />
       <List />

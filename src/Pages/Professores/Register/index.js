@@ -14,27 +14,26 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import myApi from "Service/Api.js";
 
-export default function DisciplinasRegister() {
+export default function ProfessoresRegister() {
   async function typeCreate(e) {
     const dados = {
-      nome: e.disciplinas.name,
-      code: e.disciplinas.code,
-      bloco_id: e.disciplinas.bloco,
-      sala_id:e.disciplinas.sala
+      nome: e.teacher.name,
+      bloco_id: e.teacher.bloco,
+      disciplina_id:e.teacher.professor
     };
     console.log(dados)
- 
+
     try {
-      const response = await myApi.post("/disciplinas", dados);
+      const response = await myApi.post("/professor", dados);
       if (response) {
-        toast.success("Disciplina criada com sucesso!");
+        toast.success("Professor cadastrado com sucesso!");
         setTimeout(() => {
           reload2();
         }, 3000);
       }
     } catch (error) {
       // console.log(error);
-      toast.error("Não foi possível criar Disciplina");
+      toast.error("Não foi possível cadastrar professor.");
     }
   }
   function reload2() {
@@ -48,9 +47,9 @@ export default function DisciplinasRegister() {
           validate
           steps={[
             {
-              stepName: "Registrar a disciplina",
+              stepName: "Registrar Professor",
               stepComponent: Step1,
-              stepId: "disciplinas",
+              stepId: "teacher",
             },
             {
               stepName: "Restrições",
@@ -58,7 +57,7 @@ export default function DisciplinasRegister() {
               stepId: "obs",
             },
           ]}
-          title="Cadastro de Disciplina"
+          title="Cadastro de Professor"
           subtitle=""
           finishButtonClick={(e) => typeCreate(e)}
         />

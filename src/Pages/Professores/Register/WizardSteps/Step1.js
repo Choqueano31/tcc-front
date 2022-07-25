@@ -45,26 +45,25 @@ class Step1 extends React.Component {
       descriptionState: "",
       bloco:"",
       blocoState:"",
-      class:"",
-      classState:"",
+      disciplina:"",
+      disciplinaState:"",
 
       blocoList: [],
-      classesList:[]
+      disciplinasList:[]
     };
   }
 
   sendState() {
     const dados = {
       name: this.state.name,
-      code: this.state.code,
       bloco: this.state.bloco,
-      sala: this.state.class,
+      professor: this.state.disciplina,
     };
     return dados;
   }
  async findclasses(id){
-  const response = await myApi.get(`/salas/${id}`)
-  this.setState({ classesList: response.data });
+  const response = await myApi.get(`/disciplinas/${id}`)
+  this.setState({ disciplinasList: response.data });
  }
  async blocoLists(){
     const response = await myApi.get("/bloco")
@@ -126,17 +125,13 @@ class Step1 extends React.Component {
   isValidated() {
     if (
       this.state.nameState === "success" &&
-       this.state.codeState === "success" &&
         this.state.bloco !== "" &&
-         this.state.class !== ""
+         this.state.disciplina !== ""
     ) {
       return true;
     } else {
       if (this.state.nameState !== "success") {
         this.setState({ nameState: "error" });
-      }
-      if (this.state.codeState !== "success") {
-        this.setState({ codeState: "error" });
       }
     toast.error("preencha todos os campos!")
     }
@@ -161,7 +156,7 @@ class Step1 extends React.Component {
             id="standard-basic"
             label={
               <span>
-                Nome da disciplina
+                Nome do Professor
                 {this.state.nameState === "error" ? (
                   <small> (obrigatorio)</small>
                 ) : null}
@@ -176,53 +171,25 @@ class Step1 extends React.Component {
               ),
             }}
           />
-          
+
         </GridItem>
-        <GridItem xs={12} sm={11}>
-          <TextField
-            style={{  width: "100%" }}
-            formControlProps={{
-              fullWidth: true,
-            }}
-            onChange={(event) => this.change(event, "code", "length", 1)}
-            success={this.state.codeState === "success"}
-            error={this.state.codeState === "error"}
-            id="standard-basic"
-            label={
-              <span>
-                Código da disciplina
-                {this.state.codeState === "error" ? (
-                  <small> (obrigatorio)</small>
-                ) : null}
-              </span>
-            }
-            value={this.state.code}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <Assignment />
-                </InputAdornment>
-              ),
-            }}
-          />
-          
-        </GridItem>
+
         <GridItem xs={12} sm={11}>
         <FormControl
-                        
+
                         fullWidth
                         className={classes.selectFormControl}
                       >
                         <InputLabel
-                        
+
                           htmlFor="simple-select"
                           className={classes.selectLabel}
                         >
                           Escolha o bloco
                         </InputLabel>
                         <Select
-                        
-                       
+
+
                           MenuProps={{
                             className: classes.selectMenu
                           }}
@@ -265,31 +232,31 @@ class Step1 extends React.Component {
         </GridItem>
         <GridItem xs={12} sm={11}>
         <FormControl
-                        
+
                         fullWidth
                         className={classes.selectFormControl}
                       >
                         <InputLabel
-                        
+
                           htmlFor="simple-select"
                           className={classes.selectLabel}
                         >
-                          Escolha a sala em que a disciplina será ministrada
+                          Escolha a disciplina que o professor irá ministrar
                         </InputLabel>
                         <Select
-                        
-                       
+
+
                           MenuProps={{
                             className: classes.selectMenu
                           }}
                           classes={{
                             select: classes.select
                           }}
-                          value={this.state.class}
+                          value={this.state.disciplina}
                           onChange={this.handleSimple}
                           inputProps={{
-                            name: "class",
-                            id: "class"
+                            name: "disciplina",
+                            id: "disciplina"
                           }}
                         >
                           <MenuItem
@@ -298,9 +265,9 @@ class Step1 extends React.Component {
                               root: classes.selectMenuItem
                             }}
                           >
-                            Escolha a sala
+                            Escolha a disciplina
                           </MenuItem>
-                          {this.state.classesList.map((item)=>{
+                          {this.state.disciplinasList.map((item)=>{
                             return(
 
                           <MenuItem

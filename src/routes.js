@@ -50,6 +50,10 @@ import BlocoRegister from "Pages/Blocos/Register";
 import ClassManagment from "Pages/Classe/Management";
 import TimeTable from "Pages/TimeTable";
 import Board from "Pages/TimeTable/Board";
+import DisciplinasRegister from "Pages/Disciplinas/Register";
+import DisciplinaManagment from "Pages/Disciplinas/Management";
+import ProfessoresRegister from "Pages/Professores/Register";
+import TeachersManagment from "Pages/Professores/Management";
 // import Timeline from "@material-ui/icons/Timeline";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
@@ -131,12 +135,12 @@ var dashRoutes = [
         // layout: "/admin",
         views: [
           {
-            path: "/ClassRegister",
+            path: "/disciplinaregister",
             name: "Inserir",
             rtlName: "ساحر",
             mini: "I",
             rtlMini: "ث",
-            component: ClassRegister,
+            component: DisciplinasRegister,
             layout: "/admin",
           },
           {
@@ -145,8 +149,8 @@ var dashRoutes = [
             rtlName: "ساحر",
             mini: "G",
             rtlMini: "ث",
-            component: BedroomRegister,
-            // layout: "/admin",
+            component: DisciplinaManagment,
+            layout: "/admin",
           },
         ]},
   {
@@ -205,22 +209,22 @@ var dashRoutes = [
       //   layout: "/admin",
       // },
       {
-        path: "/create",
+        path: "/createProf",
         name: "Inserir",
         rtlName: "ساحر",
         mini: "I",
         rtlMini: "ث",
-        component: BedroomRegister,
-        // layout: "/admin",
+        component: ProfessoresRegister,
+        layout: "/admin",
       },
       {
-        path: "/read",
+        path: "/ProfessorManagement",
         name: "Gerenciar",
         rtlName: "ساحر",
         mini: "G",
         rtlMini: "ث",
-        component: BedroomRegister,
-        // layout: "/admin",
+        component: TeachersManagment,
+         layout: "/admin",
       },
     ],
   },
@@ -259,7 +263,7 @@ var dashRoutes = [
   //       component: TimelinePage,
   //       layout: "/admin",
   //     },
-   
+
   //     {
   //       path: "/register-page",
   //       name: "Register Page",

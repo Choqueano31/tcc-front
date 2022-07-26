@@ -46,6 +46,7 @@ export function loadLists() {
       title: 'horarios',
       creatable: true,
       horary: true,
+      bloco_id: "",
       turno:'vespertino',
       cards: [
         {
@@ -86,12 +87,13 @@ export function loadLists() {
           labels: ['#7159c1'],
           user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',
         },
-        
+
       ],
     },
     {
       title: 'Segunda-Feira',
       creatable: false,
+      bloco_id: "",
       cards: [
         {
           id: 11,
@@ -135,6 +137,7 @@ export function loadLists() {
     {
       title: 'Terça-Feira',
       creatable: false,
+      bloco_id: "",
       cards: [
         {
           id: 1,
@@ -178,6 +181,7 @@ export function loadLists() {
     {
       title: 'Quarta-Feira',
       creatable: false,
+      bloco_id: "",
       cards: [
         {
           id: 1,
@@ -221,6 +225,7 @@ export function loadLists() {
     {
       title: 'Quinta-Feira',
       creatable: false,
+      bloco_id: "",
       cards: [
         {
           id: 1,
@@ -264,6 +269,7 @@ export function loadLists() {
     {
       title: 'Sexta-Feira',
       creatable: false,
+      bloco_id: "",
       cards: [
         {
           id: 1,
@@ -307,7 +313,7 @@ export function loadLists() {
     {
       title: 'Sábado',
       creatable: false,
-      done: true,
+      bloco_id: "",
       cards: [
         {
           id: 1,
@@ -351,7 +357,7 @@ export function loadLists() {
     {
       title: 'Domingo',
       creatable: false,
-      done: true,
+      bloco_id: "",
       cards: [
         {
           id: 1,

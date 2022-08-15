@@ -34,9 +34,68 @@ function Board() {
   const [lists, setLists] = useState([]);
   const [blocoList, setBlocoList] = useState([])
   const [teamsChosen, setTeamsChosen] = useState({})
+  const [findTimeTable, setFindTimeTable] = useState([])
+  const matutino =  {
+    title: 'Horários',
+    creatable: true,
+    horary: true,
+    turno:'MATUTINO',
+    cards: [
+      {
+        id: 1,
+        horario: '07:30 - 08:20',
+      },
+      {
+        id:2 ,
+        horario: '08:20 - 09:10',
+           },        {
+        id: 3,
+        horario: '09:20 - 10:10',
+          },        {
+        id: 4,
+        horario: '10:10 - 11:00',
+        },        {
+        id: 5,
+        horario: '11:10 - 12:00',
+      },        {
+        id: 6,
+        horario: '12:00 - 12:50',
+       },
+    ],
+  }
+  const vespertino =  {
+    title: 'Horários',
+    creatable: true,
+    horary: true,
+    turno:'VESPERTINO',
+    cards: [
+      {
+        id: 1,
+        horario: '13:00 - 13:50',
+      },
+      {
+        id:2 ,
+        horario: '13:50 - 14:40',
+           },        {
+        id: 3,
+        horario: '14:50 - 15:40',
+          },        {
+        id: 4,
+        horario: '15:40 - 16:30',
+        },        {
+        id: 5,
+        horario: '16:40 - 17:30',
+      },        {
+        id: 6,
+        horario: '17:30 - 18:20',
+       },
+    ],
+  }
+
   async function move(fromList, toList, from, to) {
     // console.log(fromList, toList, from, to);
     const objectDelect = lists[toList].cards[to];
+    console.log( lists[toList]._id)
     const dragged = lists[fromList].cards[from];
     dragged.id = objectDelect.id;
     const objectNew = {
@@ -47,6 +106,17 @@ function Board() {
       sala:dragged.sala,
       user: dragged.user,
     };
+    console.log(bloco._id);
+    if(bloco._id) {
+      const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
+      if(updateTeacher){
+
+        toast.success("Disciplina atualizada com sucesso.")
+      }else{
+        toast.error("Não foi possível atualizar disciplina.")
+      }
+
+    }
     // console.log(lists[fromList].cards[from]);
     // console.log(objectNew);
     const removeobject = lists[toList].cards.splice(to, 1, objectNew);
@@ -97,8 +167,12 @@ function Board() {
 
     try{
       const findTimeTable = await myApi.get(`/timetable/${id}`)
-      console.log(findTimeTable)
-      if(findTimeTable.length > 0){
+      setFindTimeTable(findTimeTable.data)
+      const findBloco = await myApi.get(`/bloco/${id}`)
+      console.log(findBloco)
+      setBloco(findBloco.data)
+     // console.log(findTimeTable.data[0]._id)
+      if(findTimeTable.data.length > 0){
         const response = await myApi.get(`/professor/${id}`)
         console.log(response)
         const updateBase = response.data.map((item)=> ({
@@ -115,12 +189,12 @@ function Board() {
           bloco_id: id,
           cards: updateBase
         }
-
-
+        let allInfo = findTimeTable.data
+        const recept = allInfo.unshift(refatore)
+        console.log(allInfo);
+        setLists(allInfo)
       }
-      const findBloco = await myApi.get(`/bloco/${id}`)
-      console.log(findBloco)
-      setBloco(findBloco.data)
+      else{
       const response = await myApi.get(`/professor/${id}`)
       console.log(response)
       const updateBase = response.data.map((item)=> ({
@@ -147,7 +221,7 @@ function Board() {
       }
      })
     setLists(replaceTeachers)
-    }catch(err){
+  } }catch(err){
       toast.erro(err)
     }
   }
@@ -278,9 +352,16 @@ function Board() {
             <RegularButton  onClick={()=> {back()}} color="warning">
               VOLTAR
             </RegularButton>
+            {findTimeTable.length > 0? (
+               <RegularButton onClick={() => {}} color="danger">
+               IMPRIMIR HORÁRIO
+             </RegularButton>
+            ):(
             <RegularButton onClick={() => {handleTimeTable()}} color="success">
               CRIAR HORÁRIO
             </RegularButton>
+
+            )}
           </DialogActions>
       {/* <Container >
         {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}

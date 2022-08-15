@@ -51,7 +51,7 @@ export function loadLists() {
       cards: [
         {
           id: 1,
-          horario: '13:45',
+          horario: '13:00 - 13:50',
           content: 'Estrutura de dados',
           labels: ['#7159c1'],
           user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',

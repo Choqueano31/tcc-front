@@ -18,6 +18,7 @@ import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import { FaPen } from 'react-icons/fa';
+import HorariosPdf from '../../Reports/Horarios/horarios'
 const data = loadLists();
 const styles = {
   cardIconTitle: {
@@ -107,7 +108,7 @@ function Board() {
       user: dragged.user,
     };
     console.log(bloco._id);
-    if(bloco._id) {
+    if( lists[toList]._id) {
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
       if(updateTeacher){
 
@@ -235,6 +236,7 @@ function Board() {
         }
       }
       toast.success("horario criado com sucesso")
+      window.location.reload()
     } catch (error) {
       toast.error(error)
 
@@ -353,7 +355,9 @@ function Board() {
               VOLTAR
             </RegularButton>
             {findTimeTable.length > 0? (
-               <RegularButton onClick={() => {}} color="danger">
+               <RegularButton onClick={() => {
+
+                HorariosPdf(lists)}} color="danger">
                IMPRIMIR HORÁRIO
              </RegularButton>
             ):(

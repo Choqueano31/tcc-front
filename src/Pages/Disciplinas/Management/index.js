@@ -62,6 +62,7 @@ export default function DisciplinaManagment() {
 
   async function listDisciplinas() {
     const response = await myApi.get("/disciplinas");
+    console.log(response.data)
     // const resp01 = await myApi.get("/desconts")
     // const data  = resp01.data
 
@@ -76,6 +77,7 @@ export default function DisciplinaManagment() {
           code:item.code,
           bloco:item.bloco?item.bloco.nome : "",
           sala:item.sala?item.sala.nome : "",
+          professor:item.professor?item.professor.nome : "",
 
           actions: (
             // we've added some custom button actions
@@ -120,7 +122,7 @@ export default function DisciplinaManagment() {
     await myApi.delete(`/disciplinas/${id}`)
    // listAssociates()
    listDisciplinas()
-   return toast.success('Sala excluida com sucesso')
+   return toast.success('Disciplina excluida com sucesso')
  }
 
   useEffect(() => {
@@ -232,7 +234,7 @@ export default function DisciplinaManagment() {
             <div style={{justifyContent: 'space-between', display: 'flex'}}>
             <h4 className={classes.cardIconTitle}>DISCIPLINAS</h4>
             <h4 className={classes.cardIconTitle}>TOTAL:
-            {list.length > 0 ? (
+            {list.length >= 0 ? (
                   <span style={{color: 'orange'}}>{list.length}</span>
                  ) : (
                   <ReactLoading type="spinningBubbles" color="#f8f8"  height={17} width={25} style={{marginLeft: 60, color: "#f8f8", marginTop: -35}} />
@@ -244,7 +246,7 @@ export default function DisciplinaManagment() {
             </div>
           </CardHeader>
           <CardBody>
-            {list.length > 0 ? (
+            {list.length >= 0 ? (
 
             <ReactTable
               style={{
@@ -273,6 +275,10 @@ export default function DisciplinaManagment() {
                 {
                   Header: "SALA",
                   accessor: "sala",
+                },
+                {
+                  Header: "PROFESSOR",
+                  accessor: "professor",
                 },
 
                 // {

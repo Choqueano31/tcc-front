@@ -73,8 +73,6 @@ export default function TeachersManagment() {
         return {
           id: index ,
           nome: item.nome,
-          disciplina:item.disciplina?item.disciplina.nome : "",
-          bloco:item.bloco?item.bloco.nome : "",
 
           actions: (
             // we've added some custom button actions
@@ -132,7 +130,6 @@ export default function TeachersManagment() {
       return {
         id: key,
         nome: prop.nome,
-        code: prop.code,
 
         actions: (
           // we've added some custom button actions
@@ -231,7 +228,7 @@ export default function TeachersManagment() {
             <div style={{justifyContent: 'space-between', display: 'flex'}}>
             <h4 className={classes.cardIconTitle}>PROFESSORES</h4>
             <h4 className={classes.cardIconTitle}>TOTAL:
-            {list.length > 0 ? (
+            {list.length >= 0 ? (
                   <span style={{color: 'orange'}}>{list.length}</span>
                  ) : (
                   <ReactLoading type="spinningBubbles" color="#f8f8"  height={17} width={25} style={{marginLeft: 60, color: "#f8f8", marginTop: -35}} />
@@ -243,7 +240,7 @@ export default function TeachersManagment() {
             </div>
           </CardHeader>
           <CardBody>
-            {list.length > 0 ? (
+            {list.length >= 0 ? (
 
             <ReactTable
               style={{
@@ -260,14 +257,6 @@ export default function TeachersManagment() {
                 {
                   Header: "NOME DO PROFESSOR",
                   accessor: "nome",
-                },
-                 {
-                  Header: "DISCIPLINA",
-                  accessor: "disciplina",
-                },
-                {
-                  Header: "BLOCO",
-                  accessor: "bloco",
                 },
 
                 // {

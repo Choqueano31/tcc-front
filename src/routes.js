@@ -124,35 +124,7 @@ var dashRoutes = [
           layout: "/admin",
         },
       ]},
-      {
-        // path: "/professor",
-        name: "DISCIPLINAS",
-        rtlName: "لوحة القيادة",
-        icon: FaIdBadge,
-        collapse:true,
-        state: "disciplinas",
-        // component: Dashboard,
-        // layout: "/admin",
-        views: [
-          {
-            path: "/disciplinaregister",
-            name: "Inserir",
-            rtlName: "ساحر",
-            mini: "I",
-            rtlMini: "ث",
-            component: DisciplinasRegister,
-            layout: "/admin",
-          },
-          {
-            path: "/readdisciplinas",
-            name: "Gerenciar",
-            rtlName: "ساحر",
-            mini: "G",
-            rtlMini: "ث",
-            component: DisciplinaManagment,
-            layout: "/admin",
-          },
-        ]},
+
   {
     // path: "/professor",
     name: "PROFESSOR",
@@ -228,7 +200,35 @@ var dashRoutes = [
       },
     ],
   },
-
+{
+        // path: "/professor",
+        name: "DISCIPLINAS",
+        rtlName: "لوحة القيادة",
+        icon: FaIdBadge,
+        collapse:true,
+        state: "disciplinas",
+        // component: Dashboard,
+        // layout: "/admin",
+        views: [
+          {
+            path: "/disciplinaregister",
+            name: "Inserir",
+            rtlName: "ساحر",
+            mini: "I",
+            rtlMini: "ث",
+            component: DisciplinasRegister,
+            layout: "/admin",
+          },
+          {
+            path: "/readdisciplinas",
+            name: "Gerenciar",
+            rtlName: "ساحر",
+            mini: "G",
+            rtlMini: "ث",
+            component: DisciplinaManagment,
+            layout: "/admin",
+          },
+        ]},
   // {
   //   collapse: true,
   //   name: "FINANCEIRO",

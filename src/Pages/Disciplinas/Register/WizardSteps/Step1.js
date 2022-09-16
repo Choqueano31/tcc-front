@@ -47,23 +47,31 @@ class Step1 extends React.Component {
       blocoState:"",
       class:"",
       classState:"",
+      professor:"",
+      professorState:"",
 
       blocoList: [],
-      classesList:[]
+      classesList:[],
+      professorList:[]
     };
   }
 
   sendState() {
     const dados = {
-      name: this.state.name,
+      name: this.state.name.toUpperCase(),
       code: this.state.code,
       bloco: this.state.bloco,
       sala: this.state.class,
+      professor: this.state.professor
     };
     return dados;
   }
- async findclasses(id){
-  const response = await myApi.get(`/salas/${id}`)
+  async findProfessor(){
+    const response = await myApi.get(`/professor`)
+    this.setState({ professorList: response.data });
+   }
+ async findclasses(){
+  const response = await myApi.get(`/salas`)
   this.setState({ classesList: response.data });
  }
  async blocoLists(){
@@ -72,6 +80,8 @@ class Step1 extends React.Component {
   }
   componentDidMount(){
     this.blocoLists()
+    this.findclasses()
+    this.findProfessor()
   }
   verifyEmail(value) {
     var emailRex =
@@ -128,7 +138,8 @@ class Step1 extends React.Component {
       this.state.nameState === "success" &&
        this.state.codeState === "success" &&
         this.state.bloco !== "" &&
-         this.state.class !== ""
+         this.state.class !== "" &&
+         this.state.professor !== ''
     ) {
       return true;
     } else {
@@ -176,7 +187,7 @@ class Step1 extends React.Component {
               ),
             }}
           />
-          
+
         </GridItem>
         <GridItem xs={12} sm={11}>
           <TextField
@@ -205,24 +216,24 @@ class Step1 extends React.Component {
               ),
             }}
           />
-          
+
         </GridItem>
         <GridItem xs={12} sm={11}>
         <FormControl
-                        
+
                         fullWidth
                         className={classes.selectFormControl}
                       >
                         <InputLabel
-                        
+
                           htmlFor="simple-select"
                           className={classes.selectLabel}
                         >
                           Escolha o bloco
                         </InputLabel>
                         <Select
-                        
-                       
+
+
                           MenuProps={{
                             className: classes.selectMenu
                           }}
@@ -265,20 +276,20 @@ class Step1 extends React.Component {
         </GridItem>
         <GridItem xs={12} sm={11}>
         <FormControl
-                        
+
                         fullWidth
                         className={classes.selectFormControl}
                       >
                         <InputLabel
-                        
+
                           htmlFor="simple-select"
                           className={classes.selectLabel}
                         >
                           Escolha a sala em que a disciplina será ministrada
                         </InputLabel>
                         <Select
-                        
-                       
+
+
                           MenuProps={{
                             className: classes.selectMenu
                           }}
@@ -301,6 +312,62 @@ class Step1 extends React.Component {
                             Escolha a sala
                           </MenuItem>
                           {this.state.classesList.map((item)=>{
+                            return(
+
+                          <MenuItem
+                          key={item._id}
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelected
+                            }}
+                            value={item._id}
+                          >
+                            {item.nome}
+                          </MenuItem>
+                            )
+                          })}
+
+                        </Select>
+        </FormControl>
+        </GridItem>
+        <GridItem xs={12} sm={11}>
+        <FormControl
+
+                        fullWidth
+                        className={classes.selectFormControl}
+                      >
+                        <InputLabel
+
+                          htmlFor="simple-select"
+                          className={classes.selectLabel}
+                        >
+                          Escolha o professor que irá ministrar a disciplina
+                        </InputLabel>
+                        <Select
+
+
+                          MenuProps={{
+                            className: classes.selectMenu
+                          }}
+                          classes={{
+                            select: classes.select
+                          }}
+                          value={this.state.professor}
+                          onChange={this.handleSimple}
+                          inputProps={{
+                            name: "professor",
+                            id: "professor"
+                          }}
+                        >
+                          <MenuItem
+                            disabled
+                            classes={{
+                              root: classes.selectMenuItem
+                            }}
+                          >
+                            Escolha o professor
+                          </MenuItem>
+                          {this.state.professorList.map((item)=>{
                             return(
 
                           <MenuItem

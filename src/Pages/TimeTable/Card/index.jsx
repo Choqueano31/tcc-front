@@ -139,7 +139,7 @@ function Card({ data, index, listIndex }) {
       <p style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
 
 {' '}
-          {data?.sala}
+
           {' '}
           {isActive ? <p style={{ color: 'red' }}>Solte</p> : null}
           </p>

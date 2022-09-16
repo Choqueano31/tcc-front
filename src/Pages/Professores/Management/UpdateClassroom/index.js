@@ -25,11 +25,6 @@ const styles = {
 const useStyles = makeStyles(styles);
 function UpdateDisciplinas(info) {
   const [obj, setObj] = useState(info.info)
-  const [blocoList, setBlocoList] = useState([])
-  const[classesList, setClassesList] = useState([])
-  const [teamsChosen, setTeamsChosen] = useState(info.info.bloco)
-  const [disciplina, setdisciplina] = useState(info.info.disciplina)
-
 
 async function handleUpdate(){
   if(obj.nome == "" ){
@@ -38,8 +33,6 @@ async function handleUpdate(){
   try{
    const dados={
     nome:obj.nome,
-    bloco_id: teamsChosen._id,
-    disciplina_id: disciplina._id
    }
 
 
@@ -52,30 +45,6 @@ async function handleUpdate(){
   }catch(err){
     console.log(err)
   }
-}
-async function findclasses(id){
-  const response = await myApi.get(`/disciplinas/${id}`)
- setClassesList(response.data);
- }
-async function blocoLists(){
-  const response = await myApi.get("/bloco")
- setBlocoList(response.data)
-}
-useEffect(()=>{
-  blocoLists()
-  findclasses(teamsChosen._id)
-},[])
-
-function handleSimple (event) {
-
-  setdisciplina({ [event.target.name]: event.target.value })
-  //setObj({...obj, [event.target.name]: event.target.value });
-}
-function handleSimpleBloco (event) {
-
-  setTeamsChosen({ [event.target.name]: event.target.value })
-  findclasses(event.target.value)
-  //setObj({...obj, [event.target.name]: event.target.value });
 }
 
   const classes = useStyles();
@@ -92,12 +61,10 @@ function handleSimpleBloco (event) {
 
            </div>
          </CardHeader>
-         <GridItem xs={12} sm={12}>
-          <h4 className={classes.infoText}>Preencha os campos abaixo</h4>
-        </GridItem>
+
         <GridItem xs={12} sm={11}>
           <TextField
-            style={{ marginTop: 10, width: "100%" }}
+            style={{marginTop:20, width: "100%" }}
             formControlProps={{
               fullWidth: true,
             }}
@@ -105,7 +72,7 @@ function handleSimpleBloco (event) {
             id="standard-basic"
             label={
               <span>
-                Nome da disciplina
+                Nome do professor
               </span>
             }
             value={obj.nome}
@@ -118,119 +85,6 @@ function handleSimpleBloco (event) {
             }}
           />
 
-        </GridItem>
-
-        <GridItem xs={12} sm={11}>
-        <FormControl
-
-                        fullWidth
-                        className={classes.selectFormControl}
-                      >
-                        <InputLabel
-
-                          htmlFor="simple-select"
-                          className={classes.selectLabel}
-                        >
-                          Escolha o bloco
-                        </InputLabel>
-                        <Select
-
-
-                          MenuProps={{
-                            className: classes.selectMenu
-                          }}
-                          classes={{
-                            select: classes.select
-                          }}
-                          value={teamsChosen._id}
-                          onChange={handleSimpleBloco}
-                          inputProps={{
-                            name: "_id",
-                            id: "_id"
-                          }}
-                        >
-                          <MenuItem
-                            disabled
-                            classes={{
-                              root: classes.selectMenuItem
-                            }}
-                          >
-                            Escolha o bloco
-                          </MenuItem>
-                          {blocoList.map((item)=>{
-                            return(
-
-                          <MenuItem
-                          key={item._id}
-                            classes={{
-                              root: classes.selectMenuItem,
-                              selected: classes.selectMenuItemSelected
-                            }}
-                            value={item._id}
-                          >
-                            {item.nome}
-                          </MenuItem>
-                            )
-                          })}
-
-                        </Select>
-        </FormControl>
-        </GridItem>
-        <GridItem xs={12} sm={11}>
-        <FormControl
-
-                        fullWidth
-                        className={classes.selectFormControl}
-                      >
-                        <InputLabel
-
-                          htmlFor="simple-select"
-                          className={classes.selectLabel}
-                        >
-                          Escolha a disciplina em que a disciplina será ministrada
-                        </InputLabel>
-                        <Select
-
-
-                          MenuProps={{
-                            className: classes.selectMenu
-                          }}
-                          classes={{
-                            select: classes.select
-                          }}
-                          value={disciplina._id}
-                          onChange={handleSimple}
-                          inputProps={{
-                            name: "_id",
-                            id: "_id"
-                          }}
-                        >
-                          <MenuItem
-                            disabled
-                            classes={{
-                              root: classes.selectMenuItem
-                            }}
-                          >
-                            Escolha a disciplina
-                          </MenuItem>
-                          {classesList.map((item)=>{
-                            return(
-
-                          <MenuItem
-                          key={item._id}
-                            classes={{
-                              root: classes.selectMenuItem,
-                              selected: classes.selectMenuItemSelected
-                            }}
-                            value={item._id}
-                          >
-                            {item.nome}
-                          </MenuItem>
-                            )
-                          })}
-
-                        </Select>
-        </FormControl>
         </GridItem>
       <DialogActions style={{display:"flex"  ,marginTop:120, alignItems:"center", justifyContent:"center"}}>
             <Button  onClick={()=> info.ModalClose()} color="primary">

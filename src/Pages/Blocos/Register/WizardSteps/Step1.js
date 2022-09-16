@@ -15,7 +15,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // import CustomInput from "components/CustomInput/CustomInput.js";
 import { Assignment } from "@material-ui/icons";
-import { TextField } from "@material-ui/core";
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
+import { toast } from "react-toastify";
 
 const style = {
   infoText: {
@@ -39,13 +40,21 @@ class Step1 extends React.Component {
       nameState: "",
       description: "",
       descriptionState: "",
+      turno:'',
+      turnoList :[
+        {id: 1,
+         nome:'MATUTINO'},
+         {id: 2,
+          nome:'VESPETINO'},
+      ]
     };
   }
 
   sendState() {
     const dados = {
-      
+
       nome: this.state.name.toUpperCase(),
+      turno: this.state.turno
       //description: this.state.description,
     };
     console.log(dados)
@@ -89,25 +98,28 @@ class Step1 extends React.Component {
     }
     this.setState({ [stateName]: event.target.value });
   }
-  handleSimple = (event) => {
+  handleSimple =(event)=> {
     this.setState({ [event.target.name]: event.target.value });
-    this.setState({ [event.target.name + "State"]: "success" });
-  };
+  }
   isValidated() {
     if (
-      this.state.nameState === "success" 
-      
+      this.state.nameState === "success" &&
+      this.state.turno !== ''
+
     ) {
       return true;
     } else {
       if (this.state.nameState !== "success") {
         this.setState({ nameState: "error" });
       }
-   
+      if(this.state.turno === ''){
+        toast.error("Escolha um turno para o período!")
+      }
+
     }
     return false;
   }
-  render = () => {
+  render() {
     const { classes } = this.props;
     return (
       <GridContainer justify="center">
@@ -142,6 +154,60 @@ class Step1 extends React.Component {
             }}
           />
         </GridItem>
+        <GridItem xs={12} sm={11}>
+        <FormControl
+
+                        fullWidth
+                        className={classes.selectFormControl}
+                      >
+                        <InputLabel
+                          htmlFor="simple-select"
+                          className={classes.selectLabel}
+                        >
+                          Escolha o turno
+                        </InputLabel>
+                        <Select
+
+                          MenuProps={{
+                            className: classes.selectMenu
+                          }}
+                          classes={{
+                            select: classes.select
+                          }}
+                          value={this.state.turno}
+                          onChange={this.handleSimple}
+                          inputProps={{
+                            name: "turno",
+                            id: "turno"
+                          }}
+                        >
+                          <MenuItem
+                            disabled
+                            classes={{
+                              root: classes.selectMenuItem
+                            }}
+                          >
+                            Escolha o turno
+                          </MenuItem>
+                          {this.state.turnoList.map((item)=>{
+                            return(
+
+                          <MenuItem
+                          key={item.id}
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelected
+                            }}
+                            value={item.nome}
+                          >
+                            {item.nome}
+                          </MenuItem>
+                            )
+                          })}
+
+                        </Select>
+                      </FormControl>
+        </GridItem>
         {/* <GridItem xs={12} sm={11}>
           <TextField
             style={{ marginTop: 10, width: "100%" }}
@@ -172,7 +238,7 @@ class Step1 extends React.Component {
         </GridItem> */}
       </GridContainer>
     );
-  };
+  }
 }
 
 Step1.propTypes = {

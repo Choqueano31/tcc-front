@@ -84,14 +84,14 @@ export default function AuthNavbar(props) {
           />
         </NavLink>
       </ListItem> */}
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <NavLink
           to={"/auth/login-page"}
           className={cx(classes.navLink, {
             [classes.navLinkActive]: activeRoute("/auth/login-page")
           })}
         >
-          {/* <Fingerprint className={classes.listItemIcon} /> */}
+
           <ListItemText
             primary={"ENTRAR"}
             disableTypography={true}
@@ -99,7 +99,7 @@ export default function AuthNavbar(props) {
             on
           />
         </NavLink>
-      </ListItem>
+      </ListItem> */}
       {/* <ListItem className={classes.listItem}>
         <NavLink
           to={"/auth/lock-screen-page"}
@@ -122,9 +122,9 @@ export default function AuthNavbar(props) {
       <Toolbar className={classes.container}>
         <Hidden smDown>
           <div className={classes.flex}>
-            <Button href="#" className={classes.title} color="transparent">
+            {/* <Button href="#" className={classes.title} color="transparent">
               {brandText}
-            </Button>
+            </Button> */}
           </div>
         </Hidden>
         <Hidden mdUp>

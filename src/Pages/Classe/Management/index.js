@@ -48,7 +48,7 @@ export default function ClassManagment() {
     setOpen(true)
   }
   function ModalClose(){
-   
+
     listClass()
     setOpen(false)
   }
@@ -57,20 +57,20 @@ export default function ClassManagment() {
   //   const resp01 = await myApi.get("/desconts")
   //   setListAss(resp01.data)
   // }
-  
+
   // const classes = useStyles();
 
   async function listClass() {
     const response = await myApi.get("/salas");
     // const resp01 = await myApi.get("/desconts")
     // const data  = resp01.data
-   
+
     const response2 = response.data;
     // const aa = response.data.map(association => association.cpf)
 
     // let result = []
 
-    
+
     // // for(var i=0; i<data.length; i++) {
     // //   setListAss1(data[i])
     // // }
@@ -78,7 +78,7 @@ export default function ClassManagment() {
     //   const ll = data.map(association => association.cpf)
     //   if(ll === response2[i].cpf) {
     //     for(var i=0; i<data.length; i++) {
-          
+
     //       const just = response2.filter(x => x.cpf === data[i].cpf)
     //       result.push(response2[i])
     //       console.log('TODOS', response2[i])
@@ -87,14 +87,13 @@ export default function ClassManagment() {
     //   console.log('AGORA', result);
     //   console.log('ADMIN', )
     // }
-    
+
     setList(
       response2.map((item, index) => {
         // const list = item;
         return {
           id: index ,
           nome: item.nome,
-          bloco:item.bloco.nome,
           // rg_policial: item.rg_policial,
           // rg_bombeiro: item.rg_bombeiro,
           // unidade: item.unity.nome,
@@ -102,7 +101,7 @@ export default function ClassManagment() {
           // telefone_celular: item.telefone_celular,
           // telefone_fixo: item.telefone_fixo,
           // email: item.email,
-         
+
           actions: (
             // we've added some custom button actions
             <div className="actions-center">
@@ -140,7 +139,7 @@ export default function ClassManagment() {
                   // console.log(item)
                   setInfoUpdate(item)
                   ModalOpen()
-                  
+
                 }}
                 color="warning"
                 className="edit"
@@ -168,7 +167,7 @@ export default function ClassManagment() {
     );
   }
   async function removeAssociate(id){
-  
+
     await myApi.delete(`/salas/${id}`)
    // listAssociates()
    listClass()
@@ -186,7 +185,7 @@ export default function ClassManagment() {
         id: key,
         nome: prop.nome,
         code: prop.code,
-      
+
         actions: (
           // we've added some custom button actions
           <div className="actions-right">
@@ -270,11 +269,11 @@ export default function ClassManagment() {
   return (
     <GridContainer>
      {open ? (
-     
+
         <UpdateClass ModalClose={ModalClose} info={infoUpadte}   />
      ):(
 
-     
+
       <GridItem xs={12}>
         <Card>
           <CardHeader color="primary" icon>
@@ -283,7 +282,7 @@ export default function ClassManagment() {
             </CardIcon>
             <div style={{justifyContent: 'space-between', display: 'flex'}}>
             <h4 className={classes.cardIconTitle}>SALAS</h4>
-            <h4 className={classes.cardIconTitle}>TOTAL: 
+            <h4 className={classes.cardIconTitle}>TOTAL:
             {list.length > 0 ? (
                   <span style={{color: 'orange'}}>{list.length}</span>
                  ) : (
@@ -291,7 +290,7 @@ export default function ClassManagment() {
                   // <CircularProgress
                   //   style={{ width: 25, marginTop: 10, marginRight: 10 }}
                   // />
-                )} 
+                )}
               </h4>
             </div>
           </CardHeader>
@@ -304,7 +303,7 @@ export default function ClassManagment() {
                 textAlign: "left",
               }}
               data={list}
-              filterable      
+              filterable
               columns={[
                 {
                   Header: "POS",
@@ -313,11 +312,8 @@ export default function ClassManagment() {
                 {
                   Header: "SALA",
                   accessor: "nome",
-                },  {
-                  Header: "BLOCO",
-                  accessor: "bloco",
                 },
-               
+
                 // {
                 //   Header: "CÓDIGO",
                 //   accessor: "code",
@@ -342,7 +338,7 @@ export default function ClassManagment() {
                 //   sortable: false,
                 //   filterable: false,
                 // },
-               
+
                 // {
                 //   Header: "CELULAR",
                 //   accessor: "telefone_celular",
@@ -396,7 +392,7 @@ export default function ClassManagment() {
             //   <CircularProgress
             //   style={{ width: 25, marginTop: 10, marginRight: 10 }}
             // />
-            )} 
+            )}
           </CardBody>
         </Card>
       </GridItem>

@@ -1,22 +1,21 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 // @material-ui/icons
 // import Face from "@material-ui/icons/Face";
 // import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
 // import Email from "@material-ui/icons/Email";
 
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import withStyles from "@material-ui/core/styles/withStyles";
 import "date-fns";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // import CustomInput from "components/CustomInput/CustomInput.js";
+import { TextField } from "@material-ui/core";
 import { Assignment } from "@material-ui/icons";
-import { FormControl, InputLabel, MenuItem, Select, TextField } from "@material-ui/core";
-import myApi from "Service/Api";
 
 const style = {
   infoText: {
@@ -38,38 +37,17 @@ class Step1 extends React.Component {
     this.state = {
       name: "",
       nameState: "",
-      description: "",
-      descriptionState: "",
-      bloco:"",
-      blocoState:"",
-
-      blocoList: []
     };
   }
 
   sendState() {
     const dados = {
-      name: this.state.name,
-      bloco: this.state.bloco,
+      name: this.state.name.toUpperCase(),
+     // bloco: this.state.bloco,
     };
     return dados;
   }
   // function that returns true if value is email, false otherwise
- async blocoLists(){
-    const response = await myApi.get("/bloco")
-    this.setState({ blocoList: response.data });
-  }
-  componentDidMount(){
-    this.blocoLists()
-  }
-  verifyEmail(value) {
-    var emailRex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRex.test(value)) {
-      return true;
-    }
-    return false;
-  }
   // function that verifies if a string has a given length or not
   verifyLength(value, length) {
     if (value.length >= length) {
@@ -82,14 +60,6 @@ class Step1 extends React.Component {
   }
   change(event, stateName, type, stateNameEqualTo) {
     switch (type) {
-      case "email":
-        if (this.verifyEmail(event.target.value)) {
-          this.setState({ [stateName + "State"]: "success" });
-        } else {
-          this.setState({ [stateName + "State"]: "error" });
-        }
-        break;
-
       case "length":
         if (this.verifyLength(event.target.value, stateNameEqualTo)) {
           this.setState({ [stateName + "State"]: "success" });
@@ -108,14 +78,14 @@ class Step1 extends React.Component {
   };
   isValidated() {
     if (
-      this.state.nameState === "success" 
+      this.state.nameState === "success"
     ) {
       return true;
     } else {
       if (this.state.nameState !== "success") {
         this.setState({ nameState: "error" });
       }
-   
+
     }
     return false;
   }
@@ -154,60 +124,7 @@ class Step1 extends React.Component {
             }}
           />
         </GridItem>
-        <GridItem xs={12} sm={11}>
-        <FormControl
-        
-                        fullWidth
-                        className={classes.selectFormControl}
-                      >
-                        <InputLabel
-                          htmlFor="simple-select"
-                          className={classes.selectLabel}
-                        >
-                          Escolha o bloco
-                        </InputLabel>
-                        <Select
-                       
-                          MenuProps={{
-                            className: classes.selectMenu
-                          }}
-                          classes={{
-                            select: classes.select
-                          }}
-                          value={this.state.bloco}
-                          onChange={this.handleSimple}
-                          inputProps={{
-                            name: "bloco",
-                            id: "bloco"
-                          }}
-                        >
-                          <MenuItem
-                            disabled
-                            classes={{
-                              root: classes.selectMenuItem
-                            }}
-                          >
-                            Escolha o bloco
-                          </MenuItem>
-                          {this.state.blocoList.map((item)=>{
-                            return(
 
-                          <MenuItem
-                          key={item._id}
-                            classes={{
-                              root: classes.selectMenuItem,
-                              selected: classes.selectMenuItemSelected
-                            }}
-                            value={item._id}
-                          >
-                            {item.nome}
-                          </MenuItem>
-                            )
-                          })}
-
-                        </Select>
-                      </FormControl>
-        </GridItem>
       </GridContainer>
     );
   };

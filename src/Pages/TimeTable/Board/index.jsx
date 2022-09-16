@@ -19,6 +19,8 @@ import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import { FaPen } from 'react-icons/fa';
 import HorariosPdf from '../../Reports/Horarios/horarios'
+import Loading from 'utils/Loading';
+import { Dialog } from 'primereact/dialog';
 const data = loadLists();
 const styles = {
   cardIconTitle: {
@@ -36,6 +38,7 @@ function Board() {
   const [blocoList, setBlocoList] = useState([])
   const [teamsChosen, setTeamsChosen] = useState({})
   const [findTimeTable, setFindTimeTable] = useState([])
+  const [loading, setLoading] = useState(false);
   const matutino =  {
     title: 'Horários',
     creatable: true,
@@ -96,7 +99,7 @@ function Board() {
   async function move(fromList, toList, from, to) {
     // console.log(fromList, toList, from, to);
     const objectDelect = lists[toList].cards[to];
-    console.log( lists[toList]._id)
+    console.log( lists[1].cards[to])
     const dragged = lists[fromList].cards[from];
     dragged.id = objectDelect.id;
     const objectNew = {
@@ -104,6 +107,7 @@ function Board() {
       content: dragged.content,
       teacher: dragged.teacher,
       labels: dragged.labels,
+      professorId:dragged.professorId,
       sala:dragged.sala,
       user: dragged.user,
     };
@@ -111,6 +115,13 @@ function Board() {
     if( lists[toList]._id) {
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
       if(updateTeacher){
+        const restrict = {
+          horaryId: lists[1].cards[to].id  ,
+          horary:lists[1].cards[to].horario,
+          day:  lists[toList].title
+        }
+        console.log(objectNew.professorId)
+        await myApi.put(`/professorRestrict/${objectNew.professorId}`,restrict)
 
         toast.success("Disciplina atualizada com sucesso.")
       }else{
@@ -167,20 +178,23 @@ function Board() {
   async function ListDisciplines(id){
 
     try{
+      setLoading(true)
       const findTimeTable = await myApi.get(`/timetable/${id}`)
       setFindTimeTable(findTimeTable.data)
       const findBloco = await myApi.get(`/bloco/${id}`)
       console.log(findBloco)
+      console.log(findTimeTable)
       setBloco(findBloco.data)
      // console.log(findTimeTable.data[0]._id)
       if(findTimeTable.data.length > 0){
-        const response = await myApi.get(`/professor/${id}`)
+        const response = await myApi.get(`/disciplinas/${id}`)
         console.log(response)
         const updateBase = response.data.map((item)=> ({
           id: item._id ,
           teacher: item.nome,
-          content: item.disciplina?.nome ,
-          sala: item.disciplina?.sala?.nome,
+          content: item.professor.nome ,
+          professorId:item.professor._id,
+          sala: item.sala?.nome,
           labels: gerarCorHexadecimal(),
 
         }))
@@ -190,19 +204,38 @@ function Board() {
           bloco_id: id,
           cards: updateBase
         }
-        let allInfo = findTimeTable.data
-        const recept = allInfo.unshift(refatore)
-        console.log(allInfo);
-        setLists(allInfo)
+        // let allInfo = findTimeTable.data.map((item)=>{
+        //   if(item.title === "horarios"){
+        //     if(findBloco.turno==="MATUTINO"){
+        //       return matutino
+        //     }else{
+        //       return vespertino
+        //     }
+        //   } else{
+        //     item.bloco_id = id
+        //     return item
+        //   }
+        // })
+        if(findBloco.turno==="MATUTINO"){
+          findTimeTable.data.unshift(matutino)
+              }else{
+                findTimeTable.data.unshift(vespertino)
+              }
+         findTimeTable.data.unshift(refatore)
+        // console.log(allInfo);
+        setLists(findTimeTable.data)
+        setLoading(false)
       }
       else{
-      const response = await myApi.get(`/professor/${id}`)
+        setLoading(true)
+      const response = await myApi.get(`/disciplinas/${id}`)
       console.log(response)
       const updateBase = response.data.map((item)=> ({
         id: item._id ,
         teacher: item.nome,
-        content: item.disciplina?.nome ,
-        sala: item.disciplina?.sala?.nome,
+        content: item.professor.nome ,
+        professorId:item.professor._id,
+        sala: item.sala?.nome,
         labels: gerarCorHexadecimal(),
 
       }))
@@ -216,14 +249,23 @@ function Board() {
       }
       return refatore
       }
+      else if(item.title === "horarios"){
+        if(findBloco.turno==="MATUTINO"){
+          return matutino
+        }else{
+          return vespertino
+        }
+      }
       else{
         item.bloco_id = id
         return item
       }
      })
+     //horarios
     setLists(replaceTeachers)
+    setLoading(false)
   } }catch(err){
-      toast.erro(err)
+      toast.error(err)
     }
   }
   async function handleTimeTable(){
@@ -262,6 +304,22 @@ function Board() {
   const classes = useStyles();
   return (
     <>
+   <Dialog
+          visible={loading}
+          style={{ width: '50vw' }}
+
+          onHide={() => {}}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Loading type="bars" color="#00008b" />
+          </div>
+        </Dialog>
    {bloco === ""? (
      <GridContainer justify="center">
      <GridItem xs={10}>
@@ -357,7 +415,7 @@ function Board() {
             {findTimeTable.length > 0? (
                <RegularButton onClick={() => {
 
-                HorariosPdf(lists)}} color="danger">
+                HorariosPdf(bloco,lists)}} color="danger">
                IMPRIMIR HORÁRIO
              </RegularButton>
             ):(

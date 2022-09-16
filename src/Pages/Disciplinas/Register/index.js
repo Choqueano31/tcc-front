@@ -20,10 +20,11 @@ export default function DisciplinasRegister() {
       nome: e.disciplinas.name,
       code: e.disciplinas.code,
       bloco_id: e.disciplinas.bloco,
-      sala_id:e.disciplinas.sala
+      sala_id:e.disciplinas.sala,
+      professor_id: e.disciplinas.professor
     };
     console.log(dados)
- 
+
     try {
       const response = await myApi.post("/disciplinas", dados);
       if (response) {

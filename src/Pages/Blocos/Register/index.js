@@ -19,8 +19,9 @@ export default function BlocoRegister() {
     // console.log(e)
     const dados = {
       nome: e.bloco.nome,
+      turno: e.bloco.turno
     };
- 
+
     try {
       const response = await myApi.post("/bloco", dados);
       if (response) {

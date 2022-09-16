@@ -33,11 +33,9 @@ async function handleUpdate(){
   }
   try{
    const dados={
-    nome:obj.nome,
-    bloco_id: teamsChosen._id
+    nome:obj.nometoUpperCase() ,
    }
-   console.log(obj)
-  
+
     const id = obj._id
      await myApi.put(`/salas/${id}`,dados )
     toast.success("Atualização realizada com sucesso")
@@ -48,14 +46,8 @@ async function handleUpdate(){
     console.log(err)
   }
 }
-async function blocoLists(){
-  const response = await myApi.get("/bloco")
- setBlocoList(response.data)
-}
-useEffect(()=>{
-  blocoLists()
-},[])
-console.log(teamsChosen)
+
+
 function handleSimple (event) {
   console.log(event)
   setTeamsChosen({ [event.target.name]: event.target.value })
@@ -72,8 +64,8 @@ function handleSimple (event) {
              <FaPen />
            </CardIcon>
            <div style={{justifyContent: 'space-between', display: 'flex'}}>
-           <h4 className={classes.cardIconTitle}>Atualizar Informações do bloco</h4>
-  
+           <h4 className={classes.cardIconTitle}>Atualizar Informações da sala</h4>
+
            </div>
          </CardHeader>
          <GridItem>
@@ -86,8 +78,7 @@ function handleSimple (event) {
             id="standard-basic"
             label={
               <span>
-                Nome do bloco
-               
+                Nome da sala
               </span>
             }
             value={obj.nome}
@@ -101,60 +92,6 @@ function handleSimple (event) {
           />
 
         </GridItem>
-        <GridItem>
-        <FormControl
-        
-        fullWidth
-        className={classes.selectFormControl}
-      >
-        <InputLabel
-          htmlFor="simple-select"
-          className={classes.selectLabel}
-        >
-          Escolha o bloco
-        </InputLabel>
-        <Select
-       
-          MenuProps={{
-            className: classes.selectMenu
-          }}
-          classes={{
-            select: classes.select
-          }}
-          value={teamsChosen._id}
-          onChange={handleSimple}
-          inputProps={{
-            name: "_id",
-            id: "_id"
-          }}
-        >
-          <MenuItem
-            disabled
-            classes={{
-              root: classes.selectMenuItem
-            }}
-          >
-            Escolha o bloco
-          </MenuItem>
-          {blocoList.map((item)=>{
-            return(
-
-          <MenuItem
-          key={item._id}
-            classes={{
-              root: classes.selectMenuItem,
-              selected: classes.selectMenuItemSelected
-            }}
-            value={item._id}
-          >
-            {item.nome}
-          </MenuItem>
-            )
-          })}
-
-        </Select>
-      </FormControl>
-      </GridItem>
       <DialogActions style={{display:"flex"  ,marginTop:120, alignItems:"center", justifyContent:"center"}}>
             <Button  onClick={()=> info.ModalClose()} color="primary">
               Cancelar
@@ -165,7 +102,7 @@ function handleSimple (event) {
           </DialogActions>
        </Card>
      </GridItem>
-     
+
    </GridContainer>
   )
 }

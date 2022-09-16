@@ -7,7 +7,7 @@ import GridItem from 'components/Grid/GridItem';
 import React from 'react';
 import { FaPen } from 'react-icons/fa';
 import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
-import { Button, DialogActions, InputAdornment, TextField } from '@material-ui/core';
+import { Button, DialogActions, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { Assignment } from '@material-ui/icons';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -26,13 +26,18 @@ const useStyles = makeStyles(styles);
 function UpdateBloco(info) {
  // console.log(close)
   const [obj, setObj] = useState(info.info)
+  const turnoList =[{id: 1,
+    nome:'MATUTINO'},
+    {id: 2,
+     nome:'VESPETINO'}]
 async function handleUpdate(){
   if(obj.nome == ""){
     toast.error("campo nao pode ir vazio")
   }
   try{
    const dados={
-    nome:obj.nome
+    nome:obj.nome.toUpperCase() ,
+    turno: obj.turno
    }
    console.log(obj)
     const id = obj._id
@@ -56,7 +61,7 @@ async function handleUpdate(){
            </CardIcon>
            <div style={{justifyContent: 'space-between', display: 'flex'}}>
            <h4 className={classes.cardIconTitle}>Atualizar Informações do bloco</h4>
-  
+
            </div>
          </CardHeader>
          <GridItem>
@@ -70,7 +75,7 @@ async function handleUpdate(){
             label={
               <span>
                 Nome do bloco
-               
+
               </span>
             }
             value={obj.nome}
@@ -82,7 +87,61 @@ async function handleUpdate(){
               ),
             }}
           />
-           <DialogActions>
+
+        <FormControl
+
+                        fullWidth
+                        className={classes.selectFormControl}
+                      >
+                        <InputLabel
+                          htmlFor="simple-select"
+                          className={classes.selectLabel}
+                        >
+                          Escolha o turno
+                        </InputLabel>
+                        <Select
+
+                          MenuProps={{
+                            className: classes.selectMenu
+                          }}
+                          classes={{
+                            select: classes.select
+                          }}
+                          value={obj.turno}
+                          onChange={(event) => setObj({...obj, turno:event.target.value})}
+                          inputProps={{
+                            name: "turno",
+                            id: "turno"
+                          }}
+                        >
+                          <MenuItem
+                            disabled
+                            classes={{
+                              root: classes.selectMenuItem
+                            }}
+                          >
+                            Escolha o turno
+                          </MenuItem>
+                          {turnoList.map((item)=>{
+                            return(
+
+                          <MenuItem
+                          key={item.id}
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelected
+                            }}
+                            value={item.nome}
+                          >
+                            {item.nome}
+                          </MenuItem>
+                            )
+                          })}
+
+                        </Select>
+                      </FormControl>
+
+           <DialogActions style={{display:"flex"  ,marginTop:120, alignItems:"center", justifyContent:"center"}}>
             <Button onClick={()=> info.ModalClose()} color="primary">
               Cancelar
             </Button>
@@ -93,7 +152,8 @@ async function handleUpdate(){
         </GridItem>
        </Card>
      </GridItem>
-     
+
+
    </GridContainer>
   )
 }

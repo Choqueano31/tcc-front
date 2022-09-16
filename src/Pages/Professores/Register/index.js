@@ -18,8 +18,6 @@ export default function ProfessoresRegister() {
   async function typeCreate(e) {
     const dados = {
       nome: e.teacher.name,
-      bloco_id: e.teacher.bloco,
-      disciplina_id:e.teacher.professor
     };
     console.log(dados)
 

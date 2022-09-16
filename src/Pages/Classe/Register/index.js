@@ -18,10 +18,10 @@ export default function ClassRegister() {
   async function typeCreate(e) {
     const dados = {
       nome: e.class.name,
-      bloco_id: e.class.bloco,
+     // bloco_id: e.class.bloco,
     };
     console.log(dados)
- 
+
     try {
       const response = await myApi.post("/salas", dados);
       if (response) {

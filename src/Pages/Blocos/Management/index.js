@@ -47,7 +47,7 @@ export default function BlocoManagment() {
     setOpen(true)
   }
   function ModalClose(){
-   
+
     listBlocos()
     setOpen(false)
   }
@@ -56,20 +56,21 @@ export default function BlocoManagment() {
   //   const resp01 = await myApi.get("/desconts")
   //   setListAss(resp01.data)
   // }
-  
+
   // const classes = useStyles();
 
   async function listBlocos() {
     const response = await myApi.get("/bloco");
+    console.log(response)
     // const resp01 = await myApi.get("/desconts")
     // const data  = resp01.data
-   
+
     const response2 = response.data;
     // const aa = response.data.map(association => association.cpf)
 
     // let result = []
 
-    
+
     // // for(var i=0; i<data.length; i++) {
     // //   setListAss1(data[i])
     // // }
@@ -77,7 +78,7 @@ export default function BlocoManagment() {
     //   const ll = data.map(association => association.cpf)
     //   if(ll === response2[i].cpf) {
     //     for(var i=0; i<data.length; i++) {
-          
+
     //       const just = response2.filter(x => x.cpf === data[i].cpf)
     //       result.push(response2[i])
     //       console.log('TODOS', response2[i])
@@ -86,14 +87,14 @@ export default function BlocoManagment() {
     //   console.log('AGORA', result);
     //   console.log('ADMIN', )
     // }
-    
+
     setList(
       response2.map((item, index) => {
         // const list = item;
         return {
           id: index ,
           nome: item.nome,
-          code: item.code,
+          turno: item.turno,
           // cpf: item.cpf,
           // rg_policial: item.rg_policial,
           // rg_bombeiro: item.rg_bombeiro,
@@ -102,7 +103,7 @@ export default function BlocoManagment() {
           // telefone_celular: item.telefone_celular,
           // telefone_fixo: item.telefone_fixo,
           // email: item.email,
-         
+
           actions: (
             // we've added some custom button actions
             <div className="actions-center">
@@ -140,7 +141,7 @@ export default function BlocoManagment() {
                   // console.log(item)
                   setInfoUpdate(item)
                   ModalOpen()
-                  
+
                 }}
                 color="warning"
                 className="edit"
@@ -168,7 +169,7 @@ export default function BlocoManagment() {
     );
   }
   async function removeAssociate(id){
-  
+
     await myApi.delete(`/bloco/${id}`)
    // listAssociates()
    listBlocos()
@@ -186,7 +187,7 @@ export default function BlocoManagment() {
         id: key,
         nome: prop.nome,
         code: prop.code,
-      
+
         actions: (
           // we've added some custom button actions
           <div className="actions-right">
@@ -270,11 +271,11 @@ export default function BlocoManagment() {
   return (
     <GridContainer>
      {open ? (
-     
+
         <UpdateBloco ModalClose={ModalClose} info={infoUpadte}   />
      ):(
 
-     
+
       <GridItem xs={12}>
         <Card>
           <CardHeader color="primary" icon>
@@ -283,20 +284,20 @@ export default function BlocoManagment() {
             </CardIcon>
             <div style={{justifyContent: 'space-between', display: 'flex'}}>
             <h4 className={classes.cardIconTitle}>BLOCOS</h4>
-            <h4 className={classes.cardIconTitle}>TOTAL: 
-            {list.length > 0 ? (
+            <h4 className={classes.cardIconTitle}>TOTAL:
+            {list.length >= 0 ? (
                   <span style={{color: 'orange'}}>{list.length}</span>
                  ) : (
                   <ReactLoading type="spinningBubbles" color="#f8f8"  height={17} width={25} style={{marginLeft: 60, color: "#f8f8", marginTop: -35}} />
                   // <CircularProgress
                   //   style={{ width: 25, marginTop: 10, marginRight: 10 }}
                   // />
-                )} 
+                )}
               </h4>
             </div>
           </CardHeader>
           <CardBody>
-            {list.length > 0 ? (
+            {list.length >= 0 ? (
 
             <ReactTable
               style={{
@@ -304,7 +305,7 @@ export default function BlocoManagment() {
                 textAlign: "left",
               }}
               data={list}
-              filterable      
+              filterable
               columns={[
                 {
                   Header: "POS",
@@ -314,7 +315,11 @@ export default function BlocoManagment() {
                   Header: "BLOCO",
                   accessor: "nome",
                 },
-               
+                {
+                  Header: "TURNO",
+                  accessor: "turno",
+                },
+
                 // {
                 //   Header: "CÓDIGO",
                 //   accessor: "code",
@@ -339,7 +344,7 @@ export default function BlocoManagment() {
                 //   sortable: false,
                 //   filterable: false,
                 // },
-               
+
                 // {
                 //   Header: "CELULAR",
                 //   accessor: "telefone_celular",
@@ -393,7 +398,7 @@ export default function BlocoManagment() {
             //   <CircularProgress
             //   style={{ width: 25, marginTop: 10, marginRight: 10 }}
             // />
-            )} 
+            )}
           </CardBody>
         </Card>
       </GridItem>

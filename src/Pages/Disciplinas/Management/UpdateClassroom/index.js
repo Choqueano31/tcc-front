@@ -29,6 +29,8 @@ function UpdateDisciplinas(info) {
   const[classesList, setClassesList] = useState([])
   const [teamsChosen, setTeamsChosen] = useState(info.info.bloco)
   const [sala, setsala] = useState(info.info.sala)
+  const [professor, setprofessor] = useState(info.info.professor)
+  const [professorList, setProfessorList] = useState([])
 
 
 async function handleUpdate(){
@@ -40,7 +42,8 @@ async function handleUpdate(){
     nome:obj.nome,
     code:obj.code,
     bloco_id: teamsChosen._id,
-    sala_id: sala._id
+    sala_id: sala._id,
+    professor_id: professor._id
    }
 
 
@@ -54,22 +57,32 @@ async function handleUpdate(){
     console.log(err)
   }
 }
-async function findclasses(id){
-  const response = await myApi.get(`/salas/${id}`)
+async function findclasses(){
+  const response = await myApi.get(`/salas`)
  setClassesList(response.data);
  }
 async function blocoLists(){
   const response = await myApi.get("/bloco")
  setBlocoList(response.data)
 }
+async function teachersLists(){
+  const response = await myApi.get("/professor")
+ setProfessorList(response.data)
+}
 useEffect(()=>{
   blocoLists()
-  findclasses(teamsChosen._id)
+  findclasses()
+  teachersLists()
 },[])
 
 function handleSimple (event) {
 
   setsala({ [event.target.name]: event.target.value })
+  //setObj({...obj, [event.target.name]: event.target.value });
+}
+function handleSimpleTeacher (event) {
+
+  setprofessor({ [event.target.name]: event.target.value })
   //setObj({...obj, [event.target.name]: event.target.value });
 }
 function handleSimpleBloco (event) {
@@ -238,6 +251,62 @@ function handleSimpleBloco (event) {
                             Escolha a sala
                           </MenuItem>
                           {classesList.map((item)=>{
+                            return(
+
+                          <MenuItem
+                          key={item._id}
+                            classes={{
+                              root: classes.selectMenuItem,
+                              selected: classes.selectMenuItemSelected
+                            }}
+                            value={item._id}
+                          >
+                            {item.nome}
+                          </MenuItem>
+                            )
+                          })}
+
+                        </Select>
+        </FormControl>
+        </GridItem>
+        <GridItem xs={12} sm={11}>
+        <FormControl
+
+                        fullWidth
+                        className={classes.selectFormControl}
+                      >
+                        <InputLabel
+
+                          htmlFor="simple-select"
+                          className={classes.selectLabel}
+                        >
+                          Escolha o professor que irá ministrar a disciplina
+                        </InputLabel>
+                        <Select
+
+
+                          MenuProps={{
+                            className: classes.selectMenu
+                          }}
+                          classes={{
+                            select: classes.select
+                          }}
+                          value={professor._id}
+                          onChange={handleSimpleTeacher}
+                          inputProps={{
+                            name: "_id",
+                            id: "_id"
+                          }}
+                        >
+                          <MenuItem
+                            disabled
+                            classes={{
+                              root: classes.selectMenuItem
+                            }}
+                          >
+                            Escolha o professor
+                          </MenuItem>
+                          {professorList.map((item)=>{
                             return(
 
                           <MenuItem

@@ -200,7 +200,8 @@ function Board() {
   async function move(fromList, toList, from, to) {
     // console.log(fromList, toList, from, to);
     const objectDelect = lists[toList].cards[to];
-    console.log( lists[1].cards[to])
+    console.log( lists[1].cards[to].pos.filter((item)=> item.day.toUpperCase() ===  lists[toList].title.toUpperCase()))
+    const res = lists[1].cards[to].pos.filter((item)=> item.day.toUpperCase() ===  lists[toList].title.toUpperCase())[0]
     const dragged = lists[fromList].cards[from];
     dragged.id = objectDelect.id;
     //const res =
@@ -210,10 +211,14 @@ function Board() {
       teacher: dragged.teacher,
       labels: dragged.labels,
       professorId:dragged.professorId,
+      restrict: dragged.restrict,
       sala:dragged.sala,
       user: dragged.user,
     };
     console.log(objectNew);
+
+    const ativeRestrict = objectNew.restrict.filter((item)=> item.id === res.id)
+    if(ativeRestrict.length === 0){
     if( lists[toList]._id) {
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
       if(updateTeacher){
@@ -223,10 +228,11 @@ function Board() {
           day:  lists[toList].title
         }
         if(objectNew.content.toUpperCase() === "HORARIO LIVRE"){
+          await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
           toast.success("Horario livre adicionado.")
           syncProf()
         }else{
-
+          await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
           console.log(objectNew.professorId)
           await myApi.put(`/professorRestrict/${objectNew.professorId}`,res)
 
@@ -245,7 +251,9 @@ function Board() {
     // const refin = lists[toList].cards;
     // console.log(lists);
     await setLists([...lists]);
-
+  }else{
+    toast.error("Professor não está disponível nesse horário!")
+  }
     // setLists(produce(lists, (draft) => {
     //   const dragged = draft[fromList].cards[from];
     //   draft[toList].cards.splice(to, 1, dragged);
@@ -304,6 +312,7 @@ function Board() {
           teacher: item.nome,
           content: item.professor.nome ,
           professorId:item.professor._id,
+          restrict: item.professor.restrict,
           sala: item.sala?.nome,
           labels: gerarCorHexadecimal(),
 
@@ -356,9 +365,20 @@ function Board() {
         content: item.professor.nome ,
         professorId:item.professor._id,
         sala: item.sala?.nome,
+        restrict: item.professor.restrict,
         labels: gerarCorHexadecimal(),
 
       }))
+      const horaryFree ={
+
+        id: Math.random().toFixed(3),
+        teacher: '',
+        content: 'horario livre',
+        labels: [],
+        user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',
+
+    }
+    updateBase.unshift(horaryFree)
 
      const replaceTeachers = data.map((item)=>{
       if(item.title === "Disciplinas"){

@@ -48,7 +48,7 @@ import Associado from "Pages/Search/Associado/Index";
 import BlocoManagment from "Pages/Blocos/Management";
 import BlocoRegister from "Pages/Blocos/Register";
 import ClassManagment from "Pages/Classe/Management";
-import TimeTable from "Pages/TimeTable";
+//import TimeTable from "Pages/TimeTable";
 import Board from "Pages/TimeTable/Board";
 import DisciplinasRegister from "Pages/Disciplinas/Register";
 import DisciplinaManagment from "Pages/Disciplinas/Management";

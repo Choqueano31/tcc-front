@@ -149,7 +149,7 @@ export default function BlocoManagment() {
                 <Create />
               </Button>{" "}
               {/* use this button to remove the data row */}
-              <Button
+              {/* <Button
                 justIcon
                 round
                 simple
@@ -161,7 +161,7 @@ export default function BlocoManagment() {
                 className="remove"
               >
                 <Close />
-              </Button>{" "}
+              </Button>{" "} */}
             </div>
           ),
         };

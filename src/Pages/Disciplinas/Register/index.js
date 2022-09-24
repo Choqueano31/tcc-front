@@ -53,11 +53,11 @@ export default function DisciplinasRegister() {
               stepComponent: Step1,
               stepId: "disciplinas",
             },
-            {
-              stepName: "Restrições",
-              stepComponent: Step3,
-              stepId: "obs",
-            },
+            // {
+            //   stepName: "Restrições",
+            //   stepComponent: Step3,
+            //   stepId: "obs",
+            // },
           ]}
           title="Cadastro de Disciplina"
           subtitle=""

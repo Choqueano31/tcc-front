@@ -18,6 +18,7 @@ export default function ProfessoresRegister() {
   async function typeCreate(e) {
     const dados = {
       nome: e.teacher.name,
+      restrict:e.obs.restrict
     };
     console.log(dados)
 

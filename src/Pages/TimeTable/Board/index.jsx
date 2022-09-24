@@ -111,7 +111,7 @@ function Board() {
       sala:dragged.sala,
       user: dragged.user,
     };
-    console.log(bloco._id);
+    console.log(objectNew);
     if( lists[toList]._id) {
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
       if(updateTeacher){
@@ -120,10 +120,15 @@ function Board() {
           horary:lists[1].cards[to].horario,
           day:  lists[toList].title
         }
-        console.log(objectNew.professorId)
-        await myApi.put(`/professorRestrict/${objectNew.professorId}`,restrict)
+        if(objectNew.content.toUpperCase() === "HORARIO LIVRE"){
+          toast.success("Horario livre adicionado.")
+        }else{
 
-        toast.success("Disciplina atualizada com sucesso.")
+          console.log(objectNew.professorId)
+          await myApi.put(`/professorRestrict/${objectNew.professorId}`,restrict)
+
+          toast.success("Disciplina atualizada com sucesso.")
+        }
       }else{
         toast.error("Não foi possível atualizar disciplina.")
       }
@@ -198,6 +203,16 @@ function Board() {
           labels: gerarCorHexadecimal(),
 
         }))
+        const horaryFree ={
+
+            id: Math.random().toFixed(3),
+            teacher: '',
+            content: 'horario livre',
+            labels: [],
+            user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',
+
+        }
+        updateBase.unshift(horaryFree)
         const refatore={
           title: 'Disciplinas',
           creatable: true,
@@ -239,6 +254,7 @@ function Board() {
         labels: gerarCorHexadecimal(),
 
       }))
+
      const replaceTeachers = data.map((item)=>{
       if(item.title === "Disciplinas"){
       const refatore={

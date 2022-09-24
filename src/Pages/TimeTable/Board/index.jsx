@@ -39,6 +39,7 @@ function Board() {
   const [teamsChosen, setTeamsChosen] = useState({})
   const [findTimeTable, setFindTimeTable] = useState([])
   const [loading, setLoading] = useState(false);
+  const [listProf, setListProf] = useState([])
   const matutino =  {
     title: 'Horários',
     creatable: true,
@@ -94,6 +95,10 @@ function Board() {
         horario: '17:30 - 18:20',
        },
     ],
+  }
+  async function syncProf(){
+    const response = await myApi.get(`/disciplinas/${id}`)
+    setListProf(response.data)
   }
 
   async function move(fromList, toList, from, to) {
@@ -193,6 +198,7 @@ function Board() {
      // console.log(findTimeTable.data[0]._id)
       if(findTimeTable.data.length > 0){
         const response = await myApi.get(`/disciplinas/${id}`)
+        setListProf(response.data)
         console.log(response)
         const updateBase = response.data.map((item)=> ({
           id: item._id ,
@@ -425,7 +431,10 @@ function Board() {
       <Container >
         {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
       </Container>
-      <DialogActions style={{display:"flex"  ,marginTop:120, alignItems:"center", justifyContent:"center"}}>
+      <GridItem xs={12} sm={12}>
+      <h style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold"}} >Restrições dos Professores </h>
+      </GridItem>
+      <DialogActions style={{display:"flex"  ,marginTop:60, alignItems:"center", justifyContent:"center"}}>
             <RegularButton  onClick={()=> {back()}} color="warning">
               VOLTAR
             </RegularButton>

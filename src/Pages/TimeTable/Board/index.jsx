@@ -286,7 +286,7 @@ function Board() {
   }
   async function handleTimeTable(){
     try {
-      console.log(lists)
+      setLoading(true)
       for(let i = 1; i< lists.length;){
       const response =  await myApi.post("/timetable", lists[i])
         if(response){
@@ -294,10 +294,11 @@ function Board() {
         }
       }
       toast.success("horario criado com sucesso")
-      window.location.reload()
+     back()
+     setLoading(false)
     } catch (error) {
       toast.error(error)
-
+      setLoading(false)
     }
   }
   async function blocoLists(){

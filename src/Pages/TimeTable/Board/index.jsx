@@ -49,22 +49,70 @@ function Board() {
       {
         id: 1,
         horario: '07:30 - 08:20',
+        pos:[
+      {name: '07:30 - 08:20', id: '1', day:'segunda-feira'},
+      {name: '07:30 - 08:20', id: '13', day:'terça-feira'},
+      {name: '07:30 - 08:20', id: '25', day:'quarta-feira'},
+      {name: '07:30 - 08:20', id: '37', day:'quinta-feira'},
+      {name: '07:30 - 08:20', id: '49', day:'sexta-feira'},
+
+        ]
       },
       {
         id:2 ,
         horario: '08:20 - 09:10',
+        pos:[
+      {name: '08:20 - 09:10', id: '2', day:'segunda-feira'},
+      {name: '08:20 - 09:10', id: '14', day:'terça-feira'},
+      {name: '08:20 - 09:10', id: '26', day:'quarta-feira'},
+      {name: '08:20 - 09:10', id: '38', day:'quinta-feira'},
+      {name: '08:20 - 09:10', id: '50', day:'sexta-feira'},
+
+        ]
            },        {
         id: 3,
         horario: '09:20 - 10:10',
+        pos:[
+      {name: '09:20 - 10:10', id: '3', day:'segunda-feira'},
+      {name: '09:20 - 10:10', id: '15', day:'terça-feira'},
+      {name: '09:20 - 10:10', id: '27', day:'quarta-feira'},
+      {name: '09:20 - 10:10', id: '39', day:'quinta-feira'},
+      {name: '09:20 - 10:10', id: '51', day:'sexta-feira'},
+
+        ]
           },        {
         id: 4,
         horario: '10:10 - 11:00',
+        pos:[
+      {name: '10:10 - 11:00', id: '4', day:'segunda-feira'},
+      {name: '10:10 - 11:00', id: '16', day:'terça-feira'},
+      {name: '10:10 - 11:00', id: '28', day:'quarta-feira'},
+      {name: '10:10 - 11:00', id: '40', day:'quinta-feira'},
+      {name: '10:10 - 11:00', id: '52', day:'sexta-feira'},
+
+        ]
         },        {
         id: 5,
         horario: '11:10 - 12:00',
+        pos:[
+      {name: '11:10 - 12:00', id: '5', day:'segunda-feira'},
+      {name: '11:10 - 12:00', id: '17', day:'terça-feira'},
+      {name: '11:10 - 12:00', id: '29', day:'quarta-feira'},
+      {name: '11:10 - 12:00', id: '41', day:'quinta-feira'},
+      {name: '11:10 - 12:00', id: '53', day:'sexta-feira'},
+
+        ]
       },        {
         id: 6,
         horario: '12:00 - 12:50',
+        pos:[
+      {name: '12:00 - 12:50', id: '6', day:'segunda-feira'},
+      {name: '12:00 - 12:50', id: '18', day:'terça-feira'},
+      {name: '12:00 - 12:50', id: '30', day:'quarta-feira'},
+      {name: '12:00 - 12:50', id: '42', day:'quinta-feira'},
+      {name: '12:00 - 12:50', id: '54', day:'sexta-feira'},
+
+        ]
        },
     ],
   }
@@ -77,27 +125,75 @@ function Board() {
       {
         id: 1,
         horario: '13:00 - 13:50',
+        pos:[
+      {name: '13:00 - 13:50', id: '7', day:'segunda-feira'},
+      {name: '13:00 - 13:50', id: '19', day:'terça-feira'},
+      {name: '13:00 - 13:50', id: '31', day:'quarta-feira'},
+      {name: '13:00 - 13:50', id: '43', day:'quinta-feira'},
+      {name: '13:00 - 13:50', id: '55', day:'sexta-feira'},
+
+        ]
       },
       {
         id:2 ,
         horario: '13:50 - 14:40',
+        pos:[
+      {name: '13:50 - 14:40', id: '8', day:'segunda-feira'},
+      {name: '13:50 - 14:40', id: '20', day:'terça-feira'},
+      {name: '13:50 - 14:40', id: '32', day:'quarta-feira'},
+      {name: '13:50 - 14:40', id: '44', day:'quinta-feira'},
+      {name: '13:50 - 14:40', id: '56', day:'sexta-feira'},
+
+        ]
            },        {
         id: 3,
         horario: '14:50 - 15:40',
+        pos:[
+      {name: '14:50 - 15:40', id: '9', day:'segunda-feira'},
+      {name: '14:50 - 15:40', id: '21', day:'terça-feira'},
+      {name: '14:50 - 15:40', id: '33', day:'quarta-feira'},
+      {name: '14:50 - 15:40', id: '45', day:'quinta-feira'},
+      {name: '14:50 - 15:40', id: '57', day:'sexta-feira'},
+
+        ]
           },        {
         id: 4,
         horario: '15:40 - 16:30',
+        pos:[
+      {name: '15:40 - 16:30', id: '10', day:'segunda-feira'},
+      {name: '15:40 - 16:30', id: '22', day:'terça-feira'},
+      {name: '15:40 - 16:30', id: '34', day:'quarta-feira'},
+      {name: '15:40 - 16:30', id: '46', day:'quinta-feira'},
+      {name: '15:40 - 16:30', id: '58', day:'sexta-feira'},
+
+        ]
         },        {
         id: 5,
         horario: '16:40 - 17:30',
+        pos:[
+      {name: '16:40 - 17:30', id: '11', day:'segunda-feira'},
+      {name: '16:40 - 17:30', id: '23', day:'terça-feira'},
+      {name: '16:40 - 17:30', id: '35', day:'quarta-feira'},
+      {name: '16:40 - 17:30', id: '47', day:'quinta-feira'},
+      {name: '16:40 - 17:30', id: '59', day:'sexta-feira'},
+
+        ]
       },        {
         id: 6,
         horario: '17:30 - 18:20',
+        pos:[
+      {name: '17:30 - 18:20', id: '12', day:'segunda-feira'},
+      {name: '17:30 - 18:20', id: '24', day:'terça-feira'},
+      {name: '17:30 - 18:20', id: '36', day:'quarta-feira'},
+      {name: '17:30 - 18:20', id: '48', day:'quinta-feira'},
+      {name: '17:30 - 18:20', id: '60', day:'sexta-feira'},
+
+        ]
        },
     ],
   }
   async function syncProf(){
-    const response = await myApi.get(`/disciplinas/${id}`)
+    const response = await myApi.get(`/disciplinas/${bloco._id}`)
     setListProf(response.data)
   }
 
@@ -107,6 +203,7 @@ function Board() {
     console.log( lists[1].cards[to])
     const dragged = lists[fromList].cards[from];
     dragged.id = objectDelect.id;
+    //const res =
     const objectNew = {
       id: Math.random().toFixed(3),
       content: dragged.content,
@@ -127,12 +224,14 @@ function Board() {
         }
         if(objectNew.content.toUpperCase() === "HORARIO LIVRE"){
           toast.success("Horario livre adicionado.")
+          syncProf()
         }else{
 
           console.log(objectNew.professorId)
-          await myApi.put(`/professorRestrict/${objectNew.professorId}`,restrict)
+          await myApi.put(`/professorRestrict/${objectNew.professorId}`,res)
 
           toast.success("Disciplina atualizada com sucesso.")
+          syncProf()
         }
       }else{
         toast.error("Não foi possível atualizar disciplina.")

@@ -55,7 +55,8 @@ function createData(name, calories, fat, carbs, protein, price) {
   };
 }
 function createData2(item){
-  console.log('HI', item)
+
+ // console.log('HI', item)
   // console.log(item)
   return{
     nome: item.nome,
@@ -110,7 +111,8 @@ function Row(props) {
                     <TableCell>nome</TableCell>
                     <TableCell>codigo</TableCell>
 
-                    <TableCell align="center">professor</TableCell>
+                    <TableCell >professor</TableCell>
+                    <TableCell >Sala</TableCell>
                     {/* <TableCell align="right">Data de Nascimento</TableCell> */}
                   </TableRow>
                 </TableHead>
@@ -118,7 +120,7 @@ function Row(props) {
 
                   {row.teachers.map((historyRow) => (
                     <>
-                    {historyRow.professores.length > 1&& (
+                    {/* {historyRow.professores.length > 1&& (
                       <>
                       {historyRow.professores.map((item)=>(
                            <TableRow key={item._id}>
@@ -128,16 +130,12 @@ function Row(props) {
                            <TableCell>{historyRow.code}</TableCell>
 
                            <TableCell align="left">{item.nome}</TableCell>
-                           {/* <TableCell align="right">
-                           {historyRow.data_nascimento}
-                           </TableCell> */}
-                             {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}
                          </TableRow>
                         ))}
                         </>
-                    )}
+                    )} */}
 
-                {historyRow.professores.length <= 1&& (
+
 
                     <TableRow key={historyRow._id}>
                       <TableCell component="th" scope="row">
@@ -145,14 +143,15 @@ function Row(props) {
                       </TableCell>
                       <TableCell>{historyRow.code}</TableCell>
 
-                      <TableCell align="left">{historyRow.professores[0]?.nome}</TableCell>
+                      <TableCell align="left">{historyRow.professor.nome.toUpperCase()}</TableCell>
+                      <TableCell align="left">{historyRow.sala.nome}</TableCell>
                       {/* <TableCell align="right">
                       {historyRow.data_nascimento}
                       </TableCell> */}
                         {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}
                     </TableRow>
 
-                    )}
+
                     </>
                 ))}
 
@@ -301,10 +300,17 @@ export default function Associado() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   async function listAssociates() {
 
-    const response = await myApi.get("/bloco");
-    console.log(response.data)
+    let response = await myApi.get("/bloco");
+    for(let i=0; i< response.data.length; i++){
+      const findDisciplina = await myApi.get(`/disciplinas/${response.data[i]._id}`);
+     if(findDisciplina.data !== ''){
+      response.data[i].disciplinas= findDisciplina.data
+     }
+    }
+
     setList(
-      response.data.map((item) => createData2(item)))
+      response.data.map((item) => createData2(item))
+      )
   }
 
   async function resptwo() {
@@ -353,7 +359,6 @@ export default function Associado() {
           ))}
         </TableBody>
       </Table>
-      { console.log('ASSOCIADOS', associate)}
       <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"

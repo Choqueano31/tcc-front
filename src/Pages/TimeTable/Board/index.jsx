@@ -380,6 +380,7 @@ function Board() {
       else{
         setLoading(true)
       const response = await myApi.get(`/disciplinas/${id}`)
+      setListProf(response.data)
       console.log(response)
       const updateBase = response.data.map((item)=> ({
         id: item._id ,
@@ -580,7 +581,7 @@ function Board() {
         {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
       </Container>
       <GridItem xs={12} sm={12}>
-      <h style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold"}} >Restrições dos Professores </h>
+      <h style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold", marginBottom:15}} >Restrições dos Professores </h>
       {listProf.length >0?
         listProf.map((item)=>{
         const ls= item.professor.restrict.sort(function (a, b) {

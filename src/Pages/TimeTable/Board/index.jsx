@@ -211,13 +211,14 @@ function Board() {
       teacher: dragged.teacher,
       labels: dragged.labels,
       professorId:dragged.professorId,
-      restrict: dragged.restrict,
+      restrict: res,
       sala:dragged.sala,
       user: dragged.user,
     };
     console.log(objectNew);
+    console.log(lists);
 
-    const ativeRestrict = objectNew.restrict.filter((item)=> item.id === res.id)
+    const ativeRestrict = dragged.restrict.filter((item)=> item.id === res.id)
     if(ativeRestrict.length === 0){
     if( lists[toList]._id) {
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
@@ -414,6 +415,13 @@ function Board() {
       setLoading(true)
       for(let i = 1; i< lists.length;){
       const response =  await myApi.post("/timetable", lists[i])
+      if(lists[i].title !== 'Horários'){
+        for(let j=0; j< lists[i].cards.length; j++){
+          if(lists[i].cards[j].professorId){
+            await myApi.put(`/professorRestrict/${lists[i].cards[j].professorId}`,lists[i].cards[j].restrict)
+          }
+        }
+      }
         if(response){
           i++
         }

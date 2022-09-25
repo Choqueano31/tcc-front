@@ -217,10 +217,16 @@ function Board() {
     };
     console.log(objectNew);
     console.log(lists);
+    console.log(lists[toList]._id);
 
-    const ativeRestrict = dragged.restrict.filter((item)=> item.id === res.id)
+    console.log(dragged.restrict);
+    let ativeRestrict=[]
+    if(dragged.restrict){
+       ativeRestrict = dragged.restrict.filter((item)=> item.id === res.id)
+    }
     if(ativeRestrict.length === 0){
     if( lists[toList]._id) {
+      console.log('aqi');
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
       if(updateTeacher){
         const restrict = {
@@ -228,18 +234,33 @@ function Board() {
           horary:lists[1].cards[to].horario,
           day:  lists[toList].title
         }
-        if(objectNew.content.toUpperCase() === "HORARIO LIVRE"){
-          await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
-          toast.success("Horario livre adicionado.")
-          syncProf()
-        }else{
-          await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
-          console.log(objectNew.professorId)
+        // if(objectNew.content.toUpperCase() === "HORARIO LIVRE"){
+        //   await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
+        //   toast.success("Horario livre adicionado.")
+        //   syncProf()
+        // }else{
+          if(objectDelect.professorId){
+            if(objectNew.professorId){
+
+              await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
+              console.log(objectNew.professorId)
+              await myApi.put(`/professorRestrict/${objectNew.professorId}`,res)
+
+              toast.success("Disciplina atualizada com sucesso.")
+              syncProf()
+            }else{
+              await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
+              toast.success("Disciplina atualizada com sucesso.")
+              syncProf()
+            }
+          }else{
+          // await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
+          // console.log(objectNew.professorId)
           await myApi.put(`/professorRestrict/${objectNew.professorId}`,res)
 
           toast.success("Disciplina atualizada com sucesso.")
           syncProf()
-        }
+      }
       }else{
         toast.error("Não foi possível atualizar disciplina.")
       }
@@ -560,6 +581,28 @@ function Board() {
       </Container>
       <GridItem xs={12} sm={12}>
       <h style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold"}} >Restrições dos Professores </h>
+      {listProf.length >0?
+        listProf.map((item)=>{
+        const ls= item.professor.restrict.sort(function (a, b) {
+          if (Number(a.id) > Number(b.id)) {
+            return 1;
+          }
+          if (Number(a.id) <Number(b.id)) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        })
+          return(
+            <div style={{marginBottom:20}}>
+            <p style={{ fontWeight:"bold"}} >Professor: {item.professor?.nome.toUpperCase()}  /  Disciplina: {item?.nome} </p>
+            {ls.map((i)=>(
+              <p>Dia: {i.day}  /  horário: {i.name}</p>
+            ))}
+            </div>
+          )
+        })
+      : null}
       </GridItem>
       <DialogActions style={{display:"flex"  ,marginTop:60, alignItems:"center", justifyContent:"center"}}>
             <RegularButton  onClick={()=> {back()}} color="warning">

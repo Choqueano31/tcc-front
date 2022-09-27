@@ -314,6 +314,42 @@ function Board() {
     //  ,
     // ]);
   }
+
+  function print(){
+    let profs=[]
+    for(let i=2;i< lists.length; i++){
+        for(let j=0; j< lists[i].cards.length;j++){
+          if(lists[i].cards[j].content.toUpperCase() !== "HORARIO LIVRE"){
+            profs.push(lists[i].cards[j])
+          }
+        }
+    }
+    console.log(listProf);
+    let aggroupeAll =[]
+    for(let a=0 ; a< listProf.length; a++){
+      const findDisci = profs.filter((i) => i.teacher === listProf[a]?.nome)
+      console.log(findDisci)
+      if(findDisci.length > 0){
+        const disciplina= {
+          nome: listProf[a].nome,
+          professor: listProf[a].professor.nome,
+          code:listProf[a].code,
+          sala: listProf[a].sala.nome,
+          horario: findDisci.map((it)=> (
+            it.restrict
+          ))
+
+        }
+        aggroupeAll.push(disciplina)
+      }
+    }
+    console.log(aggroupeAll);
+
+
+    // console.log(disc);
+    // console.log(profs);
+    HorariosPdf(bloco,lists, aggroupeAll)
+  }
   async function ListDisciplines(id){
 
     try{
@@ -612,7 +648,7 @@ function Board() {
             {findTimeTable.length > 0? (
                <RegularButton onClick={() => {
 
-                HorariosPdf(bloco,lists)}} color="danger">
+               print()}} color="danger">
                IMPRIMIR HORÁRIO
              </RegularButton>
             ):(

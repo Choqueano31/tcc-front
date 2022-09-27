@@ -145,96 +145,13 @@ function Row(props) {
 
                       <TableCell align="left">{historyRow.professor.nome.toUpperCase()}</TableCell>
                       <TableCell align="left">{historyRow.sala.nome}</TableCell>
-                      {/* <TableCell align="right">
-                      {historyRow.data_nascimento}
-                      </TableCell> */}
-                        {/* {Math.round(historyRow.amount * row.price * 100) / 100} */}
                     </TableRow>
-
-
                     </>
                 ))}
 
                 </TableBody>
               </Table>
             </Box>
-            {/* <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                Endereço
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Endereço</TableCell>
-                    <TableCell>Numero</TableCell>
-                    <TableCell align="right">Bairro</TableCell>
-                    <TableCell align="right">Cidade</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.endereco.map((historyRow) => (
-                    <TableRow key={historyRow.address}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.address}
-                      </TableCell>
-                      <TableCell >{historyRow.number}</TableCell>
-                      <TableCell align="right" >{historyRow.neighborhood}</TableCell>
-                      <TableCell align="right">{historyRow.city}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box> */}
-            {/* <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                Informações Funcionais
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Nome de Guerra</TableCell>
-                    <TableCell>Matricula Funcional</TableCell>
-                    <TableCell align="right">Unidade</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.funcional.map((historyRow) => (
-                    <TableRow key={historyRow.mf}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.nome_guerra}
-                      </TableCell>
-                      <TableCell >{historyRow.mf}</TableCell>
-                      <TableCell align="right">{historyRow.unidade}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box> */}
-            {/* <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                Dependentes
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Nome Completo</TableCell>
-                    <TableCell>CPF</TableCell>
-                    <TableCell align="right">Parentesco</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.dependents.length > 0 && row.dependents.map((historyRow) => (
-                    <TableRow key={historyRow.name}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.name}
-                      </TableCell>
-                      <TableCell >{historyRow.cpf}</TableCell>
-                      <TableCell align="right" >{historyRow.parentage}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box> */}
           </Collapse>
         </TableCell>
       </TableRow>
@@ -295,7 +212,6 @@ const rows = [
 
 export default function Associado() {
   const [list, setList] = useState([]);
-  const [associate, setAssociate] = useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   async function listAssociates() {
@@ -313,14 +229,8 @@ export default function Associado() {
       )
   }
 
-  async function resptwo() {
-    const response1 = await myApi.get("/desconts");
-    setAssociate(response1.data);
-
-  }
   useEffect(() => {
     listAssociates();
-    // resptwo()
   }, []);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -347,10 +257,6 @@ export default function Associado() {
             <TableCell />
             <TableCell />
             <TableCell />
-            {/* <TableCell align="center">POSTO/GRAD</TableCell>
-            <TableCell align="center">RG&nbsp;(PM)</TableCell>
-            <TableCell align="center">RG&nbsp;(BM)</TableCell>
-            <TableCell align="center">STATUS</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>

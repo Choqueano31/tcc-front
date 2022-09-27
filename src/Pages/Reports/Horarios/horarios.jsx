@@ -1,10 +1,32 @@
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
-function HorariosPDF(bloco, info) {
+function HorariosPDF(bloco, info, prof) {
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
  const ls = info
  ls.shift()
  console.log(ls)
+ console.log(bloco)
+ console.log(prof)
+ let saveHor =[]
+//  let modifyProf = prof
+//  for(let i=0; i< modifyProf.length; i++){
+//     for(let k=0; k< modifyProf[i].horario.length; k++){
+//       if(saveHor.length==0){
+//         saveHor.push(modifyProf[i].horario[k])
+
+//       }else{
+//         console.log(modifyProf[i].horario[k]?.day)
+//         console.log(saveHor)
+//           const find = saveHor.filter((id)=> id?.day.toUpperCase() === modifyProf[i].horario[k]?.day.toUpperCase())
+//           if(find.length > 0){}else{
+
+//             saveHor.push(modifyProf[i].horario[k])
+//           }
+
+//         }
+//     }
+//  }
+ console.log(saveHor)
  let complex = []
  let line1 = []
  let line2 = []
@@ -15,8 +37,8 @@ function HorariosPDF(bloco, info) {
  for(let i =0; i< ls.length; i++){
   const line00 ={text: ls[i].title, style: 'tableHeader', alignment: 'center'}
   complex.push(line00)
-  if(ls[i].cards[0].content != undefined){
-    if(ls[i].title == "horarios"){
+  if(ls[i].cards.length>0){
+    if(ls[i].title == "Horários"){
       const line01 ={text: ls[i].cards[0].horario, style: 'tableHeader', alignment: 'center'}
       line1.push(line01)
 			const line02 ={text: ls[i].cards[1].horario, style: 'tableHeader', alignment: 'center'}
@@ -47,13 +69,80 @@ function HorariosPDF(bloco, info) {
     }
   }
  }
+ const areaImpact = [
+  {
+     riskID:"f0bf6fa1-0a6b-e6e3-9ec08bd67751",
+     description:"Matt's printing testMatt's printing testMatt's printing test",
+     type:"Safety",
+     consequences:{
+        items:[
+           "Matt's printing test",
+           "Matt's printing again"
+        ]
+     },
+     safeguards:{
+        items:[
+           "Matt's printing test",
+           "Matt's printing test agin!!!"
+        ]
+     },
+     actions:{
+        "items":[
+           "Matt's awesome printing test"
+        ]
+     }
+  },
+  {
+     riskID:"ffd23fa1-0a6b-e6e3-9ec08bd67751",
+     description:"Here's another test",
+     type:"Safety",
+     consequences:{
+        items:[
+           "Matt's printing test",
+           "Matt's printing again"
+        ]
+     },
+     safeguards:{
+        items:[
+           "Matt's printing test",
+           "Matt's printing test agin!!!"
+        ]
+     },
+     actions:{
+        items:[
+           "Matt's awesome printing test"
+        ]
+     }
+  }
+  ]
+
+ function formatRiskList(riskList){
+  var printableRisks = [];
+
+  riskList.forEach(function(risk){
+
+    printableRisks.push({text:'Disciplina', style:'subheader'});
+    printableRisks.push({text:risk.nome});
+    printableRisks.push({text:'Professor', style:'subheader'});
+    printableRisks.push({text: risk.professor});
+    printableRisks.push({text:'Código', style:'subheader'});
+    printableRisks.push({text: risk.code});
+    printableRisks.push({text:'Sala', style:'subheader'});
+    printableRisks.push({text: risk.sala});
+
+  });
+
+  return printableRisks;
+
+}
  console.log(line1)
   const reportTitle = [	];
   const details = [
 		{
 			text: `Horário de aula ${bloco.nome}`,
 			style: 'header',
-			alignment: 'center'
+			alignment: 'center',
+      marginBottom: 10
 		},
 		{
 			style: 'tableExample',
@@ -74,6 +163,7 @@ function HorariosPDF(bloco, info) {
 					line6
 				]
 			},
+
 			layout: {
 				hLineWidth: function (i, node) {
 					return (i === 0 || i === node.table.body.length) ? 2 : 1;
@@ -95,7 +185,19 @@ function HorariosPDF(bloco, info) {
 				// paddingBottom: function(i, node) { return 2; },
 				// fillColor: function (rowIndex, node, columnIndex) { return null; }
 			}
-		},];
+		},
+    {text: 'Informações gerais', style: 'subheader',alignment: 'center',
+    marginTop: 20,
+
+  },
+
+      [
+        prof.map((item)=> ({text:"Disciplina: " + item.nome+ ' / '+'Professor: '+item.professor.toUpperCase() +' / '+"Sala: "+item.sala +" / Dias: "+ item.horario.map(u => u.day.toUpperCase().substr(0, 3)).join('/ '), alignment: 'justify', marginTop: 20}))
+        //formatRiskList(prof)
+      ]
+
+
+  ];
 
   const rodape = [];
 

@@ -24,6 +24,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import image from "assets/img/faces/ufpa.png";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
+import { FaUser } from "react-icons/fa";
 
 const useStyles = makeStyles(styles);
 
@@ -68,7 +69,7 @@ export default function LoginPage() {
                   }}
                 /> */}
                 <CustomInput
-                  labelText="Email..."
+                  labelText="Usuário"
                   id="email"
                   formControlProps={{
                     fullWidth: true
@@ -76,7 +77,7 @@ export default function LoginPage() {
                   inputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <Email className={classes.inputAdornmentIcon} />
+                        <FaUser className={classes.inputAdornmentIcon} />
                       </InputAdornment>
                     )
                   }}

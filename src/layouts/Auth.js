@@ -13,7 +13,8 @@ import routes from "routes.js";
 import styles from "assets/jss/material-dashboard-pro-react/layouts/authStyle.js";
 
 import register from "assets/img/register.jpeg";
-import login from "assets/img/login.jpeg";
+//import login from "assets/img/login.jpeg";
+import login from "assets/img/ufpa.png";
 import lock from "assets/img/lock.jpeg";
 import error from "assets/img/clint-mckoy.jpg";
 import pricing from "assets/img/bg-pricing.jpeg";
@@ -33,7 +34,7 @@ export default function Pages(props) {
   });
   const getRoutes = routes => {
     return routes.map((prop, key) => {
-     
+
       if (prop.collapse) {
         return getRoutes(prop.views);
       }

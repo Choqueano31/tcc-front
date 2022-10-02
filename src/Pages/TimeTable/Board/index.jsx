@@ -372,7 +372,7 @@ function Board() {
           professorId:item.professor._id,
           restrict: item.professor.restrict,
           sala: item.sala?.nome,
-          labels: gerarCorHexadecimal(),
+          labels: item.labels,
 
         }))
         const horaryFree ={
@@ -425,7 +425,7 @@ function Board() {
         professorId:item.professor._id,
         sala: item.sala?.nome,
         restrict: item.professor.restrict,
-        labels: gerarCorHexadecimal(),
+        labels: item.labels,
 
       }))
       const horaryFree ={

@@ -123,11 +123,11 @@ const dangerColor = [
   "#f2dede"
 ];
 const successColor = [
+  "#388e3c",
+  "#43a047",
   "#4caf50",
   "#66bb6a",
-  "#43a047",
   "#5cb860",
-  "#388e3c",
   "#d0e9c6",
   "#dff0d8"
 ];
@@ -242,7 +242,7 @@ const warningCardHeader = {
 };
 const successCardHeader = {
   background:
-    "linear-gradient(60deg, " + successColor[1] + ", " + successColor[2] + ")",
+    "linear-gradient(60deg, " + successColor[0] + ", " + successColor[2] + ")",
   ...successBoxShadow
 };
 const dangerCardHeader = {

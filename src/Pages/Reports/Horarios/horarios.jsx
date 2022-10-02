@@ -53,88 +53,23 @@ function HorariosPDF(bloco, info, prof) {
       line6.push(line06)
     }else{
 
-      const line01 ={text: ls[i].cards[0].content + '\n'+  ls[i].cards[0].teacher, style: 'tableHeader', alignment: 'center'}
+      const line01 ={text:(ls[i].cards[0].content.toUpperCase() === 'HORARIO LIVRE'? ls[i].cards[0].content : '') + '\n'+  ls[i].cards[0].teacher, style: 'tableHeader', alignment: 'center'}
       line1.push(line01)
-			const line02 ={text: ls[i].cards[1].content + '\n'+  ls[i].cards[1].teacher, style: 'tableHeader', alignment: 'center'}
+			const line02 ={text:(ls[i].cards[1].content.toUpperCase() === 'HORARIO LIVRE'? ls[i].cards[0].content : '')+  ls[i].cards[1].teacher, style: 'tableHeader', alignment: 'center'}
       line2.push(line02)
-			const line03 ={text: ls[i].cards[2].content + '\n'+  ls[i].cards[2].teacher, style: 'tableHeader', alignment: 'center'}
+			const line03 ={text: (ls[i].cards[2].content.toUpperCase() === 'HORARIO LIVRE'? ls[i].cards[0].content : '')+  ls[i].cards[2].teacher, style: 'tableHeader', alignment: 'center'}
       line3.push(line03)
-			const line04 ={text: ls[i].cards[3].content + '\n'+  ls[i].cards[3].teacher, style: 'tableHeader', alignment: 'center'}
+			const line04 ={text:(ls[i].cards[3].content.toUpperCase() === 'HORARIO LIVRE'? ls[i].cards[0].content : ' ') +  ls[i].cards[3].teacher, style: 'tableHeader', alignment: 'center'}
       line4.push(line04)
-			const line05 ={text: ls[i].cards[4].content + '\n'+  ls[i].cards[4].teacher, style: 'tableHeader', alignment: 'center'}
+			const line05 ={text:(ls[i].cards[4].content.toUpperCase() === 'HORARIO LIVRE'? ls[i].cards[0].content : '') +  ls[i].cards[4].teacher, style: 'tableHeader', alignment: 'center'}
       line5.push(line05)
-			const line06 ={text: ls[i].cards[5].content + '\n'+  ls[i].cards[5].teacher, style: 'tableHeader', alignment: 'center'}
+			const line06 ={text: (ls[i].cards[5].content.toUpperCase() === 'HORARIO LIVRE'? ls[i].cards[0].content : '') +  ls[i].cards[5].teacher, style: 'tableHeader', alignment: 'center'}
       line6.push(line06)
 
     }
   }
  }
- const areaImpact = [
-  {
-     riskID:"f0bf6fa1-0a6b-e6e3-9ec08bd67751",
-     description:"Matt's printing testMatt's printing testMatt's printing test",
-     type:"Safety",
-     consequences:{
-        items:[
-           "Matt's printing test",
-           "Matt's printing again"
-        ]
-     },
-     safeguards:{
-        items:[
-           "Matt's printing test",
-           "Matt's printing test agin!!!"
-        ]
-     },
-     actions:{
-        "items":[
-           "Matt's awesome printing test"
-        ]
-     }
-  },
-  {
-     riskID:"ffd23fa1-0a6b-e6e3-9ec08bd67751",
-     description:"Here's another test",
-     type:"Safety",
-     consequences:{
-        items:[
-           "Matt's printing test",
-           "Matt's printing again"
-        ]
-     },
-     safeguards:{
-        items:[
-           "Matt's printing test",
-           "Matt's printing test agin!!!"
-        ]
-     },
-     actions:{
-        items:[
-           "Matt's awesome printing test"
-        ]
-     }
-  }
-  ]
 
- function formatRiskList(riskList){
-  var printableRisks = [];
-
-  riskList.forEach(function(risk){
-
-    printableRisks.push({text:'Disciplina', style:'subheader'});
-    printableRisks.push({text:risk.nome});
-    printableRisks.push({text:'Professor', style:'subheader'});
-    printableRisks.push({text: risk.professor});
-    printableRisks.push({text:'Código', style:'subheader'});
-    printableRisks.push({text: risk.code});
-    printableRisks.push({text:'Sala', style:'subheader'});
-    printableRisks.push({text: risk.sala});
-
-  });
-
-  return printableRisks;
-
-}
  console.log(line1)
   const reportTitle = [	];
   const details = [
@@ -192,7 +127,7 @@ function HorariosPDF(bloco, info, prof) {
   },
 
       [
-        prof.map((item)=> ({text:"Disciplina: " + item.nome+ ' / '+'Professor: '+item.professor.toUpperCase() +' / '+"Sala: "+item.sala +" / Dias: "+ item.horario.map(u => u.day.toUpperCase().substr(0, 3)).join('/ '), alignment: 'justify', marginTop: 20}))
+        prof.map((item)=> ({text:"Disciplina: " + item.nome+ ' / '+'Professor: '+item.professor.toUpperCase() +' / '+"Sala: "+item.sala , alignment: 'justify', marginTop: 5}))
         //formatRiskList(prof)
       ]
 
@@ -203,6 +138,7 @@ function HorariosPDF(bloco, info, prof) {
 
   const docDefinitions = {
     pageSize: "A4",
+    pageOrientation: 'landscape',
     pageMargins: [15, 50, 15, 40],
 
     header: [reportTitle],

@@ -15,13 +15,20 @@ import "react-toastify/dist/ReactToastify.css";
 import myApi from "Service/Api.js";
 
 export default function DisciplinasRegister() {
+  function gerarCorHexadecimal() {
+    // eslint-disable-next-line radix
+    return `#${parseInt((Math.random() * 0xFFF))
+      .toString(16)
+      .padStart(3, '0')}`;
+  }
   async function typeCreate(e) {
     const dados = {
       nome: e.disciplinas.name,
       code: e.disciplinas.code,
       bloco_id: e.disciplinas.bloco,
       sala_id:e.disciplinas.sala,
-      professor_id: e.disciplinas.professor
+      professor_id: e.disciplinas.professor,
+      labels:gerarCorHexadecimal()
     };
     console.log(dados)
 

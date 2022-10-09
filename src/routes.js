@@ -35,7 +35,7 @@ import { FaIdBadge } from "react-icons/fa";
 // import DateRange from "@material-ui/icons/DateRange";
 import GridOn from "@material-ui/icons/GridOn";
 import Image from "@material-ui/icons/Image";
-import {Settings} from "@material-ui/icons";
+import {DateRange, ExitToApp, FolderShared, Settings} from "@material-ui/icons";
 import HotelRegister from "Pages/Register/Hotel/Index";
 import BedroomRegister from "Pages/Register/Bedroom";
 import AssociatesSearch from "Pages/Search/Associates/Index";
@@ -54,6 +54,7 @@ import DisciplinasRegister from "Pages/Disciplinas/Register";
 import DisciplinaManagment from "Pages/Disciplinas/Management";
 import ProfessoresRegister from "Pages/Professores/Register";
 import TeachersManagment from "Pages/Professores/Management";
+import Calendar from "views/Calendar/Calendar";
 // import Timeline from "@material-ui/icons/Timeline";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
@@ -74,7 +75,7 @@ var dashRoutes = [
     collapse:true,
     state: "periodos",
     // component: Dashboard,
-    // layout: "/admin",
+     layout: "/admin",
     views: [
       {
         path: "/blococreate",
@@ -103,7 +104,7 @@ var dashRoutes = [
       collapse:true,
       state: "salas",
       // component: Dashboard,
-      // layout: "/admin",
+       layout: "/admin",
       views: [
         {
           path: "/classregister",
@@ -133,7 +134,7 @@ var dashRoutes = [
     collapse:true,
     state: "pageCollapse",
     // component: Dashboard,
-    // layout: "/admin",
+     layout: "/admin",
     views: [
       // {
       //   path: "/regular-forms",
@@ -208,7 +209,7 @@ var dashRoutes = [
         collapse:true,
         state: "disciplinas",
         // component: Dashboard,
-        // layout: "/admin",
+         layout: "/admin",
         views: [
           {
             path: "/disciplinaregister",
@@ -229,6 +230,74 @@ var dashRoutes = [
             layout: "/admin",
           },
         ]},
+        {
+          collapse: true,
+          name: "GERENCIAMENTO",
+          rtlName: "خرائط",
+          icon: Settings,
+          state: "mapsCollapse",
+          layout:'/admin',
+          views: [
+            // {
+            //   path: "/associates",
+            //   name: "GERENCIAMENTO DE BLOCOS",
+            //   rtlName: "خرائط جوجل",
+            //   mini: "G",
+            //   rtlMini: "زم",
+            //   component: AssociatesSearch,
+            //   layout: "/admin",
+            // },
+            {
+              path: "/timetable",
+              name: "Horários",
+              rtlName: "خرائط جوجل",
+              mini: "G",
+              rtlMini: "زم",
+              component: Board,
+              layout: "/admin",
+            },
+                  {
+              path: "/listassociates",
+              name: "BLOCOS",
+              rtlName: "خرائط جوجل",
+              mini: "B",
+              rtlMini: "زم",
+              // component: AssociatesSearch, // estava comentado
+              component: Associado,
+
+              layout: "/admin",
+            },
+            // {
+            //   path: "/full-screen-maps",
+            //   name: "Full Screen Map",
+            //   rtlName: "خريطة كاملة الشاشة",
+            //   mini: "FSM",
+            //   rtlMini: "ووم",
+            //   component: FullScreenMap,
+            //   layout: "/admin",
+            // },
+            // {
+            //   path: "/vector-maps",
+            //   name: "Vector Map",
+            //   rtlName: "خريطة المتجه",
+            //   mini: "VM",
+            //   rtlMini: "تم",
+            //   component: VectorMap,
+            //   layout: "/admin",
+            // },
+          ],
+        },
+{
+   path: "/listperiods",
+   name: "BLOCOS",
+   rtlName: "خرائط جوجل",
+   mini: "B",
+   rtlMini: "زم",
+   icon:FolderShared,
+   component: Associado,
+   layout: "/user",
+        },
+
   // {
   //   collapse: true,
   //   name: "FINANCEIRO",
@@ -483,71 +552,31 @@ var dashRoutes = [
   //     },
   //   ],
   // },
-  {
-    collapse: true,
-    name: "GERENCIAMENTO",
-    rtlName: "خرائط",
-    icon: Settings,
-    state: "mapsCollapse",
-    views: [
-      // {
-      //   path: "/associates",
-      //   name: "GERENCIAMENTO DE BLOCOS",
-      //   rtlName: "خرائط جوجل",
-      //   mini: "G",
-      //   rtlMini: "زم",
-      //   component: AssociatesSearch,
-      //   layout: "/admin",
-      // },
-      {
-        path: "/timetable",
-        name: "Horários",
-        rtlName: "خرائط جوجل",
-        mini: "G",
-        rtlMini: "زم",
-        component: Board,
-        layout: "/admin",
-      },
-            {
-        path: "/listassociates",
-        name: "BLOCOS",
-        rtlName: "خرائط جوجل",
-        mini: "B",
-        rtlMini: "زم",
-        // component: AssociatesSearch, // estava comentado
-        component: Associado,
 
-        layout: "/admin",
-      },
-      // {
-      //   path: "/full-screen-maps",
-      //   name: "Full Screen Map",
-      //   rtlName: "خريطة كاملة الشاشة",
-      //   mini: "FSM",
-      //   rtlMini: "ووم",
-      //   component: FullScreenMap,
-      //   layout: "/admin",
-      // },
-      // {
-      //   path: "/vector-maps",
-      //   name: "Vector Map",
-      //   rtlName: "خريطة المتجه",
-      //   mini: "VM",
-      //   rtlMini: "تم",
-      //   component: VectorMap,
-      //   layout: "/admin",
-      // },
-    ],
-  },
-  {
-    path: "/login-page",
-    name: "SAIR",
-    rtlName: "هعذاتسجيل الدخول",
-    mini: "X",
-    rtlMini: "هعذا",
-    component: LoginPage,
-    layout: "/auth",
-  },
+
+  // {
+  //   path: "/login-page",
+  //   name: "SAIR",
+  //   rtlName: "هعذاتسجيل الدخول",
+  //   mini: "X",
+  //   icon:ExitToApp,
+  //   rtlMini: "هعذا",
+  //   component: LoginPage,
+  //   layout: "/admin",
+  // },
+
+
+
+  // {
+  //   path: "/login-page",
+  //   name: "SAIR",
+  //   rtlName: "هعذاتسجيل الدخول",
+  //   mini: "X",
+  //   icon:ExitToApp,
+  //   rtlMini: "هعذا",
+  //   component: LoginPage,
+  //   layout: "/user",
+  // },
   // {
   //   path: "/widgets",
   //   name: "Widgets",
@@ -570,7 +599,19 @@ var dashRoutes = [
   //   rtlName: "التقويم",
   //   icon: DateRange,
   //   component: Calendar,
-  //   layout: "/admin"
-  // }
+  //   layout: "/user"
+  // },
+  {
+    path: "/login-page",
+    name: "SAIR",
+    rtlName: "هعذاتسجيل الدخول",
+    mini: "X",
+    icon:ExitToApp,
+    rtlMini: "هعذا",
+    component: LoginPage,
+    layout: "/auth",
+  },
 ];
+
 export default dashRoutes;
+

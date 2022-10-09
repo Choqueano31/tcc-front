@@ -127,14 +127,14 @@ export default function AuthNavbar(props) {
             </Button> */}
           </div>
         </Hidden>
-        <Hidden mdUp>
+        {/* <Hidden mdUp>
           <div className={classes.flex}>
             <Button href="#" className={classes.title} color="transparent">
               UFPA
             </Button>
           </div>
-        </Hidden>
-        <Hidden smDown>{list}</Hidden>
+        </Hidden> */}
+        {/* <Hidden smDown>{list}</Hidden>
         <Hidden mdUp>
           <Button
             className={classes.sidebarButton}
@@ -163,7 +163,7 @@ export default function AuthNavbar(props) {
               {list}
             </Drawer>
           </Hidden>
-        </Hidden>
+        </Hidden> */}
       </Toolbar>
     </AppBar>
   );

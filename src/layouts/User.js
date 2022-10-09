@@ -1,3 +1,4 @@
+
 import React from "react";
 import cx from "classnames";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -17,15 +18,17 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/layouts/adminStyle.js";
+import { useEffect } from "react";
+import SidebarUser from "components/Sidebar/sidebarUser";
+
 
 var ps;
 
 const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
-  const dados = localStorage.getItem("token")
-  console.log(dados);
   const { ...rest } = props;
+  const dados = localStorage.getItem("token")
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
@@ -35,6 +38,7 @@ export default function Dashboard(props) {
   // const [hasImage, setHasImage] = React.useState(true);
   const [fixedClasses, setFixedClasses] = React.useState("dropdown");
   const [logo, setLogo] = React.useState(require("assets/img/faces/R.png"));
+
   // styles
   const classes = useStyles();
   const mainPanelClasses =
@@ -66,6 +70,11 @@ export default function Dashboard(props) {
       window.removeEventListener("resize", resizeFunction);
     };
   });
+  console.log(routes);
+
+  // useEffect(()=>{
+  //   setRoutesFromUser()
+  // },[])
   // functions for changeing the states from components
   const handleImageClick = image => {
     setImage(image);
@@ -98,18 +107,16 @@ export default function Dashboard(props) {
     return window.location.pathname !== "/admin/full-screen-maps";
   };
   const getActiveRoute = routes1 => {
-
     let activeRoute = "Default Brand Text";
-    const routes =  routes1.filter((i)=> i.layout === '/admin' || i.layout === '/auth' )
+    const routes =  routes1.filter((i)=> i.layout === '/user' || i.layout === '/auth' )
+    console.log(routes);
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
-
         if (collapseActiveRoute !== activeRoute) {
           return collapseActiveRoute;
         }
-      }
-       else {
+      } else {
         if (
           window.location.href.indexOf(routes[i].layout + routes[i].path) !== -1
         ) {
@@ -119,14 +126,12 @@ export default function Dashboard(props) {
     }
     return activeRoute;
   };
-
   const getRoutes = routes => {
-
     return routes.map((prop, key) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/admin" || prop.layout === '/auth') {
+      if (prop.layout === "/user" || prop.layout === '/auth') {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -147,11 +152,11 @@ export default function Dashboard(props) {
       setMobileOpen(false);
     }
   };
-
+console.log("user");
   return (
     <div className={classes.wrapper}>
-      <Sidebar
-        routes={routes.filter((i)=> i.layout == '/admin' || i.layout === '/auth')}
+      <SidebarUser
+        routes={routes.filter((i)=> i.layout == '/user' || i.layout === '/auth')}
         logoText={"UFPA"}
         logo={logo}
         image={image}
@@ -171,39 +176,20 @@ export default function Dashboard(props) {
           {...rest}
         />
         {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {/* {getRoute() ? (
-          <div className={classes.content}>
-            <div className={classes.container}>
-              <Switch>
-                {getRoutes(routes)}
-                <Redirect from="/admin" to="/admin/dashboard" />
-              </Switch>
-            </div>
-          </div>
-        ) : (
-          <div className={classes.map}>
-            <Switch>
-              {getRoutes(routes)}
-              <Redirect from="/admin" to="/admin/dashboard" />
-            </Switch>
-          </div>
-        )} */}
-      {dados ? (
-          <>
+
+
         {getRoute() && (
           <div className={classes.content}>
             <div className={classes.container}>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from="/admin" to="/admin/dashboard" />
+                <Redirect from="/user" to="/user/listperiods" />
               </Switch>
             </div>
           </div>
         )}
-        </>
-        ) : (
-          <Redirect from="/auth" to="/auth/login-page" />
-        )}
+
+
         {getRoute() ? <Footer fluid /> : null}
         <FixedPlugin
           handleImageClick={handleImageClick}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useHistory} from 'react-router-dom';
 
 // @material-ui/core components
@@ -25,18 +25,62 @@ import image from "assets/img/faces/ufpa.png";
 
 import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 import { FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
+import myApi from "Service/Api";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [usuario, setUsuario] = useState("")
+  const [senha, setSenha] = useState("")
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const history = useHistory()
-  const openHome  = () => {
-    history.push('/admin')
+  const openHome  =async (e)  => {
+    if(e === 1){
+      toast.success(`olá usuário, seja bem vindo!`);
+      history.push("/user")
+    }else if(e ===  2){
+      console.log(usuario);
+      console.log(senha);
+      if(usuario === "" || senha ===""){
+       return toast.error("preencha todos os campos")
+      }else{
+        try {
+          const dados={usuario, senha}
+          const response = await myApi.post("/sessionmongo", dados);
+          console.log('LOGG', response)
+          // setName(resposta.data)
+          //dados.cpf == resposta.data.cpf
+          if (response.data.token) {
+            // console.log('AQUI', response.data)
+            const result = response.data
+
+            localStorage.setItem("token", result.token)
+            localStorage.setItem("name", JSON.stringify(result.usuario))
+         //   localStorage.setItem("@userCpf", JSON.stringify(result.user.cpf))
+            toast.success(`olá ${result.usuario
+              .split(" ")
+              .slice(0, 1)
+              .join(" ")
+              .toUpperCase()}, seja bem vindo!`);
+              // setTimeout(() => {
+                //   reload2();
+                // }, 3000);
+                history.push("/admin")
+              } else {
+                toast.error("Dados Incorretos, tente novamente.");
+              }
+            } catch (error) {
+              // setLoading(false)
+              // console.log(error);
+              toast.error("Dados Incorretos, tente novamente.");
+        }
+      }
+    }
   }
   return (
     <div className={classes.container}>
@@ -71,10 +115,15 @@ export default function LoginPage() {
                 <CustomInput
                   labelText="Usuário"
                   id="email"
+                  value={usuario}
                   formControlProps={{
                     fullWidth: true
                   }}
+
                   inputProps={{
+                      onChange: event => {
+                        setUsuario(event.target.value);
+                      },
                     endAdornment: (
                       <InputAdornment position="end">
                         <FaUser className={classes.inputAdornmentIcon} />
@@ -85,10 +134,14 @@ export default function LoginPage() {
                 <CustomInput
                   labelText="Senha"
                   id="password"
+                  value={senha}
                   formControlProps={{
                     fullWidth: true
                   }}
                   inputProps={{
+                    onChange: event => {
+                      setSenha(event.target.value);
+                    },
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputAdornmentIcon}>
@@ -97,12 +150,16 @@ export default function LoginPage() {
                       </InputAdornment>
                     ),
                     type: "password",
-                    autoComplete: "off"
+                    autoComplete: "off",
+
                   }}
                 />
               </CardBody>
               <CardFooter className={classes.justifyContentCenter}>
-                <Button style={{cursor: 'pointer', backgroundColor: 'info'}} onClick={openHome} color="success" simple size="lg" block>
+              <Button style={{cursor: 'pointer', backgroundColor: 'info'}} onClick={() => openHome(1)} color="info" simple size="lg" block>
+                  Não sou Administrador
+                </Button>
+                <Button style={{cursor: 'pointer', backgroundColor: 'info'}} onClick={() => openHome(2)} color="success" simple size="lg" block>
                   ENTRAR
                 </Button>
               </CardFooter>

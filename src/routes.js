@@ -35,7 +35,7 @@ import { FaIdBadge } from "react-icons/fa";
 // import DateRange from "@material-ui/icons/DateRange";
 import GridOn from "@material-ui/icons/GridOn";
 import Image from "@material-ui/icons/Image";
-import {DateRange, ExitToApp, FolderShared, Settings} from "@material-ui/icons";
+import {DateRange, ExitToApp, FolderShared, PictureAsPdf, Settings} from "@material-ui/icons";
 import HotelRegister from "Pages/Register/Hotel/Index";
 import BedroomRegister from "Pages/Register/Bedroom";
 import AssociatesSearch from "Pages/Search/Associates/Index";
@@ -55,6 +55,7 @@ import DisciplinaManagment from "Pages/Disciplinas/Management";
 import ProfessoresRegister from "Pages/Professores/Register";
 import TeachersManagment from "Pages/Professores/Management";
 import Calendar from "views/Calendar/Calendar";
+import UserReport from "Pages/UserReport";
 // import Timeline from "@material-ui/icons/Timeline";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
@@ -297,6 +298,16 @@ var dashRoutes = [
    component: Associado,
    layout: "/user",
         },
+        {
+          path: "/listtimetable",
+          name: "HORÁRIOS",
+          rtlName: "خرائط جوجل",
+          mini: "B",
+          rtlMini: "زم",
+          icon:PictureAsPdf,
+          component: UserReport,
+          layout: "/user",
+               },
 
   // {
   //   collapse: true,

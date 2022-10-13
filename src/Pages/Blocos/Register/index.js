@@ -26,9 +26,9 @@ export default function BlocoRegister() {
       const response = await myApi.post("/bloco", dados);
       if (response) {
         toast.success("Bloco criado com sucesso!");
-        setTimeout(() => {
+
           reload2();
-        }, 3000);
+
       }
     } catch (error) {
       // console.log(error);

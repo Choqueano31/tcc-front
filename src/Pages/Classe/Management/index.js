@@ -283,7 +283,7 @@ export default function ClassManagment() {
             <div style={{justifyContent: 'space-between', display: 'flex'}}>
             <h4 className={classes.cardIconTitle}>SALAS</h4>
             <h4 className={classes.cardIconTitle}>TOTAL:
-            {list.length > 0 ? (
+            {list.length >= 0 ? (
                   <span style={{color: 'orange'}}>{list.length}</span>
                  ) : (
                   <ReactLoading type="spinningBubbles" color="#f8f8"  height={17} width={25} style={{marginLeft: 60, color: "#f8f8", marginTop: -35}} />
@@ -295,7 +295,7 @@ export default function ClassManagment() {
             </div>
           </CardHeader>
           <CardBody>
-            {list.length > 0 ? (
+            {list.length >= 0 ? (
 
             <ReactTable
               style={{

@@ -26,9 +26,9 @@ export default function ClassRegister() {
       const response = await myApi.post("/salas", dados);
       if (response) {
         toast.success("Sala criada com sucesso!");
-        setTimeout(() => {
+
           reload2();
-        }, 3000);
+
       }
     } catch (error) {
       // console.log(error);
@@ -50,11 +50,11 @@ export default function ClassRegister() {
               stepComponent: Step1,
               stepId: "class",
             },
-            {
-              stepName: "Restrições",
-              stepComponent: Step3,
-              stepId: "obs",
-            },
+            // {
+            //   stepName: "Restrições",
+            //   stepComponent: Step3,
+            //   stepId: "obs",
+            // },
           ]}
           title="Cadastro de sala"
           subtitle=""

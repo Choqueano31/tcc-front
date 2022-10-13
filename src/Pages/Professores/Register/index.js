@@ -26,9 +26,9 @@ export default function ProfessoresRegister() {
       const response = await myApi.post("/professor", dados);
       if (response) {
         toast.success("Professor cadastrado com sucesso!");
-        setTimeout(() => {
+
           reload2();
-        }, 3000);
+
       }
     } catch (error) {
       // console.log(error);

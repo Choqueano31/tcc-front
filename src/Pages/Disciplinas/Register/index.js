@@ -36,9 +36,9 @@ export default function DisciplinasRegister() {
       const response = await myApi.post("/disciplinas", dados);
       if (response) {
         toast.success("Disciplina criada com sucesso!");
-        setTimeout(() => {
+
           reload2();
-        }, 3000);
+
       }
     } catch (error) {
       // console.log(error);

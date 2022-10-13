@@ -415,7 +415,11 @@ function Board() {
       }
       else{
         setLoading(true)
+        console.log('estamos aqui');
       const response = await myApi.get(`/disciplinas/${id}`)
+      if(response.data){
+
+
       setListProf(response.data)
       console.log(response)
       const updateBase = response.data.map((item)=> ({
@@ -450,9 +454,13 @@ function Board() {
       return refatore
       }
       else if(item.title === "horarios"){
-        if(findBloco.turno==="MATUTINO"){
+        if(findBloco.data.turno==="MATUTINO"){
+          console.log(findBloco.turno, 'aqui');
           return matutino
         }else{
+          console.log(findBloco.turno, 'aqui');
+          console.log('vesp');
+
           return vespertino
         }
       }
@@ -464,8 +472,18 @@ function Board() {
      //horarios
     setLists(replaceTeachers)
     setLoading(false)
+  }else{
+    toast.error("Não há professores cadastrados nesse período para criação de horário!")
+    setBloco("")
+    setTeamsChosen({})
+    setLists([])
+    setFindTimeTable([])
+    setListProf([])
+    setLoading(false)
+  }
   } }catch(err){
       toast.error(err)
+      setLoading(false)
     }
   }
   async function handleTimeTable(){
@@ -505,6 +523,9 @@ function Board() {
   function back(){
     setBloco("")
     setTeamsChosen({})
+    setLists([])
+    setFindTimeTable([])
+    setListProf([])
   }
   useEffect(()=>{
     blocoLists()
@@ -641,7 +662,11 @@ function Board() {
         })
       : null}
       </GridItem>
+      {listProf.length > 0 &&(
+
+
       <DialogActions style={{display:"flex"  ,marginTop:60, alignItems:"center", justifyContent:"center"}}>
+
             <RegularButton  onClick={()=> {back()}} color="warning">
               VOLTAR
             </RegularButton>
@@ -658,10 +683,10 @@ function Board() {
 
             )}
           </DialogActions>
-      {/* <Container >
-        {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
-      </Container> */}
-
+ )}
+ {/* <Container >
+   {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
+ </Container> */}
     </BoardContext.Provider>
       )}
       </>

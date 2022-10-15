@@ -19,7 +19,6 @@ import GridItem from "components/Grid/GridItem.js";
 import React, { useEffect, useState } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
-import { toast } from "react-toastify";
 import myApi from "Service/Api";
 // import AssociateUpdate from "../../UpdateAll/Associate/index";
 // import { CircularProgress } from "@material-ui/core";
@@ -168,13 +167,13 @@ export default function BlocoManagment() {
       })
     );
   }
-  async function removeAssociate(id){
+//   async function removeAssociate(id){
 
-    await myApi.delete(`/bloco/${id}`)
-   // listAssociates()
-   listBlocos()
-   return toast.success('Bloco excluido com sucesso')
- }
+//     await myApi.delete(`/bloco/${id}`)
+//    // listAssociates()
+//    listBlocos()
+//    return toast.success('Bloco excluido com sucesso')
+//  }
 
   useEffect(() => {
     // getAssociate();

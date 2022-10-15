@@ -1,12 +1,12 @@
+/*eslint eqeqeq: off*/
+
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 function HorariosPDF(bloco, info, prof) {
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
  const ls = info
  ls.shift()
- console.log(ls)
- console.log(bloco)
- console.log(prof)
+
  let saveHor =[]
 //  let modifyProf = prof
 //  for(let i=0; i< modifyProf.length; i++){
@@ -127,7 +127,8 @@ function HorariosPDF(bloco, info, prof) {
   },
 
       [
-        prof.map((item)=> ({text:"Disciplina: " + item.nome+ ' / '+'Professor: '+item.professor.toUpperCase() +' / '+"Sala: "+item.sala , alignment: 'justify', marginTop: 5}))
+
+        prof.map((item)=> ({text:"Disciplina: " +item.nome+'/ Professor: '+item.professor.toUpperCase()+"/ Sala: "+item.sala , alignment: 'justify', marginTop: 5}))
         //formatRiskList(prof)
       ]
 

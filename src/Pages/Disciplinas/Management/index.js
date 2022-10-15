@@ -126,8 +126,64 @@ export default function DisciplinaManagment() {
  }
 
   useEffect(() => {
-    // getAssociate();
-    listDisciplinas();
+    async function listDisciplinasAll() {
+      const response = await myApi.get("/disciplinas");
+      console.log(response.data)
+      // const resp01 = await myApi.get("/desconts")
+      // const data  = resp01.data
+
+      const response2 = response.data;
+
+      setList(
+        response2.map((item, index) => {
+          // const list = item;
+          return {
+            id: index ,
+            nome: item.nome,
+            code:item.code,
+            bloco:item.bloco?item.bloco.nome : "",
+            sala:item.sala?item.sala.nome : "",
+            professor:item.professor?item.professor.nome : "",
+
+            actions: (
+              // we've added some custom button actions
+              <div className="actions-center">
+                <Button
+                  justIcon
+                  round
+                  simple
+                  onClick={() => {
+                    // console.log(item)
+                    setInfoUpdate(item)
+                    ModalOpen()
+
+                  }}
+                  color="warning"
+                  className="edit"
+                >
+                  <Create />
+                </Button>{" "}
+                {/* use this button to remove the data row */}
+                <Button
+                  justIcon
+                  round
+                  simple
+                  onClick={() => {
+                    removeAssociate(item._id)
+
+                  }}
+                  color="danger"
+                  className="remove"
+                >
+                  <Close />
+                </Button>{" "}
+              </div>
+            ),
+          };
+        })
+      );
+    }
+    listDisciplinasAll();
   }, []);
   const [data, setData] = React.useState(
     list.map((prop, key) => {

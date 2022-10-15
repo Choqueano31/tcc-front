@@ -1,18 +1,18 @@
+/*eslint eqeqeq: off*/
+import { Button, DialogActions, InputAdornment, TextField } from '@material-ui/core';
+import { Assignment } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
+import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from 'components/Grid/GridItem';
-import React, { useEffect } from 'react';
+import { Checkbox } from 'primereact/checkbox';
+import React, { useState } from 'react';
 import { FaPen } from 'react-icons/fa';
-import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
-import { Button, DialogActions, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
-import { Assignment } from '@material-ui/icons';
-import { useState } from 'react';
 import { toast } from 'react-toastify';
 import myApi from 'Service/Api';
-import { Checkbox } from 'primereact/checkbox';
 // import { Container } from './styles';
 const styles = {
   cardIconTitle: {
@@ -96,11 +96,11 @@ function UpdateDisciplinas({info, ModalClose}) {
     ];
 
   const[selectedCategories, setSelectedCategories] = useState(info.restrict)
-  const[segunda, setSegunda] = useState(categories.filter((item)=> item.day === 'segunda-feira'))
-  const[terça, setTerça] = useState(categories.filter((item)=> item.day === 'terça-feira'))
-  const[quarta, setQuarta] = useState(categories.filter((item)=> item.day === 'quarta-feira'))
-  const[quinta, setQuinta] = useState(categories.filter((item)=> item.day === 'quinta-feira'))
-  const[sexta, setSexta] = useState(categories.filter((item)=> item.day === 'sexta-feira'))
+  const[segunda ] = useState(categories.filter((item)=> item.day === 'segunda-feira'))
+  const[terça ] = useState(categories.filter((item)=> item.day === 'terça-feira'))
+  const[quarta ] = useState(categories.filter((item)=> item.day === 'quarta-feira'))
+  const[quinta ] = useState(categories.filter((item)=> item.day === 'quinta-feira'))
+  const[sexta ] = useState(categories.filter((item)=> item.day === 'sexta-feira'))
 console.log(selectedCategories)
   const onCategoryChange = (e) => {
     let _selectedCategories = [...selectedCategories];

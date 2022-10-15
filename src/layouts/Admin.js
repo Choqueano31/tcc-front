@@ -1,3 +1,4 @@
+/*eslint eqeqeq: off*/
 import React from "react";
 import cx from "classnames";
 import { Switch, Route, Redirect } from "react-router-dom";

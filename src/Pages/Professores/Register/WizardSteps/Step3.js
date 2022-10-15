@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 // @material-ui/icons
 // import Face from "@material-ui/icons/Face";
 // import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
@@ -7,14 +7,12 @@ import PropTypes from "prop-types";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import "date-fns";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // import CustomInput from "components/CustomInput/CustomInput.js";
-import { Assignment, Check } from "@material-ui/icons";
 import { Checkbox } from 'primereact/checkbox';
 
 const style = {

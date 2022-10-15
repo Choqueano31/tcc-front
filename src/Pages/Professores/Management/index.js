@@ -112,6 +112,10 @@ export default function TeachersManagment() {
       })
     );
   }
+  useEffect(() => {
+    // getAssociate();
+    listDisciplinas();
+  }, []);
   async function removeAssociate(id){
 
     await myApi.delete(`/professor/${id}`)
@@ -120,10 +124,7 @@ export default function TeachersManagment() {
    return toast.success('Professor removido com sucesso')
  }
 
-  useEffect(() => {
-    // getAssociate();
-    listDisciplinas();
-  }, []);
+
   const [data, setData] = React.useState(
     list.map((prop, key) => {
       // console.log(prop);

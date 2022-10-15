@@ -1,3 +1,4 @@
+/*eslint eqeqeq: off*/
 import { makeStyles } from '@material-ui/styles';
 import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';

@@ -17,7 +17,6 @@ import { cardTitle } from "assets/jss/material-dashboard-pro-react.js";
 import Card from 'components/Card/Card';
 import CardHeader from 'components/Card/CardHeader';
 import CardIcon from 'components/Card/CardIcon';
-import moment from "moment";
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import myApi from "Service/Api";

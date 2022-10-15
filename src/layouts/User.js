@@ -1,7 +1,7 @@
-
-import React from "react";
+/*eslint eqeqeq: off*/
 import cx from "classnames";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -10,15 +10,13 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import Footer from "components/Footer/Footer.js";
+import AdminNavbar from "components/Navbars/AdminNavbar.js";
 
 import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/layouts/adminStyle.js";
-import { useEffect } from "react";
 import SidebarUser from "components/Sidebar/sidebarUser";
 
 
@@ -28,7 +26,6 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
   const { ...rest } = props;
-  const dados = localStorage.getItem("token")
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);

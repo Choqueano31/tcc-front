@@ -22,5 +22,7 @@ export default {
         "react"
     ],
     "rules": {
-    }
+
+    },
+
 };

@@ -1,53 +1,28 @@
-import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import React from "react";
 // import { Manager, Target, Popper } from "react-popper";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Divider from "@material-ui/core/Divider";
+import Grow from "@material-ui/core/Grow";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Paper from "@material-ui/core/Paper";
-import Grow from "@material-ui/core/Grow";
-import Hidden from "@material-ui/core/Hidden";
 import Popper from "@material-ui/core/Popper";
-import Divider from "@material-ui/core/Divider";
+import { makeStyles } from "@material-ui/core/styles";
 
 // @material-ui/icons
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Fingerprint";
 // import Search from "@material-ui/icons/Search";
-
-// core components
-// import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarLinksStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
-  const [openNotification, setOpenNotification] = React.useState(null);
-  const handleClickNotification = event => {
-    if (openNotification && openNotification.contains(event.target)) {
-      setOpenNotification(null);
-    } else {
-      setOpenNotification(event.currentTarget);
-    }
-  };
-  const handleCloseNotification = () => {
-    setOpenNotification(null);
-  };
-  const [openProfile, setOpenProfile] = React.useState(null);
-  const handleClickProfile = event => {
-    if (openProfile && openProfile.contains(event.target)) {
-      setOpenProfile(null);
-    } else {
-      setOpenProfile(event.currentTarget);
-    }
-  };
+   const [openProfile, setOpenProfile] = React.useState(null);
+
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
@@ -56,7 +31,7 @@ export default function HeaderLinks(props) {
   // const searchButton =
   //   classes.top +
   //   " " +
-    
+
   //   // " " +
   //   classNames({
   //     [classes.searchRTL]: rtlActive

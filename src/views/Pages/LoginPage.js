@@ -42,15 +42,14 @@ export default function LoginPage() {
       toast.success(`olá usuário, seja bem vindo!`);
       history.push("/user")
     }else if(e ===  2){
-      console.log(usuario);
-      console.log(senha);
+
       if(usuario === "" || senha ===""){
        return toast.error("preencha todos os campos")
       }else{
         try {
           const dados={usuario, senha}
           const response = await myApi.post("/sessionmongo", dados);
-          console.log('LOGG', response)
+
           // setName(resposta.data)
           //dados.cpf == resposta.data.cpf
           if (response.data.token) {

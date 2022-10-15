@@ -62,7 +62,6 @@ export default function DisciplinaManagment() {
 
   async function listDisciplinas() {
     const response = await myApi.get("/disciplinas");
-    console.log(response.data)
     // const resp01 = await myApi.get("/desconts")
     // const data  = resp01.data
 
@@ -128,7 +127,6 @@ export default function DisciplinaManagment() {
   useEffect(() => {
     async function listDisciplinasAll() {
       const response = await myApi.get("/disciplinas");
-      console.log(response.data)
       // const resp01 = await myApi.get("/desconts")
       // const data  = resp01.data
 

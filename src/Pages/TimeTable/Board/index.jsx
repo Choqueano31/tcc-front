@@ -200,7 +200,7 @@ function Board() {
   async function move(fromList, toList, from, to) {
     // console.log(fromList, toList, from, to);
     const objectDelect = lists[toList].cards[to];
-    console.log( lists[1].cards[to].pos.filter((item)=> item.day.toUpperCase() ===  lists[toList].title.toUpperCase()))
+
     const res = lists[1].cards[to].pos.filter((item)=> item.day.toUpperCase() ===  lists[toList].title.toUpperCase())[0]
     const dragged = lists[fromList].cards[from];
     dragged.id = objectDelect.id;
@@ -215,18 +215,18 @@ function Board() {
       sala:dragged.sala,
       user: dragged.user,
     };
-    console.log(objectNew);
-    console.log(lists);
-    console.log(lists[toList]._id);
+    // console.log(objectNew);
+    // console.log(lists);
+    // console.log(lists[toList]._id);
 
-    console.log(dragged.restrict);
+    // console.log(dragged.restrict);
     let ativeRestrict=[]
     if(dragged.restrict){
        ativeRestrict = dragged.restrict.filter((item)=> item.id === res.id)
     }
     if(ativeRestrict.length === 0){
     if( lists[toList]._id) {
-      console.log('aqi');
+
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
       if(updateTeacher){
         const restrict = {
@@ -243,7 +243,7 @@ function Board() {
             if(objectNew.professorId){
 
               await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
-              console.log(objectNew.professorId)
+
               await myApi.put(`/professorRestrict/${objectNew.professorId}`,res)
 
               toast.success("Disciplina atualizada com sucesso.")
@@ -324,11 +324,11 @@ function Board() {
           }
         }
     }
-    console.log(listProf);
+
     let aggroupeAll =[]
     for(let a=0 ; a< listProf.length; a++){
       const findDisci = profs.filter((i) => i.teacher === listProf[a]?.nome)
-      console.log(findDisci)
+
       if(findDisci.length > 0){
         const disciplina= {
           nome: listProf[a].nome,
@@ -343,7 +343,7 @@ function Board() {
         aggroupeAll.push(disciplina)
       }
     }
-    console.log(aggroupeAll);
+
 
 
     // console.log(disc);
@@ -357,14 +357,13 @@ function Board() {
       const findTimeTable = await myApi.get(`/timetable/${id}`)
       setFindTimeTable(findTimeTable.data)
       const findBloco = await myApi.get(`/bloco/${id}`)
-      console.log(findBloco)
-      console.log(findTimeTable)
+
       setBloco(findBloco.data)
      // console.log(findTimeTable.data[0]._id)
       if(findTimeTable.data.length > 0){
         const response = await myApi.get(`/disciplinas/${id}`)
         setListProf(response.data)
-        console.log(response)
+
         const updateBase = response.data.map((item)=> ({
           id: item._id ,
           teacher: item.nome,
@@ -415,13 +414,13 @@ function Board() {
       }
       else{
         setLoading(true)
-        console.log('estamos aqui');
+
       const response = await myApi.get(`/disciplinas/${id}`)
       if(response.data){
 
 
       setListProf(response.data)
-      console.log(response)
+
       const updateBase = response.data.map((item)=> ({
         id: item._id ,
         teacher: item.nome,
@@ -455,12 +454,9 @@ function Board() {
       }
       else if(item.title === "horarios"){
         if(findBloco.data.turno==="MATUTINO"){
-          console.log(findBloco.turno, 'aqui');
+
           return matutino
         }else{
-          console.log(findBloco.turno, 'aqui');
-          console.log('vesp');
-
           return vespertino
         }
       }
@@ -515,7 +511,7 @@ function Board() {
    setBlocoList(response.data)
   }
   function handleSimpleBloco (event) {
-   console.log(event)
+
     setTeamsChosen({ [event.target.name]: event.target.value })
     ListDisciplines(event.target.value)
     //setObj({...obj, [event.target.name]: event.target.value });

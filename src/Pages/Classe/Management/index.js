@@ -43,7 +43,6 @@ export default function ClassManagment() {
   // const [listAss1, setListAss1] = useState([]);
   const [open, setOpen] = useState(false)
   const [infoUpadte, setInfoUpdate] = useState(null)
-  console.log(infoUpadte)
   function ModalOpen(){
     setOpen(true)
   }

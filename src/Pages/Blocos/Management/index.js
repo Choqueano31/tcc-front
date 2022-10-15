@@ -60,7 +60,6 @@ export default function BlocoManagment() {
 
   async function listBlocos() {
     const response = await myApi.get("/bloco");
-    console.log(response)
     // const resp01 = await myApi.get("/desconts")
     // const data  = resp01.data
 

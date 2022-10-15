@@ -57,7 +57,6 @@ class Step1 extends React.Component {
       turno: this.state.turno
       //description: this.state.description,
     };
-    console.log(dados)
     return dados;
   }
   // function that returns true if value is email, false otherwise

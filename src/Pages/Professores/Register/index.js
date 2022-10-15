@@ -20,7 +20,7 @@ export default function ProfessoresRegister() {
       nome: e.teacher.name,
       restrict:e.obs.restrict
     };
-    console.log(dados)
+
 
     try {
       const response = await myApi.post("/professor", dados);

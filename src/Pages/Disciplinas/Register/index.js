@@ -29,7 +29,6 @@ export default function DisciplinasRegister() {
       professor_id: e.disciplinas.professor,
       labels:gerarCorHexadecimal()
     };
-    console.log(dados)
 
     try {
       const response = await myApi.post("/disciplinas", dados);

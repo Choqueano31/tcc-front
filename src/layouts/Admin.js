@@ -25,7 +25,6 @@ const useStyles = makeStyles(styles);
 
 export default function Dashboard(props) {
   const dados = localStorage.getItem("token")
-  console.log(dados);
   const { ...rest } = props;
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);

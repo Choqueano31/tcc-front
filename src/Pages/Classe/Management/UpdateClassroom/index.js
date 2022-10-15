@@ -42,7 +42,7 @@ async function handleUpdate(){
       info.ModalClose()
     }, 1000);
   }catch(err){
-    console.log(err)
+    toast.error("Algo inesperado aconteceu, tente novamente!")
   }
 }
 

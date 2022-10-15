@@ -26,7 +26,7 @@ function HorariosPDF(bloco, info, prof) {
 //         }
 //     }
 //  }
- console.log(saveHor)
+
  let complex = []
  let line1 = []
  let line2 = []
@@ -70,7 +70,7 @@ function HorariosPDF(bloco, info, prof) {
   }
  }
 
- console.log(line1)
+
   const reportTitle = [	];
   const details = [
 		{

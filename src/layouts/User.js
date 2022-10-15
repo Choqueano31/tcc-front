@@ -67,7 +67,6 @@ export default function Dashboard(props) {
       window.removeEventListener("resize", resizeFunction);
     };
   });
-  console.log(routes);
 
   // useEffect(()=>{
   //   setRoutesFromUser()
@@ -106,7 +105,6 @@ export default function Dashboard(props) {
   const getActiveRoute = routes1 => {
     let activeRoute = "Default Brand Text";
     const routes =  routes1.filter((i)=> i.layout === '/user' || i.layout === '/auth' )
-    console.log(routes);
     for (let i = 0; i < routes.length; i++) {
       if (routes[i].collapse) {
         let collapseActiveRoute = getActiveRoute(routes[i].views);
@@ -149,7 +147,6 @@ export default function Dashboard(props) {
       setMobileOpen(false);
     }
   };
-console.log("user");
   return (
     <div className={classes.wrapper}>
       <SidebarUser

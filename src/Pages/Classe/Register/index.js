@@ -19,7 +19,6 @@ export default function ClassRegister() {
       nome: e.class.name,
      // bloco_id: e.class.bloco,
     };
-    console.log(dados)
 
     try {
       const response = await myApi.post("/salas", dados);

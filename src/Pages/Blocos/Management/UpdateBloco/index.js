@@ -40,7 +40,6 @@ async function handleUpdate(){
     nome:obj.nome.toUpperCase() ,
     turno: obj.turno
    }
-   console.log(obj)
     const id = obj._id
      await myApi.put(`/bloco/${id}`,dados )
     toast.success("Atualização realizada com sucesso")
@@ -48,7 +47,7 @@ async function handleUpdate(){
       info.ModalClose()
     }, 1000);
   }catch(err){
-    console.log(err)
+    toast.error("Algo inesperado aconteceu, tente novamente!")
   }
 }
   const classes = useStyles();

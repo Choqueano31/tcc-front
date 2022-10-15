@@ -133,7 +133,7 @@ class Step3 extends React.Component {
             }
         }
     }
-    console.log(selectedCategories);
+
     this.setState({ selectedCategories });
 }
 onCityChange(e) {
@@ -142,7 +142,7 @@ onCityChange(e) {
       selectedCities.push(e.value);
   else
       selectedCities.splice(selectedCities.indexOf(e.value), 1);
-console.log(selectedCities);
+
   this.setState({ cities: selectedCities });
 }
   sendState() {

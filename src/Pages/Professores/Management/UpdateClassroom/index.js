@@ -25,7 +25,6 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 function UpdateDisciplinas({info, ModalClose}) {
-  console.log(info)
   const [obj, setObj] = useState(info)
   const categories = [
   {name: '07:30 - 08:20', id: '1', day:'segunda-feira'},
@@ -101,7 +100,7 @@ function UpdateDisciplinas({info, ModalClose}) {
   const[quarta ] = useState(categories.filter((item)=> item.day === 'quarta-feira'))
   const[quinta ] = useState(categories.filter((item)=> item.day === 'quinta-feira'))
   const[sexta ] = useState(categories.filter((item)=> item.day === 'sexta-feira'))
-console.log(selectedCategories)
+
   const onCategoryChange = (e) => {
     let _selectedCategories = [...selectedCategories];
 
@@ -143,7 +142,7 @@ async function handleUpdate(){
       ModalClose()
     }, 1000);
   }catch(err){
-    console.log(err)
+   toast.error("Algo inesperado aconteceu, tente novamente!")
   }
 }
 

@@ -189,7 +189,7 @@ function UserReport() {
    setBlocoList(response.data)
   }
   function handleSimpleBloco (event) {
-    console.log(event)
+
      setTeamsChosen({ [event.target.name]: event.target.value })
     async function handletimetable(){
      try{
@@ -197,13 +197,13 @@ function UserReport() {
       const findTimeTable = await myApi.get(`/timetable/${event.target.value}`)
       setFindTimeTable(findTimeTable.data)
       const findBloco = await myApi.get(`/bloco/${event.target.value}`)
-      console.log(findBloco)
-      console.log(findTimeTable)
+
+
       setBloco(findBloco.data)
       if(findTimeTable.data.length > 0){
         const response = await myApi.get(`/disciplinas/${event.target.value}`)
         setListProf(response.data)
-        console.log(response)
+
         const updateBase = response.data.map((item)=> ({
           id: item._id ,
           teacher: item.nome,
@@ -275,11 +275,11 @@ function UserReport() {
           }
         }
     }
-    console.log(listProf);
+
     let aggroupeAll =[]
     for(let a=0 ; a< listProf.length; a++){
       const findDisci = profs.filter((i) => i.teacher === listProf[a]?.nome)
-      console.log(findDisci)
+
       if(findDisci.length > 0){
         const disciplina= {
           nome: listProf[a].nome,
@@ -294,7 +294,7 @@ function UserReport() {
         aggroupeAll.push(disciplina)
       }
     }
-    console.log(aggroupeAll);
+
 
 
     // console.log(disc);

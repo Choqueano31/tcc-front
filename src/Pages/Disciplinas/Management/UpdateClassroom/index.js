@@ -55,7 +55,6 @@ async function handleUpdate(){
       info.ModalClose()
     }, 1000);
   }catch(err){
-    console.log(err)
   }
 }
 async function findclasses(){

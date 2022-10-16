@@ -7,7 +7,7 @@ import { MdSettingsApplications } from 'react-icons/md';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Container, Label } from './styles';
+import { ContainerCard, Label } from './styles.js';
 import BoardContext from '../Board/context';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
@@ -120,7 +120,7 @@ function Card({ data, index, listIndex }) {
   );
   return (
 
-    <Container ref={ref} isDragging={isDragging}>
+    <ContainerCard ref={ref} isDragging={isDragging}>
       <Dialog header="Adicionar Professor" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => setDisplayBasic(false)}>
         <span className="p-float-label" style={{ marginTop: 10 }}>
           <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} />
@@ -154,7 +154,7 @@ function Card({ data, index, listIndex }) {
       ) : null} */}
 
       {/* <img src={data.user} alt="teste" /> */}
-    </Container>
+    </ContainerCard>
   );
 }
 

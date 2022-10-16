@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+export const ContainerCard = styled.div`
   position: relative;
   background: #FFF;
   border-radius: 5px;
@@ -14,7 +14,7 @@ export const Container = styled.div`
     position: absolute;
     top: -25px;
     left: 15px;
-   
+
   }
 
   p {
@@ -44,7 +44,7 @@ export const Container = styled.div`
     top: 40px;
     left: 140px;
     cursor: pointer;
-   
+
   }
 `;
 

@@ -16,7 +16,7 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { toast } from "react-toastify";
@@ -165,6 +165,7 @@ export default function ClassManagment() {
       })
     );
   }
+  listClass()
   async function removeAssociate(id){
 
     await myApi.delete(`/salas/${id}`)
@@ -173,10 +174,10 @@ export default function ClassManagment() {
    return toast.success('Sala excluida com sucesso')
  }
 
-  useEffect(() => {
-    // getAssociate();
-    listClass();
-  }, []);
+  // useEffect(() => {
+  //   // getAssociate();
+  //   listClass();
+  // }, []);
   const [data, setData] = React.useState(
     list.map((prop, key) => {
       // console.log(prop);

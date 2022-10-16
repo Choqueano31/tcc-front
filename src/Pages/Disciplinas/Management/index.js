@@ -16,7 +16,7 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { toast } from "react-toastify";
@@ -124,65 +124,7 @@ export default function DisciplinaManagment() {
    return toast.success('Disciplina excluida com sucesso')
  }
 
-  useEffect(() => {
-    async function listDisciplinasAll() {
-      const response = await myApi.get("/disciplinas");
-      // const resp01 = await myApi.get("/desconts")
-      // const data  = resp01.data
-
-      const response2 = response.data;
-
-      setList(
-        response2.map((item, index) => {
-          // const list = item;
-          return {
-            id: index ,
-            nome: item.nome,
-            code:item.code,
-            bloco:item.bloco?item.bloco.nome : "",
-            sala:item.sala?item.sala.nome : "",
-            professor:item.professor?item.professor.nome : "",
-
-            actions: (
-              // we've added some custom button actions
-              <div className="actions-center">
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    // console.log(item)
-                    setInfoUpdate(item)
-                    ModalOpen()
-
-                  }}
-                  color="warning"
-                  className="edit"
-                >
-                  <Create />
-                </Button>{" "}
-                {/* use this button to remove the data row */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    removeAssociate(item._id)
-
-                  }}
-                  color="danger"
-                  className="remove"
-                >
-                  <Close />
-                </Button>{" "}
-              </div>
-            ),
-          };
-        })
-      );
-    }
-    listDisciplinasAll();
-  }, []);
+listDisciplinas()
   const [data, setData] = React.useState(
     list.map((prop, key) => {
       // console.log(prop);

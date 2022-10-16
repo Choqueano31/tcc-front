@@ -7,7 +7,7 @@ function HorariosPDF(bloco, info, prof) {
  const ls = info
  ls.shift()
 
- let saveHor =[]
+
 //  let modifyProf = prof
 //  for(let i=0; i< modifyProf.length; i++){
 //     for(let k=0; k< modifyProf[i].horario.length; k++){

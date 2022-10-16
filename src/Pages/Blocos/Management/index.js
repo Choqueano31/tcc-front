@@ -16,7 +16,7 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import myApi from "Service/Api";
@@ -166,6 +166,7 @@ export default function BlocoManagment() {
       })
     );
   }
+  listBlocos();
 //   async function removeAssociate(id){
 
 //     await myApi.delete(`/bloco/${id}`)
@@ -174,10 +175,10 @@ export default function BlocoManagment() {
 //    return toast.success('Bloco excluido com sucesso')
 //  }
 
-  useEffect(() => {
-    // getAssociate();
-    listBlocos();
-  }, []);
+  // useEffect(() => {
+  //   // getAssociate();
+  //   listBlocos();
+  // }, []);
   const [data, setData] = React.useState(
     list.map((prop, key) => {
       // console.log(prop);

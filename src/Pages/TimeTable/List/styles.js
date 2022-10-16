@@ -5,15 +5,13 @@ export const Container = styled.div`
   padding: 0 0px;
   height: 100%;
   flex: 1;
- 
- 
+
+
   & + div {
-   
     border-left: 0.5px solid black;
     border-bottom: 0.5px solid black;
-    border-top: 0.5px solid black; 
-    border-right: 0.5px solid black; 
-    //border-right: 1px solid rgba(0, 0, 0, 0.05); */
+    border-top: 0.5px solid black;
+    border-right: 0.5px solid black;
   }
 
   header {
@@ -22,7 +20,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 42px;
-    
+
 
 
     h2 {
@@ -39,9 +37,9 @@ export const Container = styled.div`
       cursor: pointer;
     }
     ul {
-     
+
       margin-top: 30px;
-    
+
     }
   }
 `;

@@ -630,9 +630,9 @@ function Board() {
 
 
         <h3 style={{display:"flex", alignItems:'center', justifyContent:"center"}} >{bloco?.nome} </h3>
-      <Container >
+      <div style={{display: 'flex', flexDirection:'row', padding:"30px"}} >
         {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
-      </Container>
+      </div>
       <GridItem xs={12} sm={12}>
       <h style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold", marginBottom:15}} >Restrições dos Professores </h>
       {listProf.length >0?

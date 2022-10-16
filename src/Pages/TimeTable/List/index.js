@@ -37,7 +37,15 @@ function List({ data, index: listIndex }) {
     </div>
   );
   return (
-    <Container>
+    <div style={{
+      padding:"0 0px",
+      height:"100%",
+      flex: 1,
+      borderLeft:"0.5px solid black",
+      borderRight:"0.5px solid black",
+      borderBottom:"0.5px solid black",
+      borderTop:"0.5px solid black"
+    }}>
       <Dialog header="Adicionar Professor" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => setDisplayBasic(false)}>
         <span className="p-float-label" style={{ marginTop: 10 }}>
           <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} />
@@ -91,7 +99,6 @@ function List({ data, index: listIndex }) {
             </ul>
             </>
       )
-
       }
            {!data.creatable && (
  <>
@@ -112,12 +119,9 @@ function List({ data, index: listIndex }) {
             </ul>
             </>
       )
-
       }
 
-
-
-    </Container>
+    </div>
   );
 }
 

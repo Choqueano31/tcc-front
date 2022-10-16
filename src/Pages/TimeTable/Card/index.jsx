@@ -15,7 +15,7 @@ import 'primereact/resources/primereact.css';
 
 import styled, { css } from 'styled-components';
 
- const Container = styled.div`
+ const CardStyle = styled.div`
   position: relative;
   background: #FFF;
   border-radius: 5px;
@@ -177,7 +177,7 @@ function Card({ data, index, listIndex }) {
   );
   return (
 
-    <Container ref={ref} isDragging={isDragging}>
+    <CardStyle ref={ref} isDragging={isDragging}>
       <Dialog header="Adicionar Professor" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => setDisplayBasic(false)}>
         <span className="p-float-label" style={{ marginTop: 10 }}>
           <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} />
@@ -211,7 +211,7 @@ function Card({ data, index, listIndex }) {
       ) : null} */}
 
       {/* <img src={data.user} alt="teste" /> */}
-    </Container>
+    </CardStyle>
   );
 }
 

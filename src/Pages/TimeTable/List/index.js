@@ -38,86 +38,125 @@ function List({ data, index: listIndex }) {
   );
   return (
     <div style={{
-      padding:"0 0px",
-      height:"100%",
+      padding: "0 0px",
+      height: "690px",
       flex: 1,
-      borderLeft:"0.5px solid black",
-      borderRight:"0.5px solid black",
-      borderBottom:"0.5px solid black",
-      borderTop:"0.5px solid black"
+      borderLeft: "0.5px solid black",
+      borderRight: "0.5px solid black",
+      borderBottom: "0.5px solid black",
+      borderTop: "0.5px solid black"
     }}>
-      <Dialog header="Adicionar Professor" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => setDisplayBasic(false)}>
+      <Dialog header="Adicionar Professor"
+       visible={displayBasic}
+       style={{ width: '50vw' }}
+        footer={renderFooter('displayBasic')}
+        onHide={() => setDisplayBasic(false)}>
         <span className="p-float-label" style={{ marginTop: 10 }}>
           <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} />
           <label>Insira o nome do professor</label>
         </span>
       </Dialog>
-     {(data.creatable && !data.horary) &&(
-      <>
-        <header style={{border:"1px solid",color:"white", backgroundColor:"#34495e", marginRight:20 }}>
-        <h2>{data.title}</h2>
+      {(data.creatable && !data.horary) && (
+        <>
+          <header
+           style={{
+            display:"flex",
+            justifyContent:"space-between",
+            justifyContent:"center",
+            alignItems:"center",
+            border: "1px solid",
+             color: "white",
+              backgroundColor: "#34495e",
+                height: '50px' }}>
+            <h2
+             style={{
+              fontWeight:500,
+               fontSize:'16px',
+                padding:"0 10px"}} >{data.title}</h2>
+          </header>
 
+          <ul style={{
+            marginTop: 30,
+            marginRight: 20,
+            height: 520,
+            overflowX: "hidden",
+            overflowY: 'scroll'
+          }}  >
+            {data.cards.map((card, index) => (
+              <Card
+                key={card.id}
+                listIndex={listIndex}
+                index={index}
+                data={card}
+              />
+            ))}
+          </ul>
 
-        {/* <button type="button" onClick={() => setDisplayBasic(true)}>
-          <MdAdd size={24} color="#FFF" />
-        </button> */}
-
-      </header>
-
-      <ul style={{ marginTop: 20,
-       marginRight:20,
-       height:520,
-      overflowX:"hidden",
-      overflowY: 'scroll'  }}  >
-        {data.cards.map((card, index) => (
-          <Card
-            key={card.id}
-            listIndex={listIndex}
-            index={index}
-            data={card}
-          />
-        ))}
-      </ul> </> )}
+          </>)}
       {data.horary && (
- <>
-       <header style={{border:"1px solid",color:"white", backgroundColor:"#34495e"}}>
-        <h2>{data.title}</h2>
+        <>
+          <header style={{
+            display:"flex",
+            justifyContent:"space-between",
+            justifyContent:"center",
+            alignItems:"center",
+            border: "1px solid",
+             color: "white",
+              backgroundColor: "#34495e",
 
-
-        {/* <button type="button" onClick={() => setDisplayBasic(true)}>
-          <MdAdd size={24} color="#FFF" />
-        </button> */}
-
-      </header>
-
-            <ul style={{ marginTop: 20}}>
-              {data.cards.map((card, index) => (
-               <div key={index} style={{height:80,padding: 15,marginTop:12,
-                 display:'flex', alignItems:"center",
-                  justifyContent:'center'}}>{card.horario} </div>
-              ))}
-            </ul>
-            </>
+                height: '50px' }}>
+            <h2
+             style={{
+              fontWeight:500,
+               fontSize:'16px',
+                padding:"0 10px"}}
+            >{data.title}</h2>
+          </header>
+          <ul style={{ marginTop: 30 }}>
+            {data.cards.map((card, index) => (
+              <div key={index} style={{
+                height: 80, padding: 15, marginTop: 12,
+                display: 'flex', alignItems: "center",
+                justifyContent: 'center'
+              }}>{card.horario} </div>
+            ))}
+          </ul>
+        </>
       )
       }
-           {!data.creatable && (
- <>
-              <header style={{border:"1px solid",color:"white", backgroundColor:"#34495e" }}>
-              <h2>{data.title}</h2>
+      {!data.creatable && (
+        <>
+          <header
+          style={{
+            display:"flex",
+            justifyContent:"space-between",
+            justifyContent:"center",
+            alignItems:"center",
+            border: "1px solid",
+             color: "white",
+              backgroundColor: "#34495e",
+                height: '50px'
+            }}>
+            <h2
+            style={{
+              fontWeight:500,
+               fontSize:'16px',
+                padding:"0 10px"}}
+            >{data.title}</h2>
 
-            </header>
+          </header>
 
-            <ul style={{ marginTop: 20 }}>
-              {data.cards.map((card, index) => (
-                <Card
-                  key={card.id}
-                  listIndex={listIndex}
-                  index={index}
-                  data={card}
-                />
-              ))}
-            </ul>
-            </>
+          <ul style={{ marginTop: 30 }}>
+            {data.cards.map((card, index) => (
+              <Card
+                key={card.id}
+                listIndex={listIndex}
+                index={index}
+                data={card}
+              />
+            ))}
+          </ul>
+        </>
       )
       }
 

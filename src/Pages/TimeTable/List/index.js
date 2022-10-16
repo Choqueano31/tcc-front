@@ -61,7 +61,6 @@ function List({ data, index: listIndex }) {
           <header
            style={{
             display:"flex",
-            justifyContent:"space-between",
             justifyContent:"center",
             alignItems:"center",
             border: "1px solid",
@@ -97,7 +96,6 @@ function List({ data, index: listIndex }) {
         <>
           <header style={{
             display:"flex",
-            justifyContent:"space-between",
             justifyContent:"center",
             alignItems:"center",
             border: "1px solid",
@@ -129,7 +127,6 @@ function List({ data, index: listIndex }) {
           <header
           style={{
             display:"flex",
-            justifyContent:"space-between",
             justifyContent:"center",
             alignItems:"center",
             border: "1px solid",

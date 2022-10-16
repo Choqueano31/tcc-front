@@ -41,7 +41,7 @@ ReactDOM.render(
       <Route path="/admin" component={AdminLayout} />
       <Route path="/user" component={UserLayout} />
       <Redirect from="/admin" to="/admin/dashboard" />
-      <Redirect from="/user" to="/user/calendar" />
+      <Redirect from="/user" to="/user/listperiods" />
       <Redirect from="/" to="/auth/login-page" />
       {/* <Route path="/rtl" component={RtlLayout} />
       <Route path="/auth" component={AuthLayout} />

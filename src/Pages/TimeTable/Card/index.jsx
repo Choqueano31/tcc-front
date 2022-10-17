@@ -15,6 +15,7 @@ import 'primereact/resources/primereact.css';
 import './stylescard.css'
 
 function Card({ data, index, listIndex }) {
+
   const ref = useRef();
   const [name, setName] = useState('');
   const [displayBasic, setDisplayBasic] = useState(false);
@@ -127,8 +128,8 @@ function Card({ data, index, listIndex }) {
 
         </span>
       </Dialog>
-      <header>
-        <Label color={data.labels} style={{ marginRight: 5 }} />
+      <header className='header'>
+        <div className='label'  style={{ marginRight: 5, backgroundColor: data.labels }} />
         {data.content}
       </header>
       <p style={{display:"flex", alignItems:"center", justifyContent:"center"}}>

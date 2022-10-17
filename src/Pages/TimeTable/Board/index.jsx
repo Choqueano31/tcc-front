@@ -40,6 +40,7 @@ function Board() {
   const [findTimeTable, setFindTimeTable] = useState([])
   const [loading, setLoading] = useState(false);
   const [listProf, setListProf] = useState([])
+
   const matutino =  {
     title: 'Horários',
     creatable: true,
@@ -274,6 +275,7 @@ function Board() {
     // console.log(lists);
     await setLists([...lists]);
   }else{
+
     toast.error("Professor não está disponível nesse horário!")
   }
     // setLists(produce(lists, (draft) => {
@@ -634,7 +636,7 @@ function Board() {
         {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
       </div>
       <GridItem xs={12} sm={12}>
-      <h style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold", marginBottom:15}} >Restrições dos Professores </h>
+      <h5 style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold", marginBottom:15}} >Restrições dos Professores </h5>
       {listProf.length >0?
         listProf.map((item)=>{
         const ls= item.professor.restrict.sort(function (a, b) {

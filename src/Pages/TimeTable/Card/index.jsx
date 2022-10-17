@@ -20,7 +20,9 @@ function Card({ data, index, listIndex }) {
   const [name, setName] = useState('');
   const [displayBasic, setDisplayBasic] = useState(false);
 
+
   const { move, teacherAdd } = useContext(BoardContext);
+
   function teacherHandle() {
 
     // teacherAdd(name);
@@ -121,7 +123,7 @@ function Card({ data, index, listIndex }) {
   );
   return (
 
-    <div id='content' ref={ref} isDragging={isDragging}>
+    <div id='content' ref={ref} isDragging={isDragging} style={{backgroundColor:isActive? "#98f094": "#FFF"}}>
       <Dialog header="Adicionar Professor" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => setDisplayBasic(false)}>
         <span className="p-float-label" style={{ marginTop: 10 }}>
           <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} />
@@ -132,29 +134,12 @@ function Card({ data, index, listIndex }) {
         <div className='label'  style={{ marginRight: 5, backgroundColor: data.labels }} />
         {data.content}
       </header>
-      <p style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+      <p className='p' style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
 
         {' '}
         {data.teacher}
         {' '}
       </p>
-      <p style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
-
-{' '}
-
-          {' '}
-          {isActive ? <p style={{ color: 'red' }}>Solte</p> : null}
-          </p>
-      {/* {data.teacher !== '' ? (
-        <aside>
-          <MdSettingsApplications
-            style={{ height: 18, width: 18 }}
-            onClick={() => setDisplayBasic(true)}
-          />
-        </aside>
-      ) : null} */}
-
-      {/* <img src={data.user} alt="teste" /> */}
     </div>
   );
 }

@@ -49,14 +49,25 @@ class Step1 extends React.Component {
       ]
     };
   }
+  cleanStates(){
+  this.setState({
+      name: '',
+      turno:''
+    })
+
+  }
 
   sendState() {
     const dados = {
 
       nome: this.state.name.toUpperCase(),
-      turno: this.state.turno
+      turno: this.state.turno,
+
       //description: this.state.description,
     };
+    setTimeout(() => {
+      this.cleanStates()
+    }, 1500);
     return dados;
   }
   // function that returns true if value is email, false otherwise

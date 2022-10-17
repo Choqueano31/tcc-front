@@ -34,19 +34,13 @@ export default function DisciplinasRegister() {
       const response = await myApi.post("/disciplinas", dados);
       if (response) {
         toast.success("Disciplina criada com sucesso!");
-
-          reload2();
-
       }
     } catch (error) {
       // console.log(error);
       toast.error("Não foi possível criar Disciplina");
     }
   }
-  function reload2() {
-    // console.log("teste");
-    window.location.reload();
-  }
+
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>

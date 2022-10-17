@@ -26,19 +26,13 @@ export default function ProfessoresRegister() {
       const response = await myApi.post("/professor", dados);
       if (response) {
         toast.success("Professor cadastrado com sucesso!");
-
-          reload2();
-
       }
     } catch (error) {
       // console.log(error);
       toast.error("Não foi possível cadastrar professor.");
     }
   }
-  function reload2() {
-    // console.log("teste");
-    window.location.reload();
-  }
+
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>

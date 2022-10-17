@@ -26,18 +26,11 @@ export default function BlocoRegister() {
       const response = await myApi.post("/bloco", dados);
       if (response) {
         toast.success("Bloco criado com sucesso!");
-
-          reload2();
-
       }
     } catch (error) {
-      // console.log(error);
+       console.log(error);
       toast.error("Não foi possível criar Bloco");
     }
-  }
-  function reload2() {
-    // console.log("teste");
-    window.location.reload();
   }
   return (
     <GridContainer justify="center">

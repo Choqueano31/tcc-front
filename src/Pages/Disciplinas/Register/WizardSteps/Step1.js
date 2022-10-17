@@ -55,7 +55,16 @@ class Step1 extends React.Component {
       professorList:[]
     };
   }
+  cleanStates(){
+    this.setState({
+        name: '',
+        code:'',
+        bloco:'',
+        class:"",
+        professor:''
+      })
 
+    }
   sendState() {
     const dados = {
       name: this.state.name.toUpperCase(),
@@ -64,6 +73,9 @@ class Step1 extends React.Component {
       sala: this.state.class,
       professor: this.state.professor
     };
+    setTimeout(() => {
+      this.cleanStates()
+    }, 1500);
     return dados;
   }
   async findProfessor(){

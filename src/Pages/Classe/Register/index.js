@@ -24,19 +24,13 @@ export default function ClassRegister() {
       const response = await myApi.post("/salas", dados);
       if (response) {
         toast.success("Sala criada com sucesso!");
-
-          reload2();
-
       }
     } catch (error) {
       // console.log(error);
       toast.error("Não foi possível criar Sala");
     }
   }
-  function reload2() {
-    // console.log("teste");
-    window.location.reload();
-  }
+
   return (
     <GridContainer justify="center">
       <GridItem xs={12} sm={8}>

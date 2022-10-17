@@ -12,7 +12,7 @@ import BoardContext from '../Board/context';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
-
+import './stylescard.css'
 
 function Card({ data, index, listIndex }) {
   const ref = useRef();
@@ -120,7 +120,7 @@ function Card({ data, index, listIndex }) {
   );
   return (
 
-    <ContainerCard ref={ref} isDragging={isDragging}>
+    <div id='content' ref={ref} isDragging={isDragging}>
       <Dialog header="Adicionar Professor" visible={displayBasic} style={{ width: '50vw' }} footer={renderFooter('displayBasic')} onHide={() => setDisplayBasic(false)}>
         <span className="p-float-label" style={{ marginTop: 10 }}>
           <InputText id="username" value={name} onChange={(e) => setName(e.target.value)} />
@@ -154,7 +154,7 @@ function Card({ data, index, listIndex }) {
       ) : null} */}
 
       {/* <img src={data.user} alt="teste" /> */}
-    </ContainerCard>
+    </div>
   );
 }
 

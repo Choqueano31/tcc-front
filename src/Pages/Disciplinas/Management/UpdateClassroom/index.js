@@ -102,7 +102,7 @@ function handleSimpleBloco (event) {
              <FaPen />
            </CardIcon>
            <div style={{justifyContent: 'space-between', display: 'flex'}}>
-           <h4 className={classes.cardIconTitle}>Atualizar Informações do bloco</h4>
+           <h4 className={classes.cardIconTitle}>Atualizar Informações da disciplina</h4>
 
            </div>
          </CardHeader>

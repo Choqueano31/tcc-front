@@ -471,7 +471,7 @@ function Board() {
     setLists(replaceTeachers)
     setLoading(false)
   }else{
-    toast.error("Não há professores cadastrados nesse período para criação de horário!")
+    toast.error("Não há disciplinas cadastradas nesse período para criação de horário!")
     setBloco("")
     setTeamsChosen({})
     setLists([])

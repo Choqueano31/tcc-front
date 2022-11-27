@@ -167,6 +167,7 @@ export default function ClassManagment() {
   }
   useEffect(()=>{
     listClass()
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   async function removeAssociate(id){
 

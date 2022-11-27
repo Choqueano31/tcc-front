@@ -24,6 +24,7 @@ import myApi from "Service/Api";
 // import { CircularProgress } from "@material-ui/core";
 import ReactLoading from 'react-loading';
 import UpdateBloco from "./UpdateBloco";
+import { useEffect } from "react";
 
 const styles = {
   cardIconTitle: {
@@ -166,7 +167,10 @@ export default function BlocoManagment() {
       })
     );
   }
-  listBlocos();
+  useEffect(()=>{
+    listBlocos();
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 //   async function removeAssociate(id){
 
 //     await myApi.delete(`/bloco/${id}`)

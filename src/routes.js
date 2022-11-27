@@ -10,7 +10,7 @@ import LoginPage from "views/Pages/LoginPage.js";
 
 // @material-ui/icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import { FaIdBadge, FaUser } from "react-icons/fa";
+import { FaIdBadge } from "react-icons/fa";
 // import DateRange from "@material-ui/icons/DateRange";
 import { ExitToApp, FolderShared, PictureAsPdf, Settings } from "@material-ui/icons";
 import ClassRegister from "Pages/Classe/Register";

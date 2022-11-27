@@ -25,6 +25,7 @@ import myApi from "Service/Api";
 // import { CircularProgress } from "@material-ui/core";
 import ReactLoading from 'react-loading';
 import UpdateDisciplinas from "./UpdateClassroom";
+import { useEffect } from "react";
 
 const styles = {
   cardIconTitle: {
@@ -123,8 +124,11 @@ export default function DisciplinaManagment() {
    listDisciplinas()
    return toast.success('Disciplina excluida com sucesso')
  }
+useEffect(()=>{
 
-listDisciplinas()
+  listDisciplinas()
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+},[])
   const [data, setData] = React.useState(
     list.map((prop, key) => {
       // console.log(prop);

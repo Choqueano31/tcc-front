@@ -116,6 +116,7 @@ export default function UserManagement() {
   useEffect(() => {
     // getAssociate();
     listBlocos();
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [data, setData] = React.useState(
     list.map((prop, key) => {

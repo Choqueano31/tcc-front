@@ -15,7 +15,6 @@ import 'primereact/resources/primereact.css';
 import './stylescard.css'
 
 function Card({ data, index, listIndex }) {
-
   const ref = useRef();
   const [name, setName] = useState('');
   const [displayBasic, setDisplayBasic] = useState(false);
@@ -132,7 +131,8 @@ function Card({ data, index, listIndex }) {
       </Dialog>
       <header className='header'>
         <div className='label'  style={{ marginRight: 5, backgroundColor: data.labels }} />
-        {data.content}
+        {data.content.toUpperCase() === 'HORARIO LIVRE'? data.content: data.content.split(" ")[0] + " / " }  {data?.sala}
+
       </header>
       <p className='p' style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
 

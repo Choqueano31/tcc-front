@@ -16,7 +16,7 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 import { toast } from "react-toastify";
@@ -165,7 +165,9 @@ export default function ClassManagment() {
       })
     );
   }
-  listClass()
+  useEffect(()=>{
+    listClass()
+  },[])
   async function removeAssociate(id){
 
     await myApi.delete(`/salas/${id}`)

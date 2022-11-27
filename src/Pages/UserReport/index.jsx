@@ -220,7 +220,7 @@ function UserReport() {
             teacher: '',
             content: 'horario livre',
             labels: [],
-            user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',
+            user: ' ',
 
         }
         updateBase.unshift(horaryFree)

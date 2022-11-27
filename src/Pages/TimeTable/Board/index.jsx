@@ -21,6 +21,7 @@ import { FaPen } from 'react-icons/fa';
 import HorariosPdf from '../../Reports/Horarios/horarios'
 import Loading from 'utils/Loading';
 import { Dialog } from 'primereact/dialog';
+import { Accordion, AccordionTab } from 'primereact/accordion';
 const data = loadLists();
 const styles = {
   cardIconTitle: {
@@ -40,6 +41,7 @@ function Board() {
   const [findTimeTable, setFindTimeTable] = useState([])
   const [loading, setLoading] = useState(false);
   const [listProf, setListProf] = useState([])
+  const [listClass, setListClass] = useState([])
 
   const matutino =  {
     title: 'Horários',
@@ -193,9 +195,12 @@ function Board() {
        },
     ],
   }
+
   async function syncProf(){
     const response = await myApi.get(`/disciplinas/${bloco._id}`)
+    const response2 = await myApi.get(`/salas`)
     setListProf(response.data)
+    setListClass(response2.data)
   }
 
   async function move(fromList, toList, from, to) {
@@ -205,7 +210,6 @@ function Board() {
     const res = lists[1].cards[to].pos.filter((item)=> item.day.toUpperCase() ===  lists[toList].title.toUpperCase())[0]
     const dragged = lists[fromList].cards[from];
     dragged.id = objectDelect.id;
-    //const res =
     const objectNew = {
       id: Math.random().toFixed(3),
       content: dragged.content,
@@ -214,20 +218,24 @@ function Board() {
       professorId:dragged.professorId,
       restrict: res,
       sala:dragged.sala,
+      salaId: dragged.salaId,
+      salaRestrict: dragged.salaRestrict,
       user: dragged.user,
     };
-    // console.log(objectNew);
-    // console.log(lists);
-    // console.log(lists[toList]._id);
 
-    // console.log(dragged.restrict);
     let ativeRestrict=[]
-    if(dragged.restrict){
+    if(dragged.restrict.length > 0){
        ativeRestrict = dragged.restrict.filter((item)=> item.id === res.id)
     }
-    if(ativeRestrict.length === 0){
-    if( lists[toList]._id) {
+    let activeClassRestrict=[]
+    if(dragged.salaRestrict.length > 0){
+      activeClassRestrict = dragged.salaRestrict.filter((item)=> item.id === res.id)
+   }
 
+
+    if(ativeRestrict.length === 0){
+      if(activeClassRestrict.length === 0){
+    if( lists[toList]._id) {
       const updateTeacher = await myApi.put(`/timetable/${lists[toList]._id}/${objectDelect.id}`, objectNew)
       if(updateTeacher){
         const restrict = {
@@ -235,29 +243,33 @@ function Board() {
           horary:lists[1].cards[to].horario,
           day:  lists[toList].title
         }
-        // if(objectNew.content.toUpperCase() === "HORARIO LIVRE"){
-        //   await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
-        //   toast.success("Horario livre adicionado.")
-        //   syncProf()
-        // }else{
           if(objectDelect.professorId){
             if(objectNew.professorId){
 
               await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
+              await myApi.put(`/classremoverestrict/${objectDelect.salaId}`,res)
+
 
               await myApi.put(`/professorRestrict/${objectNew.professorId}`,res)
+              await myApi.put(`/classrestrict/${objectNew.salaId}`,res)
+
 
               toast.success("Disciplina atualizada com sucesso.")
               syncProf()
             }else{
+              // remover restrição da sala
               await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
+              await myApi.put(`/classremoverestrict/${objectDelect.salaId}`,res)
               toast.success("Disciplina atualizada com sucesso.")
               syncProf()
             }
           }else{
           // await myApi.put(`/professorremoverestrict/${objectDelect.professorId}`,res)
           // console.log(objectNew.professorId)
+
+          //adicionar restrição para sala
           await myApi.put(`/professorRestrict/${objectNew.professorId}`,res)
+          await myApi.put(`/classrestrict/${objectNew.salaId}`,res)
 
           toast.success("Disciplina atualizada com sucesso.")
           syncProf()
@@ -274,7 +286,11 @@ function Board() {
     // const refin = lists[toList].cards;
     // console.log(lists);
     await setLists([...lists]);
-  }else{
+  }
+else{
+  toast.error("A sala já está ocupada neste horário!")
+}
+}else{
 
     toast.error("Professor não está disponível nesse horário!")
   }
@@ -307,7 +323,7 @@ function Board() {
       teacher,
       content: 'Algebra Linear',
       labels: [`${gerarCorHexadecimal()}`],
-      user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',
+      user: ' ',
 
     };
     lists[0].cards.push(ts2);
@@ -359,20 +375,25 @@ function Board() {
       const findTimeTable = await myApi.get(`/timetable/${id}`)
       setFindTimeTable(findTimeTable.data)
       const findBloco = await myApi.get(`/bloco/${id}`)
-
       setBloco(findBloco.data)
+
      // console.log(findTimeTable.data[0]._id)
       if(findTimeTable.data.length > 0){
         const response = await myApi.get(`/disciplinas/${id}`)
         setListProf(response.data)
+        const response2 = await myApi.get(`/salas`)
+        setListClass(response2.data)
 
         const updateBase = response.data.map((item)=> ({
           id: item._id ,
+          blocoId:item.bloco_id,
           teacher: item.nome,
           content: item.professor.nome ,
           professorId:item.professor._id,
           restrict: item.professor.restrict,
+          salaId: item.sala._id,
           sala: item.sala?.nome,
+          salaRestrict: item.sala?.restrict,
           labels: item.labels,
 
         }))
@@ -382,7 +403,7 @@ function Board() {
             teacher: '',
             content: 'horario livre',
             labels: [],
-            user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',
+            user: ' ',
 
         }
         updateBase.unshift(horaryFree)
@@ -404,7 +425,7 @@ function Board() {
         //     return item
         //   }
         // })
-        if(findBloco.turno==="MATUTINO"){
+        if(findBloco.data.turno==="MATUTINO"){
           findTimeTable.data.unshift(matutino)
               }else{
                 findTimeTable.data.unshift(vespertino)
@@ -416,22 +437,22 @@ function Board() {
       }
       else{
         setLoading(true)
-
+        const response2 = await myApi.get(`/salas`)
+        setListClass(response2.data)
       const response = await myApi.get(`/disciplinas/${id}`)
       if(response.data){
-
-
       setListProf(response.data)
-
       const updateBase = response.data.map((item)=> ({
         id: item._id ,
+        blocoId:item.bloco_id,
         teacher: item.nome,
         content: item.professor.nome ,
         professorId:item.professor._id,
-        sala: item.sala?.nome,
         restrict: item.professor.restrict,
+        salaId: item.sala._id,
+        sala: item.sala?.nome,
+        salaRestrict: item.sala?.restrict,
         labels: item.labels,
-
       }))
       const horaryFree ={
 
@@ -439,7 +460,7 @@ function Board() {
         teacher: '',
         content: 'horario livre',
         labels: [],
-        user: 'https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/profile.png',
+        user: ' ',
 
     }
     updateBase.unshift(horaryFree)
@@ -487,6 +508,7 @@ function Board() {
   async function handleTimeTable(){
     try {
       setLoading(true)
+      lists.shift()
       for(let i = 1; i< lists.length;){
       const response =  await myApi.post("/timetable", lists[i])
       if(lists[i].title !== 'Horários'){
@@ -625,19 +647,16 @@ function Board() {
 
    </GridContainer>
    ):(
-
-
-
     <BoardContext.Provider value={{ lists, move, teacherAdd }}>
-
-
         <h3 style={{display:"flex", alignItems:'center', justifyContent:"center"}} >{bloco?.nome} </h3>
       <div style={{display: 'flex', flexDirection:'row', padding:"30px"}} >
         {lists.map((list, index) => <List key={list.title} index={index} data={list} />)}
       </div>
       <GridItem xs={12} sm={12}>
-      <h5 style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold", marginBottom:15}} >Restrições dos Professores </h5>
-      {listProf.length >0?
+     <h5 style={{display:"flex", alignItems:'center', justifyContent:"center", fontWeight:"bold", marginBottom:15}} >RESTRIÇÕES </h5>
+      <Accordion >
+  <AccordionTab header="PROFESSORES">
+  {listProf.length >0?
         listProf.map((item)=>{
         const ls= item.professor.restrict.sort(function (a, b) {
           if (Number(a.id) > Number(b.id)) {
@@ -651,7 +670,9 @@ function Board() {
         })
           return(
             <div style={{marginBottom:20}}>
+              {item.professor.restrict.length > 0 ?(
             <p style={{ fontWeight:"bold"}} >Professor: {item.professor?.nome.toUpperCase()}  /  Disciplina: {item?.nome} </p>
+              ):null}
             {ls.map((i)=>(
               <p>Dia: {i.day}  /  horário: {i.name}</p>
             ))}
@@ -659,6 +680,38 @@ function Board() {
           )
         })
       : null}
+  </AccordionTab>
+  <AccordionTab header="SALAS">
+  {listClass.length >0?
+        listClass.map((item)=>{
+        const ls= item.restrict.sort(function (a, b) {
+          if (Number(a.id) > Number(b.id)) {
+            return 1;
+          }
+          if (Number(a.id) <Number(b.id)) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        })
+          return(
+            <div style={{marginBottom:20}}>
+              {item.restrict.length > 0 ?(
+                <p style={{ fontWeight:"bold"}} >Sala: {item.nome.toUpperCase()} </p>
+
+                ): null}
+                {ls.map((i)=>(
+                  <p>Dia: {i?.day}  /  horário: {i?.name}</p>
+                ))}
+            </div>
+          )
+        })
+      : null}
+  </AccordionTab>
+
+                </Accordion>
+
+
       </GridItem>
       {listProf.length > 0 &&(
 

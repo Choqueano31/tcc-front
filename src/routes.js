@@ -10,7 +10,7 @@ import LoginPage from "views/Pages/LoginPage.js";
 
 // @material-ui/icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import { FaIdBadge } from "react-icons/fa";
+import { FaIdBadge, FaUser } from "react-icons/fa";
 // import DateRange from "@material-ui/icons/DateRange";
 import { ExitToApp, FolderShared, PictureAsPdf, Settings } from "@material-ui/icons";
 import ClassRegister from "Pages/Classe/Register";
@@ -26,6 +26,8 @@ import TeachersManagment from "Pages/Professores/Management";
 import ProfessoresRegister from "Pages/Professores/Register";
 import Board from "Pages/TimeTable/Board";
 import UserReport from "Pages/UserReport";
+import UsersRegister from "Pages/Usuarios/Register";
+import UserManagement from "Pages/Usuarios/Register/Management";
 // import Timeline from "@material-ui/icons/Timeline";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
@@ -278,6 +280,35 @@ var dashRoutes = [
           component: UserReport,
           layout: "/user",
                },
+               {
+                // path: "/professor",
+                name: "Usuários",
+                rtlName: "لوحة القيادة",
+                icon: FaIdBadge,
+                collapse:true,
+                state: "usuarios",
+                // component: Dashboard,
+                 layout: "/admin",
+                views: [
+                  {
+                    path: "/usercreate",
+                    name: "Inserir",
+                    rtlName: "ساحر",
+                    mini: "I",
+                    rtlMini: "ث",
+                    component: UsersRegister,
+                    layout: "/admin",
+                  },
+                  {
+                    path: "/usermanagement",
+                    name: "Gerenciar",
+                    rtlName: "ساحر",
+                    mini: "G",
+                    rtlMini: "ث",
+                    component: UserManagement,
+                     layout: "/admin",
+                  },
+                ]},
 
   {
     path: "/login-page",

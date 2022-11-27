@@ -16,16 +16,15 @@ import Button from "components/CustomButtons/Button.js";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
-import { toast } from "react-toastify";
 import myApi from "Service/Api";
 // import AssociateUpdate from "../../UpdateAll/Associate/index";
 // import { CircularProgress } from "@material-ui/core";
 import ReactLoading from 'react-loading';
-import UpdateDisciplinas from "./UpdateClassroom";
-import { useEffect } from "react";
+import UpdateBloco from "./UserUpdate";
+import { toast } from "react-toastify";
 
 const styles = {
   cardIconTitle: {
@@ -38,53 +37,45 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function TeachersManagment() {
+export default function UserManagement() {
   const [list, setList] = useState([]);
   // const [listAss, setListAss] = useState([]);
   // const [listAss1, setListAss1] = useState([]);
   const [open, setOpen] = useState(false)
   const [infoUpadte, setInfoUpdate] = useState(null)
-
   function ModalOpen(){
     setOpen(true)
   }
   function ModalClose(){
 
-    listDisciplinas()
+    listBlocos()
     setOpen(false)
   }
 
-  // async function getAssociate() {
-  //   const resp01 = await myApi.get("/desconts")
-  //   setListAss(resp01.data)
-  // }
-
-  // const classes = useStyles();
-
-  async function listDisciplinas() {
-    const response = await myApi.get("/professor");
-    // const resp01 = await myApi.get("/desconts")
-    // const data  = resp01.data
-
+  async function listBlocos() {
+    const response = await myApi.get("/users");
     const response2 = response.data;
-
     setList(
       response2.map((item, index) => {
         // const list = item;
+        const dados= {
+          _id: item._id,
+          usuario: item.usuario,
+          senha: ''
+        }
         return {
           id: index ,
-          nome: item.nome,
-
+          nome: item.usuario,
           actions: (
-            // we've added some custom button actions
             <div className="actions-center">
               <Button
+
                 justIcon
                 round
                 simple
                 onClick={() => {
                   // console.log(item)
-                  setInfoUpdate(item)
+                  setInfoUpdate(dados)
                   ModalOpen()
 
                 }}
@@ -114,24 +105,25 @@ export default function TeachersManagment() {
     );
   }
 
-  useEffect(()=>{
-    listDisciplinas()
-  },[])
   async function removeAssociate(id){
 
-    await myApi.delete(`/professor/${id}`)
+    await myApi.delete(`/user/${id}`)
    // listAssociates()
-   listDisciplinas()
-   return toast.success('Professor removido com sucesso')
+   listBlocos()
+   return toast.success('Usuário excluido com sucesso')
  }
 
-
+  useEffect(() => {
+    // getAssociate();
+    listBlocos();
+  }, []);
   const [data, setData] = React.useState(
     list.map((prop, key) => {
       // console.log(prop);
       return {
         id: key,
         nome: prop.nome,
+        code: prop.code,
 
         actions: (
           // we've added some custom button actions
@@ -217,7 +209,7 @@ export default function TeachersManagment() {
     <GridContainer>
      {open ? (
 
-        <UpdateDisciplinas ModalClose={ModalClose} info={infoUpadte}   />
+        <UpdateBloco ModalClose={ModalClose} info={infoUpadte}   />
      ):(
 
 
@@ -228,7 +220,7 @@ export default function TeachersManagment() {
               <PermContactCalendar />
             </CardIcon>
             <div style={{justifyContent: 'space-between', display: 'flex'}}>
-            <h4 className={classes.cardIconTitle}>PROFESSORES</h4>
+            <h4 className={classes.cardIconTitle}>USUARIOS</h4>
             <h4 className={classes.cardIconTitle}>TOTAL:
             {list.length >= 0 ? (
                   <span style={{color: 'orange'}}>{list.length}</span>
@@ -257,62 +249,9 @@ export default function TeachersManagment() {
                   accessor: "id",
                 },
                 {
-                  Header: "NOME DO PROFESSOR",
+                  Header: "USUARIO",
                   accessor: "nome",
                 },
-
-                // {
-                //   Header: "CÓDIGO",
-                //   accessor: "code",
-                //   sortable: false,
-                //   filterable: false,
-                // },
-                // {
-                //   Header: "RG PM",
-                //   accessor: "rg_policial",
-                //   sortable: false,
-                //   filterable: false,
-                // },
-                // {
-                //   Header: "RG BM",
-                //   accessor: "rg_bombeiro",
-                //   sortable: false,
-                //   filterable: false,
-                // },
-                // {
-                //   Header: "LOTAÇÃO",
-                //   accessor: "unidade",
-                //   sortable: false,
-                //   filterable: false,
-                // },
-
-                // {
-                //   Header: "CELULAR",
-                //   accessor: "telefone_celular",
-                //   sortable: false,
-                //   filterable: false,
-                // },
-                // {
-                //   Header: "TELEFONE",
-                //   accessor: "telefone_fixo",
-                //   sortable: false,
-                //   filterable: false,
-                // },
-                // {
-                //   // eslint-disable-next-line react/display-name
-                //   Header: () => (
-                //     <div
-                //       style={{
-                //         textAlign: "left",
-                //       }}
-                //     >
-                //       EMAIL
-                //     </div>
-                //   ),
-                //   accessor: "email",
-                //   sortable: false,
-                //   filterable: false,
-                // },
                 {
                   // eslint-disable-next-line react/display-name
                   Header: () => (

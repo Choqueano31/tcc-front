@@ -22,7 +22,7 @@ import HorariosPdf from '../../Reports/Horarios/horarios'
 import Loading from 'utils/Loading';
 import { Dialog } from 'primereact/dialog';
 import { Accordion, AccordionTab } from 'primereact/accordion';
-const data = loadLists();
+const dataAllList = loadLists();
 const styles = {
   cardIconTitle: {
     ...cardTitle,
@@ -34,7 +34,8 @@ const styles = {
 const useStyles = makeStyles(styles);
 function Board() {
   // eslint-disable-next-line no-unused-vars
-  const[bloco, setBloco] = useState("")
+  const [defaultList, SetDefaultList] = useState(dataAllList)
+  const [bloco, setBloco] = useState("")
   const [lists, setLists] = useState([]);
   const [blocoList, setBlocoList] = useState([])
   const [teamsChosen, setTeamsChosen] = useState({})
@@ -42,7 +43,11 @@ function Board() {
   const [loading, setLoading] = useState(false);
   const [listProf, setListProf] = useState([])
   const [listClass, setListClass] = useState([])
-
+  // console.log("bloco",bloco);
+  // console.log("lists",lists);
+  // console.log("teamsChosen",teamsChosen);
+  // console.log("findTimeTable",findTimeTable);
+  // console.log("listProf",listProf);
   const matutino =  {
     title: 'Horários',
     creatable: true,
@@ -227,10 +232,12 @@ function Board() {
     if(dragged.restrict.length > 0){
        ativeRestrict = dragged.restrict.filter((item)=> item.id === res.id)
     }
+    console.log(ativeRestrict);
     let activeClassRestrict=[]
     if(dragged.salaRestrict.length > 0){
       activeClassRestrict = dragged.salaRestrict.filter((item)=> item.id === res.id)
    }
+   console.log(activeClassRestrict);
 
 
     if(ativeRestrict.length === 0){
@@ -401,6 +408,8 @@ else{
 
             id: Math.random().toFixed(3),
             teacher: '',
+            restrict:[],
+            salaRestrict: [],
             content: 'horario livre',
             labels: [],
             user: ' ',
@@ -440,6 +449,7 @@ else{
         const response2 = await myApi.get(`/salas`)
         setListClass(response2.data)
       const response = await myApi.get(`/disciplinas/${id}`)
+      console.log(response.data);
       if(response.data){
       setListProf(response.data)
       const updateBase = response.data.map((item)=> ({
@@ -458,14 +468,16 @@ else{
 
         id: Math.random().toFixed(3),
         teacher: '',
+        restrict:[],
+        salaRestrict: [],
         content: 'horario livre',
         labels: [],
         user: ' ',
 
     }
     updateBase.unshift(horaryFree)
-
-     const replaceTeachers = data.map((item)=>{
+    console.log(updateBase);
+     const replaceTeachers = defaultList.map((item)=>{
       if(item.title === "Disciplinas"){
       const refatore={
         title: 'Disciplinas',
@@ -488,6 +500,7 @@ else{
         return item
       }
      })
+     console.log(replaceTeachers);
      //horarios
     setLists(replaceTeachers)
     setLoading(false)
@@ -523,8 +536,10 @@ else{
         }
       }
       toast.success("horario criado com sucesso")
-     back()
-     setLoading(false)
+      //talvez funcione
+      back()
+      window.location.reload()
+      setLoading(false)
     } catch (error) {
       toast.error(error)
       setLoading(false)
@@ -547,6 +562,7 @@ else{
     setFindTimeTable([])
     setListProf([])
   }
+
   useEffect(()=>{
     blocoLists()
   },[])

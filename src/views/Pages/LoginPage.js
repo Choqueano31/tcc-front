@@ -25,6 +25,8 @@ import styles from "assets/jss/material-dashboard-pro-react/views/loginPageStyle
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import myApi from "Service/Api";
+import { Dialog } from "primereact/dialog";
+import Loading from "utils/Loading";
 
 const useStyles = makeStyles(styles);
 
@@ -32,6 +34,7 @@ export default function LoginPage() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   const [usuario, setUsuario] = useState("")
   const [senha, setSenha] = useState("")
+  const [loading, setLoading] = useState(false);
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
@@ -47,12 +50,14 @@ export default function LoginPage() {
        return toast.error("preencha todos os campos")
       }else{
         try {
+          setLoading(true)
           const dados={usuario, senha}
           const response = await myApi.post("/sessionmongo", dados);
 
           // setName(resposta.data)
           //dados.cpf == resposta.data.cpf
           if (response.data.token) {
+            setLoading(false)
             // console.log('AQUI', response.data)
             const result = response.data
 
@@ -69,9 +74,11 @@ export default function LoginPage() {
                 // }, 3000);
                 history.push("/admin")
               } else {
+                setLoading(false)
                 toast.error("Dados Incorretos, tente novamente.");
               }
             } catch (error) {
+              setLoading(false)
               // setLoading(false)
               // console.log(error);
               toast.error("Dados Incorretos, tente novamente.");
@@ -80,6 +87,23 @@ export default function LoginPage() {
     }
   }
   return (
+    <>
+    <Dialog
+    visible={loading}
+    style={{ width: '50vw' }}
+
+    onHide={() => {}}
+  >
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Loading type="bars" color="#00008b" />
+    </div>
+  </Dialog>
     <div className={classes.container}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={6} md={4}>
@@ -165,5 +189,6 @@ export default function LoginPage() {
         </GridItem>
       </GridContainer>
     </div>
+    </>
   );
 }

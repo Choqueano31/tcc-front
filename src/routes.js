@@ -34,7 +34,7 @@ import UserManagement from "Pages/Usuarios/Register/Management";
 var dashRoutes = [
   {
     path: "/dashboard",
-    name: "HOME",
+    name: "INICIO",
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
     component: Dashboard,
